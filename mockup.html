@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
     <style>
-      body { width: 320px; margin: auto; font-family: "Helvetica Neue"}
+      body { /*width: 320px;*/ font-family: "Helvetica Neue"}
       label { display: block; padding: 10px 0; clear:both; }
       input { margin: 5px 0; }
       div { text-align: center; background: #fff; }
@@ -34,7 +34,7 @@
         height: 25px;
         float: left;
         background: #efefef; }
-        #talk-about, #talk-submit {
+        .talk-about, #talk-submit {
           margin: 20px;
           background: #EFEFEF;
           padding: 10px;
@@ -48,119 +48,138 @@
           margin: 20px;
           height: 60px;
         }
+        #wrap {
+          margin:auto;
+          width: 320px;
+          overflow-x: hidden;
+        }
+        #main {
+          width: 960px;
+          -webkit-transition: -webkit-transform 0.2s linear;
+          -webkit-transform: translate(0, 0);
+        }
+        .pane {
+          /*-webkit-transition: -webkit-transform 0.2s linear;
+          -webkit-transform: translate(-320px, 0);*/
+          float:left;
+          width: 320px;
+        }
+        /*
         .pane.show {
-          
-        }
-        .pane.hide {
-          
-        }
+          -webkit-transform: translate(0, 0);
+        }*/
     </style>
   </head>
   <body>
-    <div id="stop-form">
-      <h2>StopTalk</h2>
-      <label for="stop">Enter Bus Stop #</label>
-      <input id="stop" type="text" /><br />
-      <input id="stop-submit" type="submit" value="Go" />
-      <h4>Recent Stops</h4>
-      <ul>
-        <li>50397</li>
-        <li>51333</li>
-      </ul>
-    </div>
-    <div id="stop-info">
-      <span class="back">&larr; Stop #</span>
-      <h2>50397</h2>
-      <ul class="tabs">
-        <li id="bus-tab" class="active">Busses</li>
-        <li id="talk-tab">Recent talk</li>
-      </ul>
-      <div id="busses">
-        <!--<iframe width='200' height='200' frameBorder='0' src='http://a.tiles.mapbox.com/v2/mapbox.open-streets-nyc.html#14/40.77/-73.97'></iframe>-->
-        <iframe width='200' height='200' frameBorder='0' src='http://a.tiles.mapbox.com/v2/upload.4wfrz0od/mm/legend.html?1321299003657#13/49.280550000000005/-123.09105'></iframe>
+  <div id="wrap">
+    <div id="main">
+      <div id="stop-form" class="pane show">
+        <h2>StopTalk</h2>
+        <label for="stop">Enter Bus Stop #</label>
+        <input id="stop" type="text" /><br />
+        <input id="stop-submit" type="submit" value="Go" />
+        <h4>Recent Stops</h4>
         <ul>
-          <li>16 Arbutus (next at 3:38pm)</li>
-          <li>9 Alma (next at 4:00pm)</li>
-          <li>17 UBC (next at 3:57pm)</li>
+          <li>50397</li>
+          <li>51333</li>
         </ul>
       </div>
-      <div id="talk">
-        <div class="comment">
-          <span class="icon"></span>
-          <div class="text">
-            <h4>Today at 10:30pm</h4>
-            Lorem ipsum dolor site amet
-            <br /><span class="service">up - down - flag</span>
-          </div>
+      <div id="stop-info" class="pane">
+        <span class="back">&larr; Stop #</span>
+        <h2>50397</h2>
+        <ul class="tabs">
+          <li id="bus-tab" class="active">Busses</li>
+          <li id="talk-tab">Recent talk</li>
+        </ul>
+        <div id="busses">
+          <!--<iframe width='200' height='200' frameBorder='0' src='http://a.tiles.mapbox.com/v2/mapbox.open-streets-nyc.html#14/40.77/-73.97'></iframe>-->
+          <iframe width='200' height='200' frameBorder='0' src='http://a.tiles.mapbox.com/v2/upload.4wfrz0od/mm/legend.html?1321299003657#13/49.280550000000005/-123.09105'></iframe>
+          <ul>
+            <li>16 Arbutus (next at 3:38pm)</li>
+            <li>9 Alma (next at 4:00pm)</li>
+            <li>17 UBC (next at 3:57pm)</li>
+          </ul>
         </div>
-        <div class="comment">
-          <span class="icon"></span>
-          <div class="text">
-            <h4>Today at 8:23am</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In velit tellus, mollis quis feugiat quis, tristique eget nisi. Donec tempor orci tempus nisi dictum nec volutpat dolor volutpat.
-            <br /><span class="service">up - down - flag</span>
+        <div id="talk">
+          <br /><div class="talk-about">Talk About This Stop</div>
+          <div class="comment">
+            <span class="icon"></span>
+            <div class="text">
+              <h4>Today at 10:30pm</h4>
+              Lorem ipsum dolor site amet
+              <br /><span class="service">up - down - flag</span>
+            </div>
           </div>
-        </div>
-        <div class="comment">
-          <span class="icon"></span>
-          <div class="text">
-            <h4>Yesterday at 5:15pm</h4>
-            Tristique eget nisi. Donec tempor orci tempus nisi dictum nec volutpat dolor volutpat.
-            <br /><span class="service">up - down - flag</span>
+          <div class="comment">
+            <span class="icon"></span>
+            <div class="text">
+              <h4>Today at 8:23am</h4>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In velit tellus, mollis quis feugiat quis, tristique eget nisi. Donec tempor orci tempus nisi dictum nec volutpat dolor volutpat.
+              <br /><span class="service">up - down - flag</span>
+            </div>
           </div>
-        </div>
-        <div class="comment">
-          <span class="icon"></span>
-          <div class="text">
-            <h4>Monday at 1:32pm</h4>
-            Pellentesque aliquet imperdiet nisi id dignissim. Etiam vel luctus leo. Curabitur ut lectus velit. Nulla facilisis sodales interdum
-            <br /><span class="service">up - down - flag</span>
+          <div class="comment">
+            <span class="icon"></span>
+            <div class="text">
+              <h4>Yesterday at 5:15pm</h4>
+              Tristique eget nisi. Donec tempor orci tempus nisi dictum nec volutpat dolor volutpat.
+              <br /><span class="service">up - down - flag</span>
+            </div>
           </div>
+          <div class="comment">
+            <span class="icon"></span>
+            <div class="text">
+              <h4>Monday at 1:32pm</h4>
+              Pellentesque aliquet imperdiet nisi id dignissim. Etiam vel luctus leo. Curabitur ut lectus velit. Nulla facilisis sodales interdum
+              <br /><span class="service">up - down - flag</span>
+            </div>
+          </div>
+          <div class="talk-about">Talk About This Stop</div><br />
         </div>
-        <div id="talk-about">Talk About This Stop</div><br />
       </div>
-    </div>
-    <div id="talk-form">
-      <span class="back">&larr; Recent talk</span>
-      <h2>The Rules</h2>
-      <p>Be nice, or we'll erase your posts.<br />
-        Posts are only shown for 7 days.</p>
-      <h3>What's Your Post About?</h3>
-      <div class="category">
-        <span class="icon"></span>
-        <div>I Saw</div>
+      <div id="talk-form" class="pane">
+        <span class="back">&larr; Recent talk</span>
+        <h2>The Rules</h2>
+        <p>Be nice, or we'll erase your posts.<br />
+          Posts are only shown for 7 days.</p>
+        <h3>What's Your Post About?</h3>
+        <div class="category">
+          <span class="icon"></span>
+          <div>I Saw</div>
+        </div>
+        <div class="category">
+          <span class="icon"></span>
+          <div>Weather</div>
+        </div>
+        <div class="category">
+          <span class="icon"></span>
+          <div>Needs repair</div>
+        </div>
+        <textarea id="comment-text"></textarea>
+        <div id="talk-submit">Talk About This Stop</div><br />
       </div>
-      <div class="category">
-        <span class="icon"></span>
-        <div>Weather</div>
-      </div>
-      <div class="category">
-        <span class="icon"></span>
-        <div>Needs repair</div>
-      </div>
-      <textarea id="comment-text"></textarea>
-      <div id="talk-submit">Talk About This Stop</div><br />
-    </div>
+    </div><!-- #main -->
+    </div><!-- #wrap -->
     <script type="text/javascript">
       // Frame one...
-      $('#stop-info').hide();
-      $('#talk-form').hide();
       $('#stop-submit, #stop-form li').click(function(e) {
         // Fake ajax.
         setTimeout(function() {
           window.scrollTo(0,0);
-          $('#stop-form').hide();
-          $('#stop-info').show();
+          $('.pane').removeClass('show');
+          $('#stop-info').addClass('show');
+          $('#main').css({'-webkit-transform': 'translate(-320px, 0)'});
           $('#talk').hide();
           $('#busses').show();
           $('#talk-tab').removeClass('active');
           $('#bus-tab').addClass('active');
-        }, 1500);
+        }, 100);
       });
       $('#stop-info .back').click(function(e) {
         window.scrollTo(0,0);
-        $('#stop-form').show();
-        $('#stop-info').hide();
+        $('.pane').removeClass('show');
+        $('#stop-form').addClass('show');
+        $('#main').css({'-webkit-transform': 'translate(0, 0)'});
       });
 
       // Frame two...
@@ -178,15 +197,17 @@
         $('#talk').hide();
       });
       
-      $('#talk-about').click(function() {
-        window.scrollTo(0,0);
-        $('#talk-form').show();
-        $('#stop-info').hide();
+      $('.talk-about').click(function() {
+        //window.scrollTo(0,0);
+        $('.pane').removeClass('show');
+        $('#talk-form').addClass('show');
+        $('#main').css({'-webkit-transform': 'translate(-640px, 0)'});
       });
       $('#talk-form .back').click(function() {
-        window.scrollTo(0,0);
-        $('#talk-form').hide();
-        $('#stop-info').show();
+        //window.scrollTo(0,0);
+        $('.pane').removeClass('show');
+        $('#stop-info').addClass('show');
+        $('#main').css({'-webkit-transform': 'translate(-320px, 0)'});
         $('#bus-tab').removeClass('active');
         $('#talk-tab').addClass('active');
         $('#busses').hide();
@@ -194,11 +215,12 @@
       });
       $('#talk-submit').click(function() {
         setTimeout(function() {
-          window.scrollTo(0,0);
+          //window.scrollTo(0,0);
           $('#talk').prepend('<div class="comment"><span class="icon"></span><div class="text"><h4>Just now</h4>' + $('#comment-text').val() + '<br /><span class="service">up - down - flag</span></div></div>');
           $('#comment-text').val('');
-          $('#talk-form').hide();
-          $('#stop-info').show();
+          $('.pane').removeClass('show');
+          $('#stop-info').addClass('show');
+          $('#main').css({'-webkit-transform': 'translate(-320px, 0)'});
           $('#bus-tab').removeClass('active');
           $('#talk-tab').addClass('active');
           $('#busses').hide();
