@@ -1,0 +1,18 @@
+{
+  "author": "Tylor Sherman <tylor@denimandsteel.com> (http://denimandsteel.com)",
+  "name": "thisisourstop",
+  "description": "An ad-hoc social network around your bus stops",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/denimandsteel/thisisourstop.git"
+  },
+  "engines": {
+    "node": "~v0.4.9-pre"
+  },
+  "dependencies": {
+    "express": "2.5.1",
+    "dirty": "0.9.4"
+  },
+  "devDependencies": {}
+}
