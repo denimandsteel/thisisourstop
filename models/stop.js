@@ -24,7 +24,7 @@ stop_times_csv.on('data',function(data, index){
   }
   stop_times[data.stop_id].push(data);
 }).on('end',function(count){
-  // If we don't actually use this (if we cache routes by stop), then free up.
+  // If we don't actually use this (if we cache routes by stop), then free up memory.
   console.log('Number of stop_times: '+count);
 });
 
