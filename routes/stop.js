@@ -5,8 +5,8 @@ module.exports = function(app) {
 
   app.param('stop', function(req, res, next, id){
     Stop.get(id, function(err, stop){
-      if (err) return next(err);
-      if (!stop) return next(new Error('failed to find stop'));
+      //if (err) return next(err);
+      //if (!stop) return next(new Error('failed to find stop'));
       req.stop = stop;
       next();
     });
