@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "express": "2.5.1",
-    "dirty": "0.9.4"
+    "dirty": "0.9.4",
+    "csv": "0.0.10"
   },
   "devDependencies": {}
 }

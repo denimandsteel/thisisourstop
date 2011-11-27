@@ -28,7 +28,12 @@ module.exports = function(app) {
   	}
   	else {
       var ret = '';
-      ret += '<h1>' + req.stop.id + ': ' + req.stop.description + '</h1><form method="post" action="/stop/' + req.stop.id + '"><textarea name="comment"></textarea><input type="submit" /></form>';
+      ret += '<h1>' + req.stop.id + ': ' + req.stop.stop.stop_desc + '</h1>';
+      for (var route in req.stop.trip) {
+        ret += '<div>' + route + '</div>';
+      }
+      ret += '<h2>Comments</h2>';
+      ret += '<form method="post" action="/stop/' + req.stop.id + '"><textarea name="comment"></textarea><div><input type="submit" /></div></form>';
       Comment.byStop(req.stop.id, function(comments) {
         var length = comments.length;
         for (var i = 0; i < length; i++) {
