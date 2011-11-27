@@ -13,7 +13,7 @@ module.exports = function(app) {
   });
 
   app.get('/', function(req, res) {
-    res.end('<h1>This Is Our Stop</h1><form method="post" action="/"><input name="stop" type="text" /><input type="submit" /></form>');
+    res.end('<html><h1>This Is Our Stop</h1><form method="post" action="/"><input name="stop" type="text" /><input type="submit" /></form></html>');
   });
 
   app.post('/', function(req, res) {
@@ -28,7 +28,7 @@ module.exports = function(app) {
   	}
   	else {
       var ret = '';
-      ret += '<h1>' + req.stop.id + ': ' + req.stop.stop.stop_desc + '</h1>';
+      ret += '<html><h1>' + req.stop.id + ': ' + req.stop.stop.stop_desc + '</h1></html>';
       for (var route in req.stop.trip) {
         ret += '<div>' + route + '</div>';
       }
