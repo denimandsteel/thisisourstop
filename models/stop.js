@@ -24,6 +24,7 @@ stop_times_csv.on('data',function(data, index){
   }
   stop_times[data.stop_id].push(data);
 }).on('end',function(count){
+  // If we don't actually use this (if we cache routes by stop), then free up.
   console.log('Number of stop_times: '+count);
 });
 
@@ -50,6 +51,8 @@ exports.get = function(id, fn){
   var stop = stops[id];
   var times = stop_times[stop.stop_id];
   var trip = {};
+
+  // Can either cache this ahead of time or actually make use of the times.
   var length = times.length;
   for (var i = 0; i < length; i++) {
     trip[trips[times[i].trip_id].trip_headsign] = trips[times[i].trip_id].trip_headsign;

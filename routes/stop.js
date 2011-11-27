@@ -46,6 +46,8 @@ module.exports = function(app) {
 
   app.post('/stop/:stop.:format?', function(req, res) {
     var comment = new Comment(req.body.comment, req.stop.id);
+    // Validate.
+    // Remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
       if (req.params.format === 'json') {
         res.json({ error: false, comment: savedComment });
