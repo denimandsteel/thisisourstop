@@ -1,4 +1,5 @@
 var express = require('express');
+var ejs = require('ejs');
 var app = module.exports = express.createServer();
 
 // Mount hook
@@ -7,6 +8,7 @@ app.mounted(function(other){
 });
 
 app.set('jsonp callback', true);
+app.set('view engine', 'ejs');
 
 // Middleware
 app.configure(function(){
