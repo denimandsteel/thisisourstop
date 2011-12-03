@@ -1,4 +1,3 @@
-//var code_to_id = {};
 var stops = {};
 var stop_times = {};
 var trips = {};
@@ -9,11 +8,10 @@ var stop_times_csv = require('csv')().fromPath('google_transit/stop_times.txt', 
 var trips_csv = require('csv')().fromPath('google_transit/trips.txt', { columns: true });
 var routes_csv = require('csv')().fromPath('google_transit/routes.txt', { columns: true });
 
-// stops(stop_code -> stop_id) -> stop_times(stop_id -> trip_id*) -> trips (trip_id -> route_id) -> routes
+ // Schema: stops(stop_code -> stop_id) -> stop_times(stop_id -> trip_id*) -> trips (trip_id -> route_id) -> routes
 
 stops_csv.on('data',function(data, index){
   stops[data.stop_code] = data;
-  //code_to_id[data.stop_code] = data.stop_id;
 }).on('end',function(count){
   console.log('Number of stops: '+count);
 });
@@ -43,8 +41,6 @@ routes_csv.on('data',function(data, index){
 var Stop = exports = module.exports = function Stop(id) {
   this.id = id;
 };
-
-// stops.set(123, {description: '123 Broadway'});
 
 exports.get = function(id, fn){
   var stop = stops[id];

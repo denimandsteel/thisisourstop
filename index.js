@@ -25,8 +25,6 @@ app.configure(function(){
 
 // Routes
 require('./routes/stop')(app);
-//require('./routes/comment')(app);
-//require('./routes/user')(app);
 
 if (!module.parent) {
   app.listen(process.env.PORT || 3000);

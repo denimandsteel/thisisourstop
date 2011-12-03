@@ -20,7 +20,6 @@ exports.get = function(id, fn){
 exports.byStop = function(stop, fn) {
 	var ret = [];
 	comments.forEach(function(key, val) {
-    //console.log('Found key: %s, val: %j', key, val);
     if (val.stop == stop) {
     	ret.push(val);
     }
