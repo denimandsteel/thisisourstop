@@ -9,6 +9,9 @@
 
 <p><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;zoom=15&amp;size=290x200&amp;maptype=&amp;markers=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;sensor=false" /></p>
 
+<a href="http://maps.google.com/maps?ll=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>">Open in Maps</a>
+<a href="http://nb.translink.ca/Map/Stop/<%= stop.id %>">Open in TransLink Mobile"</a>
+
 <h2>Recent Talk</h2>
 
 <%- partial('comment', comments) %>
