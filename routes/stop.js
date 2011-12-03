@@ -21,17 +21,14 @@ module.exports = function(app) {
   });
 
   app.get('/stop/:stop.:format?', function(req, res) {
-  	if(req.params.format === 'json') {
-      Comment.byStop(req.stop.id, function(comments) {
+    Comment.byStop(req.stop.id, function(comments) {
+      if(req.params.format === 'json') {
         res.json({stop: req.stop, comments: comments}); 
-      });
-  	}
-  	else {
-      var ret = '';
-      Comment.byStop(req.stop.id, function(comments) {
+      }
+      else {
         res.render('stop/show', { stop: req.stop, comments: comments });
-      });
-  	}
+      }
+    });
   });
 
   app.post('/stop/:stop.:format?', function(req, res) {
