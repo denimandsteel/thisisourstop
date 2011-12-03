@@ -7,6 +7,7 @@ module.exports = function(app) {
     Stop.get(id, function(err, stop){
       //if (err) return next(err);
       //if (!stop) return next(new Error('failed to find stop'));
+      // Send 404...
       req.stop = stop;
       next();
     });
@@ -14,6 +15,10 @@ module.exports = function(app) {
 
   app.get('/', function(req, res) {
     res.render('stop');
+  });
+
+  app.get('/about', function(req, res) {
+    res.render('about');
   });
 
   app.post('/', function(req, res) {
