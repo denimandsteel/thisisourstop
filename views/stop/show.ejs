@@ -1,8 +1,15 @@
-<h2><%= stop.id %>: <%= stop.stop.stop_desc %></h2>
+<form method="post" action="/">
+	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
+	<input type="submit" value="Go" />
+</form>
+
+<h2>At This Stop</h2>
 
 <%- partial('trip', stop.trip) %>
 
-<h2>Comments</h2>
+<p><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;zoom=15&amp;size=290x200&amp;maptype=&amp;markers=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;sensor=false" /></p>
+
+<h2>Recent Talk</h2>
 
 <%- partial('comment', comments) %>
 
