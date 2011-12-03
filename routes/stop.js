@@ -26,6 +26,8 @@ module.exports = function(app) {
         res.json({stop: req.stop, comments: comments}); 
       }
       else {
+        console.log(req.stop);
+        console.log(comments);
         res.render('stop/show', { stop: req.stop, comments: comments });
       }
     });

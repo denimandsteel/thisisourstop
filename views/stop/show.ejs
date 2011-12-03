@@ -1,17 +1,10 @@
-<h2><%= stop.id %>: <%= stop.stop_desc %></h2>
+<h2><%= stop.id %>: <%= stop.stop.stop_desc %></h2>
 
-<ul>
-  <% for (var route in stop.trip) { %>
-    <li><%= route %></li>
-  <% } %>
-</ul>
+<%- partial('trip', stop.trip) %>
 
 <h2>Comments</h2>
 
-<% var length = comments.length;
-	for (var i = 0; i < length; i++) { %>
-		<div><%= comments[i].comment %></div>
-<% } %>
+<%- partial('comment', comments) %>
 
 <form method="post" action="/stop/<%= stop.id %>">
 	<textarea name="comment"></textarea>

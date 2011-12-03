@@ -40,9 +40,8 @@ routes_csv.on('data',function(data, index){
   console.log('Number of routes: '+count);
 });
 
-var Stop = exports = module.exports = function Stop(id, description) {
+var Stop = exports = module.exports = function Stop(id) {
   this.id = id;
-  this.description = description;
 };
 
 // stops.set(123, {description: '123 Broadway'});
@@ -50,12 +49,12 @@ var Stop = exports = module.exports = function Stop(id, description) {
 exports.get = function(id, fn){
   var stop = stops[id];
   var times = stop_times[stop.stop_id];
-  var trip = {};
+  var trip = [];
 
   // Can either cache this ahead of time or actually make use of the times.
   var length = times.length;
   for (var i = 0; i < length; i++) {
-    trip[trips[times[i].trip_id].trip_headsign] = trips[times[i].trip_id].trip_headsign;
+    trip.push(trips[times[i].trip_id].trip_headsign);
   }
   var data = { stop: stop, trip: trip };
 
