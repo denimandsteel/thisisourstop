@@ -2,8 +2,36 @@
 
 An ad-hoc social network around your bus stop!
 
+## Installation
+
+### On your local environment
+
+Install node and npm.
+
+$ git clone git@github.com:denimandsteel/thisisourstop.git
+$ cd thisisourstop
+$ npm install
+$ npm start
+
+Visit the site at http://localhost:3000 in a web browser.
+
+You can install your own GTFS feed by replacing the google_transit directory with your own.
+
+### On a Heroku instance
+
+Create an account at [Heroku](http://www.heroku.com/)
+
+$ gem install heroku
+$ heroku keys:add
+$ heroku create --stack cedar # to get a node.js capable stack
+$ git push heroku
+$ heroku ps:scale web=1
+$ heroku open # open a web browser to the site
+$ heroku logs -t # show instance log (useful to keep an eye on if you have a large GTFS file)
+
 ## Todo
 
+- instructions for installation on other platforms (eg. no.de)
 - database backends for comments and stops
 - cookies/sessions for recent stops
 - comment flagging
