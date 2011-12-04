@@ -50,7 +50,7 @@ exports.get = function(id, fn){
   // Can either cache this ahead of time or actually make use of the times.
   var length = times.length;
   for (var i = 0; i < length; i++) {
-    trip.push(trips[times[i].trip_id].trip_headsign);
+    trip.push(trips[times[i].trip_id]);
   }
   var data = { stop: stop, trip: trip };
 

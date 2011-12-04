@@ -38,6 +38,10 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/stop/:stop/new', function(req, res) {
+    res.render('stop/new', { stop: req.stop });
+  });
+
   app.post('/stop/:stop.:format?', function(req, res) {
     var comment = new Comment(req.body.comment, req.stop.id);
     // Validate.

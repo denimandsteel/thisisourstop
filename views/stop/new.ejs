@@ -1,0 +1,21 @@
+<form method="post" action="/">
+	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
+	<input type="submit" value="Go" />
+</form>
+
+<h1>What is your post about?</h1>
+
+<form method="post" action="/stop/<%= stop.id %>">
+	<ul>
+		<li><input id="weather" type="checkbox" /><label for="weather">Weather</label></li>
+		<li><input id="suggestion" type="checkbox" /><label for="suggestion">Suggestion</label></li>
+		<li><input id="look-for" type="checkbox" /><label for="look-for">Look For</label></li>
+		<li><input id="just-sayin" type="checkbox" /><label for="just-sayin">Suggestion</label></li>
+	</ul>
+	<label for="text">0/200</label>
+	<textarea id="text" name="comment"></textarea>
+	<div>
+		<input type="submit" />
+	</div>
+	<p>Abuse & spam are mercilessly deleted</p>
+ </form>
