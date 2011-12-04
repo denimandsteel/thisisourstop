@@ -51,7 +51,7 @@ module.exports = function(app) {
         res.json({ error: false, comment: savedComment });
       }
       else {
-        res.redirect('/stop/' + req.stop.id);
+        res.redirect('/stop/' + req.stop.id + '/#talk');
       }
     });
   });

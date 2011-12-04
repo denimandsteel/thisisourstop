@@ -1,4 +1,4 @@
-body { font-family: "Helvetica Neue"; margin:0; width: 320px; }
+body { font-family: "Helvetica Neue"; margin: 0 auto; max-width: 500px; }
 h2 { text-align: center; }
 header { text-align: center; }
 
