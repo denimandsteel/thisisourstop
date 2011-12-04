@@ -12,7 +12,7 @@
 
 <div id="stop-info">
   <h2>At This Stop</h2>
-  
+
   <%- partial('trip', stop.trip) %>
 
   <p class="map">
@@ -32,7 +32,12 @@
 </div>
 
 <script type="text/javascript">
-$('#stop-talk').hide();
+if (window.location.hash == '#talk') {
+  $('#stop-info').hide();
+}
+else {
+  $('#stop-talk').hide();
+}
 $('#info').click(function() {
   $('#stop-info').show();
   $('#stop-talk').hide();

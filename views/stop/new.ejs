@@ -6,8 +6,8 @@
 	<h1>What is your post about?</h1>
 </header>
 
-<form id="new-comment" method="post" action="/stop/<%= stop.id %>">
-	<ul>
+<form id="new-comment" method="post" action="/stop/<%= stop.id %>#talk">
+	<ul class="type">
 		<li><input id="weather" type="checkbox" name="type[weather]" /><label for="weather">Weather</label></li>
 		<li><input id="suggestion" type="checkbox" name="type[suggestion]" /><label for="suggestion">Suggestion</label></li>
 		<li><input id="look-for" type="checkbox" name="type[look_for]" /><label for="look-for">Look For</label></li>
