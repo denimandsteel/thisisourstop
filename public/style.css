@@ -1,6 +1,7 @@
 body { font-family: "Helvetica Neue"; margin: 0 auto; max-width: 500px; }
 h2 { text-align: center; }
 header { text-align: center; }
+header form { margin-top: 10px; }
 
 ul.tabs { margin: 20px 0 20px; padding: 0; text-align: center; }
 ul.tabs li { display: inline; padding: 5px; border: 2px solid #efefef; }
