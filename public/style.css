@@ -1,1 +1,24 @@
 body { font-family: "Helvetica Neue"; margin:0; }
+h2 { text-align: center; }
+li label { margin-left: 10px; }
+header { text-align: center; }
+
+.button { background: #efefef; display: block; padding: 5px; margin: 5px auto; text-align:center; }
+
+.map, .disclaimer, .logo { text-align: center; }
+
+.comment { margin: 10px; }
+	.time { border-bottom: 1px solid #ccc; font-weight: bold; padding-bottom: 5px; }
+	.comment ul { list-style: none; padding: 0; }
+	.comment li {
+		border-radius: 25px;
+	  	float: left;
+		width: 25px;
+		height: 25px;
+		padding-left: 14px;
+		padding-top: 8px;
+		background: #ccc;
+		margin-right: 10px;
+		margin-bottom: 10px;
+	}
+	.text { clear: both; }

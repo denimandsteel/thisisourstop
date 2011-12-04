@@ -1,21 +1,20 @@
-<br /><br />
 <div class="comment">
-	<div><%=: comment.time | time %></div>
+	<div class="time"><%=: comment.time | time %></div>
 	<% if (typeof comment.type != 'undefined') { %>
 		<ul>
 		<% if (typeof comment.type.weather != 'undefined') { %>
-			<li class="weather">Weather</li>
+			<li class="weather">W</li>
 		<% } %>
 		<% if (typeof comment.type.suggestion != 'undefined') { %>
-			<li class="suggestion">Suggestion</li>
+			<li class="suggestion">S</li>
 		<% } %>
 		<% if (typeof comment.type.look_for != 'undefined') { %>
-			<li class="look_form">Look For</li>
+			<li class="look_form">L</li>
 		<% } %>
 		<% if (typeof comment.type.just_sayin != 'undefined') { %>
-			<li class="just_sayin">Just Sayin'</li>
+			<li class="just_sayin">J</li>
 		<% } %>
 		</ul>
 	<% } %>
-	<div><%= comment.comment %></div>
+	<div class="text"><%= comment.comment %></div>
 </div>

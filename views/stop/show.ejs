@@ -1,7 +1,9 @@
-<form method="post" action="/">
-	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
-	<input type="submit" value="Go" />
-</form>
+<header>
+  <form method="post" action="/">
+  	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
+  	<input type="submit" value="Go" />
+  </form>
+</header>
 
 <ul class="tabs">
   <li>Busses</li>
@@ -13,18 +15,18 @@
 <div id="stop-info">
   <%- partial('trip', stop.trip) %>
 
-  <p>
+  <p class="map">
     <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;zoom=15&amp;size=290x200&amp;maptype=&amp;markers=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;sensor=false" />
   </p>
 
-  <a href="http://maps.google.com/maps?ll=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>">Open in Maps</a>
-  <a href="http://nb.translink.ca/Map/Stop/<%= stop.id %>">Open in TransLink Mobile</a>
+  <a class="button" href="http://maps.google.com/maps?ll=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>">Open in Maps</a>
+  <a class="button" href="http://nb.translink.ca/Map/Stop/<%= stop.id %>">Open in TransLink Mobile</a>
 </div>
 
 <div id="stop-talk">
-  <a href="/stop/<%= stop.id %>/new">Post Something</a>
+  <a class="button" href="/stop/<%= stop.id %>/new">Post Something</a>
 
   <%- partial('comment', comments) %>
 
-  <a href="/stop/<%= stop.id %>/new">Post Something</a>
+  <a class="button" href="/stop/<%= stop.id %>/new">Post Something</a>
 </div>
