@@ -6,13 +6,13 @@
 </header>
 
 <ul class="tabs">
-  <li>Busses</li>
-  <li>Recent Talk</li>
+  <li id="info" class="active">Busses</li>
+  <li id="talk">Recent Talk</li>
 </ul>
 
-<h2>At This Stop</h2>
-
 <div id="stop-info">
+  <h2>At This Stop</h2>
+  
   <%- partial('trip', stop.trip) %>
 
   <p class="map">
@@ -30,3 +30,19 @@
 
   <a class="button" href="/stop/<%= stop.id %>/new">Post Something</a>
 </div>
+
+<script type="text/javascript">
+$('#stop-talk').hide();
+$('#info').click(function() {
+  $('#stop-info').show();
+  $('#stop-talk').hide();
+  $('#info').addClass('active');
+  $('#talk').removeClass('active');
+});
+$('#talk').click(function() {
+  $('#stop-info').hide();
+  $('#stop-talk').show();
+  $('#info').removeClass('active');
+  $('#talk').addClass('active');
+});
+</script>

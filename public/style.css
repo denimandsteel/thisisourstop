@@ -3,9 +3,13 @@ h2 { text-align: center; }
 li label { margin-left: 10px; }
 header { text-align: center; }
 
+ul.tabs { margin: 20px 0 20px; padding: 0; text-align: center; }
+ul.tabs li { display: inline; padding: 5px; border: 2px solid #efefef; }
+ul.tabs li.active { background: #efefef; }
+
 .button { background: #efefef; display: block; padding: 5px; margin: 5px auto; text-align:center; }
 
-.map, .disclaimer, .logo { text-align: center; }
+.map, .disclaimer, .logo, #stop-info { text-align: center; }
 
 .comment { margin: 10px; }
 	.time { border-bottom: 1px solid #ccc; font-weight: bold; padding-bottom: 5px; }
