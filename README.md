@@ -25,7 +25,7 @@ Create an account at [Heroku](http://www.heroku.com/).
 - $ heroku keys:add
 - $ heroku create --stack cedar # to get a node.js capable stack
 - $ git push heroku
-- $ heroku ps:scale web=1
+- $ heroku ps:scale web=1 # node apps require a resize
 - $ heroku open # open a web browser to the site
 - $ heroku logs -t # show instance log (useful to keep an eye on if you have a large GTFS file)
 
