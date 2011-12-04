@@ -7,7 +7,7 @@ ul.tabs li { display: inline; padding: 5px; border: 2px solid #efefef; }
 ul.tabs li.active { background: #efefef; }
 
 ul.type { margin: 20px 0 20px; padding: 0; text-align: center; }
-ul.type li { display: inline; float: left; margin-right: 5px; }
+ul.type li { display: inline; float: left; margin-right: 5px; font-size: 12px; }
 ul.type label { display: block; }
 #count { clear: both; padding-top: 10px; display: block; }
 
@@ -16,7 +16,7 @@ ul.type label { display: block; }
 .map, .disclaimer, .logo, #stop-info, .post-it { text-align: center; }
 
 #new-comment { margin: 20px; }
-textarea { width: 100%; height: 50px; }
+textarea { width: 100%; height: 50px; font-size: 12px; }
 
 .comment { margin: 10px; }
 	.time { border-bottom: 1px solid #ccc; font-weight: bold; padding-bottom: 5px; }
