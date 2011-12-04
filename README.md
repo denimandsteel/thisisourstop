@@ -1,25 +1,25 @@
 # This Is Our Stop
 
-An ad-hoc social network around your bus stop!
+An ad-hoc social network around your bus stop! See it running at: <http://thisisourstop.herokuapp.com>
 
 ## Installation
 
 ### On your local environment
 
-Install node and npm.
+Install [node and npm](http://nodejs.org/#download).
 
 - $ git clone git@github.com:denimandsteel/thisisourstop.git
 - $ cd thisisourstop
 - $ npm install
 - $ npm start
 
-Visit the site at http://localhost:3000 in a web browser.
+Visit the site at <http://localhost:3000> in a web browser.
 
 You can install your own GTFS feed by replacing the google_transit directory with your own.
 
 ### On a Heroku instance
 
-Create an account at [Heroku](http://www.heroku.com/)
+Create an account at [Heroku](http://www.heroku.com/).
 
 - $ gem install heroku
 - $ heroku keys:add
