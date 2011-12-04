@@ -38,16 +38,18 @@ if (window.location.hash == '#talk') {
 else {
   $('#stop-talk').hide();
 }
-$('#info').click(function() {
+$('#info').click(function(e) {
   $('#stop-info').show();
   $('#stop-talk').hide();
   $('#info').addClass('active');
   $('#talk').removeClass('active');
+  e.preventDefault();
 });
-$('#talk').click(function() {
+$('#talk').click(function(e) {
   $('#stop-info').hide();
   $('#stop-talk').show();
   $('#info').removeClass('active');
   $('#talk').addClass('active');
+  e.preventDefault();
 });
 </script>
