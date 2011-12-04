@@ -1,9 +1,11 @@
 var comments = require('dirty')('comments.dirty');
 
-var Comment = exports = module.exports = function Comment(comment, stop) {
+var Comment = exports = module.exports = function Comment(comment, stop, type) {
   this.id = new Date().getTime();
   this.comment = comment;
   this.stop = stop;
+  this.type = type;
+  this.time = new Date().getTime();
 };
 
 exports.get = function(id, fn){

@@ -7,10 +7,10 @@
 
 <form method="post" action="/stop/<%= stop.id %>">
 	<ul>
-		<li><input id="weather" type="checkbox" /><label for="weather">Weather</label></li>
-		<li><input id="suggestion" type="checkbox" /><label for="suggestion">Suggestion</label></li>
-		<li><input id="look-for" type="checkbox" /><label for="look-for">Look For</label></li>
-		<li><input id="just-sayin" type="checkbox" /><label for="just-sayin">Suggestion</label></li>
+		<li><input id="weather" type="checkbox" name="type[weather]" /><label for="weather">Weather</label></li>
+		<li><input id="suggestion" type="checkbox" name="type[suggestion]" /><label for="suggestion">Suggestion</label></li>
+		<li><input id="look-for" type="checkbox" name="type[look_for]" /><label for="look-for">Look For</label></li>
+		<li><input id="just-sayin" type="checkbox" name="type[just_sayin]" /><label for="just-sayin">Suggestion</label></li>
 	</ul>
 	<label for="text">0/200</label>
 	<textarea id="text" name="comment"></textarea>

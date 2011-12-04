@@ -43,7 +43,7 @@ module.exports = function(app) {
   });
 
   app.post('/stop/:stop.:format?', function(req, res) {
-    var comment = new Comment(req.body.comment, req.stop.id);
+    var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
     // Validate.
     // Remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
