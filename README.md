@@ -4,6 +4,11 @@ An ad-hoc social network around your bus stop!
 
 ## Todo
 
+- database backends for comments and stops
+- cookies/sessions for recent stops
+- comment flagging
+- admin
+- cookie user account
 - <del>look at using ejs (on server) and underscore (on client) templating together. They both use <% %></del>
 - want to serve up full layout at /stop/123 and json at /stop/123.json, that can then be passed to the same partial template.
 - <del>implement a parser for gtfs</del>
