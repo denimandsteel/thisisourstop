@@ -18,7 +18,7 @@
 	<key>GuidesVisible</key>
 	<string>YES</string>
 	<key>ImageCounter</key>
-	<integer>12</integer>
+	<integer>14</integer>
 	<key>ImageLinkBack</key>
 	<array>
 		<dict/>
@@ -48,7 +48,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2011-11-26 05:11:35 +0000</string>
+	<string>2011-12-05 22:39:44 +0000</string>
 	<key>Modifier</key>
 	<string>Todd Sieling</string>
 	<key>NotesVisible</key>
@@ -49354,7 +49354,8 @@ your bus stop.}</string>
 \
 Meditate on this kitten. \
 Let it calm your heart. \
-\ul The block will be lifted in XX hours.}</string>
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\slleading80\pardirnatural\qc
+\cf2 \ul \ulc2 The block will be lifted in XX hours.}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -51796,7 +51797,7 @@ Let it calm your heart. \
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{210.60605, 1860.6058}, {2015.1512, 1459.0907}}</string>
+		<string>{{0, 2669.6968}, {2015.1515, 1459.0908}}</string>
 		<key>Zoom</key>
 		<real>0.6600000262260437</real>
 		<key>ZoomValues</key>
