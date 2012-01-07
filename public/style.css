@@ -1,23 +1,20 @@
-body { font-family: "Helvetica Neue"; margin: 0 auto; max-width: 500px; }
-h2 { text-align: center; }
+body { margin: 0 auto; max-width: 500px; }
 header { text-align: center; }
 header form { margin-top: 10px; }
 
-ul.tabs { margin: 20px 0 20px; padding: 0; text-align: center; }
-ul.tabs li { display: inline; padding: 5px; border: 2px solid #efefef; }
-ul.tabs li.active { background: #efefef; }
-
 ul.type { margin: 20px 0 20px; padding: 0; text-align: center; }
 ul.type li { display: inline; float: left; margin-left: 7px; font-size: 14px; }
-ul.type label { display: block; }
-#count { clear: both; padding-top: 10px; display: block; }
+ul.type label { display: block; width: 105px; }
+ul.type label input { margin-right: 5px; }
+#count { clear: both; padding-top: 10px; display: block; float: right; }
+#stop-talk .actions { padding-left: 20px; text-align: center; }
 
 .button { background: #efefef; display: block; padding: 5px; margin: 5px auto; text-align:center; }
 
-.map, .disclaimer, .logo, #stop-info, .post-it { text-align: center; }
+.map, .disclaimer, .logo, #stop-info { text-align: center; }
 
-#new-comment { margin: 20px; }
-textarea { width: 100%; height: 50px; font-size: 14px; }
+#form-inputs { margin: 20px; }
+textarea { width: 97%; height: 50px; }
 
 .comment { margin: 10px; }
 	.time { border-bottom: 1px solid #ccc; font-weight: bold; padding-bottom: 5px; }

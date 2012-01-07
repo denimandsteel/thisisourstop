@@ -1,17 +1,11 @@
 <header>
   <form method="post" action="/">
   	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
-  	<input type="submit" value="Go" />
+  	<input class="btn" type="submit" value="Go" />
   </form>
 </header>
 
-<ul class="tabs">
-  <li id="info" class="active">Busses</li>
-  <li id="talk">Recent Talk</li>
-</ul>
-
 <div id="stop-info">
-  <h2>At This Stop</h2>
 
   <%- partial('trip', stop.trip) %>
 
@@ -24,32 +18,39 @@
 </div>
 
 <div id="stop-talk">
-  <a class="button" href="/stop/<%= stop.id %>/new">Post Something</a>
+  <h2>Recent Talk</h2>
+  <a class="button" href="#post">Say Something</a>
 
   <%- partial('comment', comments) %>
 
-  <a class="button" href="/stop/<%= stop.id %>/new">Post Something</a>
-</div>
+  <a class="button" id="post" href="#post">Say Something</a>
 
-<script type="text/javascript">
-if (window.location.hash == '#talk') {
-  $('#stop-info').hide();
-}
-else {
-  $('#stop-talk').hide();
-}
-$('#info').click(function(e) {
-  $('#stop-info').show();
-  $('#stop-talk').hide();
-  $('#info').addClass('active');
-  $('#talk').removeClass('active');
-  e.preventDefault();
-});
-$('#talk').click(function(e) {
-  $('#stop-info').hide();
-  $('#stop-talk').show();
-  $('#info').removeClass('active');
-  $('#talk').addClass('active');
-  e.preventDefault();
-});
-</script>
+  <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
+    <div id="form-inputs">
+      <ul class="type">
+        <li><label for="weather"><input id="weather" type="checkbox" name="type[weather]" /><span>Weather</span></label></li>
+        <li><label for="suggestion"><input id="suggestion" type="checkbox" name="type[suggestion]" /><span>Suggestion</span></label></li>
+        <li><label for="look-for"><input id="look-for" type="checkbox" name="type[look_for]" /><span>Look For</span></label></li>
+        <li><label for="just-sayin"><input id="just-sayin" type="checkbox" name="type[just_sayin]" /><span>Just Sayin'</span></label></li>
+      </ul>
+      <div><label id="count" for="text">0/200</label></div>
+      <textarea id="text" name="comment"></textarea>
+    </div>
+    <div class="actions">
+      <input class="btn primary" type="submit" value="Post It" />
+    </div>
+    <p class="disclaimer">Abuse & spam are mercilessly deleted</p>
+  </form>
+  <a id="another-stop" class="button" href="#stop">Find Another Stop</a>
+
+  <script type="text/javascript">
+  $('textarea#text').keyup(function() {
+    $('#count').html($(this).val().length + '/200');
+  });
+  $('#another-stop').click(function() {
+    window.scrollTo(0,0);
+    $('#stop').val('').focus();
+    return false;
+  })
+  </script>
+</div>

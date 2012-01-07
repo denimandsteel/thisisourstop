@@ -1,19 +1,10 @@
 <div class="comment">
 	<div class="time"><%=: comment.time | time %></div>
-	<% if (typeof comment.type != 'undefined') { %>
+	<% if (typeof comment.type !== 'undefined') { %>
 		<ul>
-		<% if (typeof comment.type.weather != 'undefined') { %>
-			<li class="weather">W</li>
-		<% } %>
-		<% if (typeof comment.type.suggestion != 'undefined') { %>
-			<li class="suggestion">S</li>
-		<% } %>
-		<% if (typeof comment.type.look_for != 'undefined') { %>
-			<li class="look_form">L</li>
-		<% } %>
-		<% if (typeof comment.type.just_sayin != 'undefined') { %>
-			<li class="just_sayin">J</li>
-		<% } %>
+		<% for(var i = 0; i < comment.type.length; i++) { %>
+   		<li class="<%= comment.type[i] %>"><%= comment.type[i][0].toUpperCase() %></li>
+ 		<% } %>
 		</ul>
 	<% } %>
 	<div class="text"><%= comment.comment %></div>

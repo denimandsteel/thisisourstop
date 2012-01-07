@@ -31,8 +31,6 @@ module.exports = function(app) {
         res.json({stop: req.stop, comments: comments}); 
       }
       else {
-        console.log(req.stop);
-        console.log(comments);
         res.render('stop/show', { stop: req.stop, comments: comments });
       }
     });
@@ -43,9 +41,15 @@ module.exports = function(app) {
   });
 
   app.post('/stop/:stop.:format?', function(req, res) {
-    var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
-    // Validate.
-    // Remove XSS input, only plain text is allowed.
+    var types = [];
+    var valid_types = ['weather', 'suggestion', 'look_for', 'just_sayin'];
+    for (var i in req.body.type) {
+      if (req.body.type[i] === 'on' && valid_types.indexOf(i) !== -1) {
+        types.push(i);
+      }
+    }
+    var comment = new Comment(req.body.comment, req.stop.id, types);
+    // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
       if (req.params.format === 'json') {
         res.json({ error: false, comment: savedComment });
