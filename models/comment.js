@@ -6,7 +6,7 @@ client = new pg.Client(connectionString);
 client.connect();
 
 var Comment = exports = module.exports = function Comment(comment, stop, type) {
-  this.id = new Date().getTime();
+  //this.id = new Date().getTime();
   this.comment = comment;
   this.stop = stop;
   this.type = type;
@@ -45,10 +45,11 @@ exports.byStop = function(stop, fn) {
 }
 
 Comment.prototype.save = function(fn){
-  /*
+  console.log(this);
   var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4)', [this.comment, this.stop, this.type, new Date()]);
   query.on('end', function(result) {
-    //if (typeof result === 'undefined') // Check for errors.*/
+    console.log('we at end?');
+    //if (typeof result === 'undefined') // Check for errors.
     fn(null, this);
-  //});
+  });
 }
