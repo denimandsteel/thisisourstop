@@ -39,7 +39,6 @@ exports.byStop = function(stop, fn) {
     ret.push(row);
   });
   query.on('end', function() {
-    console.log(ret);
     fn(ret);
   });
 }
