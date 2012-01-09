@@ -45,9 +45,10 @@ exports.byStop = function(stop, fn) {
 }
 
 Comment.prototype.save = function(fn){
+  /*
   var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4)', [this.comment, this.stop, this.type, new Date()]);
   query.on('end', function(result) {
-    //if (typeof result === 'undefined') // Check for errors.
+    //if (typeof result === 'undefined') // Check for errors.*/
     fn(null, this);
-  });
+  //});
 }
