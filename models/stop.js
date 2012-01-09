@@ -25,7 +25,8 @@ exports.get = function(id, fn){
           ret[key] = formatTitles(data[key]);
         }
       }
-      client.query('SELECT DISTINCT trips.route_id, routes.* FROM stop_times LEFT JOIN trips ON stop_times.trip_id = trips.trip_id LEFT JOIN routes ON trips.route_id = routes.route_id WHERE stop_times.stop_id = $1 ORDER BY routes.route_short_name', [ret.stop_id], function(err, trip) {
+      // Slow and requires a lot of data up front.
+      client.query('SELECT * from stop_routes WHERE stop_code = $1 ORDER BY route_short_name', [ret.stop_code], function(err, trip) {
         ret.trip = trip.rows;
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
