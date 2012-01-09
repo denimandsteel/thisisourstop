@@ -7,13 +7,15 @@
 
 <div id="stop-info">
 
+  <p><%= stop.stop_desc %></p>
+
   <%- partial('trip', stop.trip) %>
 
   <p class="map">
-    <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;zoom=15&amp;size=290x200&amp;maptype=&amp;markers=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>&amp;sensor=false" />
+    <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop_lat %>,<%= stop.stop_lon %>&amp;zoom=15&amp;size=290x200&amp;maptype=&amp;markers=<%= stop.stop_lat %>,<%= stop.stop_lon %>&amp;sensor=false" />
   </p>
 
-  <a class="button" href="http://maps.google.com/maps?ll=<%= stop.stop.stop_lat %>,<%= stop.stop.stop_lon %>">Open in Maps</a>
+  <a class="button" href="http://maps.google.com/maps?ll=<%= stop.stop_lat %>,<%= stop.stop_lon %>">Open in Maps</a>
   <a class="button" href="http://nb.translink.ca/Map/Stop/<%= stop.id %>">Open in TransLink Mobile</a>
 </div>
 

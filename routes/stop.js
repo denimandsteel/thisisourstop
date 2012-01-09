@@ -8,8 +8,18 @@ module.exports = function(app) {
       //if (err) return next(err);
       //if (!stop) return next(new Error('failed to find stop'));
       // Send 404...
-      req.stop = stop;
-      next();
+      if (err === null) {
+        req.stop = stop;
+        next();
+      }
+      else {
+        next(err); 
+       // console.log('and this is right too?');
+       // next(new Error('failed to find stop'));
+        //next(new Error(err));
+        //res.send(404);
+        //res.render('stop');
+      }
     });
   });
 
