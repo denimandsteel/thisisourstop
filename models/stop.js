@@ -26,7 +26,7 @@ exports.get = function(id, fn){
         }
       }
       // Slow and requires a lot of data up front.
-      client.query('SELECT * from stop_routes WHERE stop_code = $1 ORDER BY route_short_name', [ret.stop_code], function(err, trip) {
+      client.query('SELECT distinct route_short_name, route_long_name from stop_routes WHERE stop_code = $1 ORDER BY route_short_name', [ret.stop_code], function(err, trip) {
         ret.trip = trip.rows;
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
