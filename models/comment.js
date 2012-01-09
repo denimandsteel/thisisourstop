@@ -45,11 +45,13 @@ exports.byStop = function(stop, fn) {
 }
 
 Comment.prototype.save = function(fn){
-  console.log(this);
-  var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4)', [this.comment, this.stop, this.type, new Date()]);
-  query.on('end', function(result) {
-    console.log('we at end?');
+  var that = this;
+  var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING cid', [this.comment, this.stop, this.type, new Date()]);
+  query.on('row', function(row) {
+    that.cid = row.cid;
+  });
+  query.on('end', function() {
     //if (typeof result === 'undefined') // Check for errors.
-    fn(null, this);
+    fn(null, that);
   });
 }

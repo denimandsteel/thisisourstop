@@ -65,7 +65,11 @@ module.exports = function(app) {
         res.json({ error: false, comment: savedComment });
       }
       else {
-        res.redirect('/stop/' + req.stop.id);
+        var hash = '';
+        if (typeof savedComment.cid !== 'undefined') {
+          hash = '/#comment-' + savedComment.cid;
+        }
+        res.redirect('/stop/' + req.stop.id + hash);
       }
     });
   });

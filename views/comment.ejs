@@ -1,4 +1,4 @@
-<div class="comment">
+<div id="comment-<%= comment.cid %>" class="comment">
 	<div class="time"><%=: comment.time | time %></div>
 	<% if (typeof comment.type !== 'undefined') { %>
 		<ul>

@@ -43,8 +43,3 @@ else if (process.argv[2] == 'test') {
   });
   sequence.on('end', endTest);
 }
-
-/*var query = client.query("ALTER TABLE comments ALTER COLUMN id SET DEFAULT nextval('comment_id')");
-query.on('end', function() {
-  client.end();
-});*/
