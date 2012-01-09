@@ -14,7 +14,7 @@ var Comment = exports = module.exports = function Comment(comment, stop, type) {
 };
 
 exports.get = function(id, fn){
-  var query = client.query('SELECT * FROM comments WHERE id = $1', [id]);
+  var query = client.query('SELECT * FROM comments WHERE cid = $1', [id]);
   var ret = new Comment();
   query.on('row', function(row) {
     for (var key in row) {
