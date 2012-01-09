@@ -29,15 +29,17 @@ exports.get = function(id, fn){
 };
 
 exports.byStop = function(stop, fn) {
-  var date = new Date();
   var ret = [];
-  query = client.query('SELECT * FROM comments WHERE stop = $1 ORDER BY time DESC', [stop]);
+  var today = new Date();
+  var weekAgo = new Date(today.getTime()-1000*60*60*24*7);
+  query = client.query('SELECT * FROM comments WHERE stop = $1 AND time > $2 ORDER BY time DESC', [stop, weekAgo]);
   query.on('row', function(row) {
     var types = JSON.parse(row.type);
     row.type = types;
     ret.push(row);
   });
-  query.on('end', function() { 
+  query.on('end', function() {
+    console.log(ret);
     fn(ret);
   });
 }

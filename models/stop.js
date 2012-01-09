@@ -20,9 +20,17 @@ exports.get = function(id, fn){
         if (undefined != data[key]) {
           ret[key] = data[key];
         }
+        // Ugly... dirty data...
+        if (key == 'stop_desc') {
+          ret[key] = formatTitles(data[key]);
+        }
       }
-      client.query('SELECT DISTINCT trips.route_id, routes.* FROM stop_times LEFT JOIN trips ON stop_times.trip_id = trips.trip_id LEFT JOIN routes ON trips.route_id = routes.route_id WHERE stop_times.stop_id = $1', [ret.stop_id], function(err, trip) {
+      client.query('SELECT DISTINCT trips.route_id, routes.* FROM stop_times LEFT JOIN trips ON stop_times.trip_id = trips.trip_id LEFT JOIN routes ON trips.route_id = routes.route_id WHERE stop_times.stop_id = $1 ORDER BY routes.route_short_name', [ret.stop_id], function(err, trip) {
         ret.trip = trip.rows;
+        // Ugly... dirty data...
+        for (var i = 0; i < trip.rows.length; i++) {
+          ret.trip[i].route_long_name = formatTitles(trip.rows[i].route_long_name);
+        }
         fn(null, ret);
       });
     }
@@ -30,4 +38,8 @@ exports.get = function(id, fn){
       fn('No such stop.');
     }
   });
+
+  var formatTitles = function(str) {
+    return str.toLowerCase().replace(/\w/, function($0) { return $0.toUpperCase(); });
+  }
 };

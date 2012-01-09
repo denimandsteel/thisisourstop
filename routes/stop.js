@@ -65,7 +65,7 @@ module.exports = function(app) {
         res.json({ error: false, comment: savedComment });
       }
       else {
-        res.redirect('/stop/' + req.stop.id + '/#talk');
+        res.redirect('/stop/' + req.stop.id);
       }
     });
   });

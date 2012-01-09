@@ -10,6 +10,7 @@ ul.type label input { margin-right: 5px; }
 #stop-talk .actions { padding-left: 20px; text-align: center; }
 
 .button { background: #efefef; display: block; padding: 5px; margin: 5px auto; text-align:center; }
+.trip { text-transform:capitalize; }
 
 .map, .disclaimer, .logo, #stop-info { text-align: center; }
 
