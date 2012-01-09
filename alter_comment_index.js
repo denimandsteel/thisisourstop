@@ -31,7 +31,7 @@ if (process.argv[2] == 'migrate') {
 else if (process.argv[2] == 'test') {
   client = new pg.Client(connectionString);
   client.connect();
-  var query = client.query("select * from INFORMATION_SCHEMA.COLUMNS where table_name = 'comments' and column_name = 'id';");
+  var query = client.query("select * from INFORMATION_SCHEMA.COLUMNS where table_name = 'comments' and column_name = 'cid';");
   query.on('row', function(row) {
     console.log(row);
   });
