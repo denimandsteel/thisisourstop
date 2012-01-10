@@ -56,8 +56,10 @@ else if (process.argv[2] == 'csv') {
           trip[route.route_short_name] = [route.route_short_name, route.route_long_name.replace(/^\s+|\s+$/g,""), id];
         }
         for (var k in trip) {
-          console.log(trip[k]);
           client.query('INSERT INTO stop_routes VALUES($1, $2, $3)', trip[k]);
+          if (trip[k][2] == '61612') {
+            console.log(trip[k]);
+          }
         }
       }
       //client.end(); -- dies early. Kill script manually for now.
