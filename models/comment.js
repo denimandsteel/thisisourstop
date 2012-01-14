@@ -24,7 +24,7 @@ exports.get = function(id, fn){
     }
   });
   query.on('end', function() {
-    fn(ret);
+    fn(null, ret);
   });
 };
 
@@ -33,6 +33,19 @@ exports.byStop = function(stop, fn) {
   var today = new Date();
   var weekAgo = new Date(today.getTime()-1000*60*60*24*7);
   query = client.query('SELECT * FROM comments WHERE stop = $1 AND time > $2 ORDER BY time DESC', [stop, weekAgo]);
+  query.on('row', function(row) {
+    var types = JSON.parse(row.type);
+    row.type = types;
+    ret.push(row);
+  });
+  query.on('end', function() {
+    fn(ret);
+  });
+}
+
+exports.all = function(fn) {
+  var ret = [];
+  query = client.query('SELECT * FROM comments ORDER BY time DESC');
   query.on('row', function(row) {
     var types = JSON.parse(row.type);
     row.type = types;
