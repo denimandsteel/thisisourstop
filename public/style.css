@@ -1,3 +1,4 @@
+body, label, input, select, textarea, .topbar input, .btn .close, .alert-message .close { font-family: "ff-super-grotesk-web",sans-serif; }
 body { margin: 0 auto; max-width: 500px; }
 header { text-align: center; }
 header form { margin-top: 10px; }
