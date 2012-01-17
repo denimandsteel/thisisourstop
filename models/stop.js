@@ -40,7 +40,73 @@ exports.get = function(id, fn){
     }
   });
 
+  // We have some seriously ugly data from Translink, let's make it nicer.
+  // Extended from: http://ejohn.org/blog/title-capitalization-in-javascript/
   var formatTitles = function(str) {
-    return str.toLowerCase().replace(/\w/, function($0) { return $0.toUpperCase(); });
+    var small = "(a|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v[.]?|via|vs[.]?)";
+    var big = "(UBC|VCC)";
+    var correct = {
+      'Bdry': 'Boundary',
+      'Bway': 'Broadway',
+      'Gran': 'Granville',
+      'Av': 'Ave',
+    }
+    // Get keys for use in regex.
+    var correct_keys = [];
+    for (var key in correct) {
+      if(Object.prototype.hasOwnProperty.call(correct, key)) {
+        correct_keys.push(key); 
+      }
+    }
+
+    var punct = "([!\"#$%&'()*+,./:;<=>?@[\\\\\\]^_`{|}~-]*)";
+    
+    this.titleCaps = function(title){
+      var parts = [],
+          split = /[:.;?!] |(?: |^)["Ò]/g,
+          index = 0;
+      
+      while (true) {
+        var m = split.exec(title);
+
+        parts.push(title
+          .toLowerCase()
+          .substring(index, m ? m.index : title.length)
+          .replace(/\b([A-Za-z][a-z.'Õ]*)\b/g, function(all){
+            return /[A-Za-z]\.[A-Za-z]/.test(all) ? all : upper(all);
+          })
+          .replace(RegExp("\\b" + small + "\\b", "ig"), function(word) {
+            return word.toLowerCase();
+          })
+          .replace(RegExp("^" + punct + small + "\\b", "ig"), function(all, punct, word){
+            return punct + upper(word);
+          })
+          .replace(RegExp("\\b" + small + punct + "$", "ig"), upper)
+        );
+        
+        index = split.lastIndex;
+        
+        if (m) {
+          parts.push(m[0]);
+        }
+        else {
+          break;
+        }
+      }
+      
+      return parts.join("").replace(/ V(s?)\. /ig, " v$1. ")
+        .replace(/(['Õ])S\b/ig, "$1s")
+        .replace(RegExp("\\b(" + correct_keys.join("|") + ")\\b", "ig"), function(all) {
+          return correct[all];
+        })
+        .replace(RegExp("\\b" + big + "\\b", "ig"), function(all){
+          return all.toUpperCase();
+        });
+    };
+      
+    function upper(word){
+      return word.substr(0,1).toUpperCase() + word.substr(1);
+    }
+    return this.titleCaps(str);
   }
 };
