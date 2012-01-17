@@ -12,7 +12,7 @@
   <%- partial('trip', stop.trip) %>
 
   <p class="map">
-    <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop_lat %>,<%= stop.stop_lon %>&amp;zoom=15&amp;size=290x200&amp;maptype=&amp;markers=<%= stop.stop_lat %>,<%= stop.stop_lon %>&amp;sensor=false" />
+    <img width="290" height="200" src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop_lat %>,<%= stop.stop_lon %>&amp;zoom=15&amp;size=290x200&amp;maptype=&amp;markers=<%= stop.stop_lat %>,<%= stop.stop_lon %>&amp;sensor=false&amp;scale=2" />
   </p>
 
   <a class="button" href="http://maps.google.com/maps?ll=<%= stop.stop_lat %>,<%= stop.stop_lon %>">Open in Maps</a>
