@@ -44,12 +44,22 @@ exports.get = function(id, fn){
   // Extended from: http://ejohn.org/blog/title-capitalization-in-javascript/
   var formatTitles = function(str) {
     var small = "(a|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v[.]?|via|vs[.]?)";
-    var big = "(UBC|VCC)";
+    var big = "(UBC|VCC|BCIT|SFU)";
     var correct = {
       'Bdry': 'Boundary',
       'Bway': 'Broadway',
       'Gran': 'Granville',
       'Av': 'Ave',
+      'Cntrl': 'Central',
+      'Exch': 'Exchange',
+      'Ex': 'Exchange',
+      'Cap': 'Capilano',
+      'U': 'University',
+      'Van': 'Vancouver',
+      'Coq': 'Coquitlam',
+      'Mdws': 'Meadows',
+      'Rvr': 'River',
+      'Stat': 'Stn',
     }
     // Get keys for use in regex.
     var correct_keys = [];
