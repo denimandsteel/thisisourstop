@@ -1,7 +1,9 @@
 var Stop = require('../models/stop');
 var Comment = require('../models/comment');
+var sio = require('socket.io');
 
 module.exports = function(app) {
+  var io = sio.listen(app);
 
   app.param('stop', function(req, res, next, id){
     Stop.get(id, function(err, stop){
@@ -61,6 +63,10 @@ module.exports = function(app) {
     var comment = new Comment(req.body.comment, req.stop.id, types);
     // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
+      // Render HTML on server side... bit of a hack but don't feel like sharing templates on client side yet.
+      res.partial('comment', [savedComment], function(err, html) {
+        io.sockets.emit('comment', {'html': html});
+      });
       if (req.params.format === 'json') {
         res.json({ error: false, comment: savedComment });
       }

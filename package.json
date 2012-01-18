@@ -8,12 +8,13 @@
     "url": "git://github.com/denimandsteel/thisisourstop.git"
   },
   "engines": {
-    "node": "~v0.4.9-pre"
+    "node": ">=0.4.9"
   },
   "dependencies": {
     "pg": "0.5.4",
     "express": "2.5.1",
-    "ejs": "0.5.0"
+    "ejs": "0.5.0",
+    "socket.io": "0.8.7"
   },
   "devDependencies": {},
   "scripts": { "start" : "node index.js" }
