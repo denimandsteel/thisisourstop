@@ -1,15 +1,24 @@
 var pg = require('pg').native;
 var connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/thisisourstop'
 var client;
+var sanitize = require('validator').sanitize;
 
 client = new pg.Client(connectionString);
 client.connect();
 
 var Comment = exports = module.exports = function Comment(comment, stop, type) {
-  //this.id = new Date().getTime();
-  this.comment = comment;
-  this.stop = stop;
-  this.type = type;
+  this.comment = sanitize(comment).xss();
+  this.stop = sanitize(stop).toInt();
+
+  var types = [];
+  var valid_types = ['weather', 'suggestion', 'look_for', 'just_sayin'];
+  for (var i in type) {
+    if (type[i] === 'on' && valid_types.indexOf(i) !== -1) {
+      types.push(i);
+    }
+  }
+
+  this.type = types;
   this.time = new Date().getTime();
 };
 

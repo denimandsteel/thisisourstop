@@ -53,13 +53,6 @@ module.exports = function(app) {
   });
 
   app.post('/stop/:stop.:format?', function(req, res) {
-    var types = [];
-    var valid_types = ['weather', 'suggestion', 'look_for', 'just_sayin'];
-    for (var i in req.body.type) {
-      if (req.body.type[i] === 'on' && valid_types.indexOf(i) !== -1) {
-        types.push(i);
-      }
-    }
     var comment = new Comment(req.body.comment, req.stop.id, types);
     // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){

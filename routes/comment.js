@@ -43,4 +43,15 @@ module.exports = function(app) {
       }
   });
 
+  app.post('/comment/:comment/:action.:format?', function(req, res) {
+      /*
+      if(req.params.format === 'json') {
+        res.json({ comment: req.comment }); 
+      }
+      else {
+        res.render('admin', { comments: req.comment });
+      }
+      */
+  });
+
 };
