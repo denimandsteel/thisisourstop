@@ -21,7 +21,8 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/admin.:format?', function(req, res) {
+  // All comments.
+  app.get('/stop/all.:format?', function(req, res) {
     client.query('SELECT * FROM comments', function(err, result) {
       Comment.all(function(comments) {
         if(req.params.format === 'json') {
@@ -34,24 +35,29 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/comment/:comment.:format?', function(req, res) {
+  // Individual comment info.
+  app.get('/stop/:stop/:comment.:format?', function(req, res) {
       if(req.params.format === 'json') {
-        res.json({ comment: req.comment }); 
+        res.json({ comment: req.comment });
       }
       else {
         res.render('admin', { comments: req.comment });
       }
   });
 
-  app.post('/comment/:comment/:action.:format?', function(req, res) {
-      /*
-      if(req.params.format === 'json') {
-        res.json({ comment: req.comment }); 
-      }
-      else {
-        res.render('admin', { comments: req.comment });
-      }
-      */
+  app.get('/stop/:stop/:comment/report.:format?', function(req, res) {
+    // Report comment form.
+    res.json({ comment: req.comment });
+  });
+
+  app.post('/stop/:stop/:comment/report.:format?', function(req, res) {
+    // Save report and redirect back to stop.
+    res.json({ comment: req.comment });
+  });
+
+  app.get('/stop/:stop/:comment/moderate.:format?', function(req, res) {
+    // Peek in get parameters for +/- and session token.
+    res.json({ comment: req.comment });
   });
 
 };
