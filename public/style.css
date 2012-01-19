@@ -6,12 +6,15 @@ header { position: relative; text-align: right; height: 60px; background: #500f6
 header form { padding: 20px 20px 0 0; }
 header #stop { width: 60px; }
 
+#stop_form.hide { display: none; }
+
 header #stop_id {
 	font-weight: bold;
 	color: #ffffff;
 	font-size: 41px;
 	padding: 2px 15px 0 0;
 	letter-spacing: 7px;
+	cursor: pointer;
 }
 
 img#logo {

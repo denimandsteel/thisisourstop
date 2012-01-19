@@ -1,10 +1,10 @@
 <header>
   <a href="/"><img width="134" height"81" id="logo" src="/logo.png" /></a>
   <div id="stop_id"><%= stop.id %></div>
-  <!--<form method="post" action="/">
+  <form id="stop_form" class="hide" method="post" action="/">
   	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
   	<input class="btn" type="submit" value="Go" />
-  </form>-->
+  </form>
 </header>
 
 <div class="map">
@@ -64,10 +64,16 @@
     $(this).removeClass('active');
     $('#new-comment input[name="type[' + $(this).attr('id') + ']"]').attr('checked', false);
   });
-  /*$('#another-stop').click(function() {
+  $('#another-stop').click(function() {
+    $('#stop_id').hide();
+    $('#stop_form').show();
     window.scrollTo(0,0);
     $('#stop').val('').focus();
     return false;
-  });*/
+  });
+  $('#stop_id').click(function() {
+    $(this).hide();
+    $('#stop_form').show();
+  });
   </script>
 </div>
