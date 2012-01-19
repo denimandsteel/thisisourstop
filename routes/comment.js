@@ -22,7 +22,7 @@ module.exports = function(app) {
   });
 
   // All comments.
-  app.get('/stop/all.:format?', function(req, res) {
+  app.get('/all.:format?', function(req, res) {
     client.query('SELECT * FROM comments', function(err, result) {
       Comment.all(function(comments) {
         if(req.params.format === 'json') {
@@ -36,7 +36,7 @@ module.exports = function(app) {
   });
 
   // Individual comment info.
-  app.get('/stop/:stop/:comment.:format?', function(req, res) {
+  app.get('/stop/:stop/comment/:comment.:format?', function(req, res) {
       if(req.params.format === 'json') {
         res.json({ comment: req.comment });
       }
@@ -45,17 +45,17 @@ module.exports = function(app) {
       }
   });
 
-  app.get('/stop/:stop/:comment/report.:format?', function(req, res) {
+  app.get('/stop/:stop/comment/:comment/report.:format?', function(req, res) {
     // Report comment form.
     res.json({ comment: req.comment });
   });
 
-  app.post('/stop/:stop/:comment/report.:format?', function(req, res) {
+  app.post('/stop/:stop/comment/:comment/report.:format?', function(req, res) {
     // Save report and redirect back to stop.
     res.json({ comment: req.comment });
   });
 
-  app.get('/stop/:stop/:comment/moderate.:format?', function(req, res) {
+  app.get('/stop/:stop/comment/:comment/moderate.:format?', function(req, res) {
     // Peek in get parameters for +/- and session token.
     res.json({ comment: req.comment });
   });

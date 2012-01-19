@@ -53,7 +53,7 @@ module.exports = function(app) {
   });
 
   app.post('/stop/:stop.:format?', function(req, res) {
-    var comment = new Comment(req.body.comment, req.stop.id, types);
+    var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
     // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
       // Render HTML on server side... bit of a hack but don't feel like sharing templates on client side yet.

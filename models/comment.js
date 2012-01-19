@@ -7,8 +7,8 @@ client = new pg.Client(connectionString);
 client.connect();
 
 var Comment = exports = module.exports = function Comment(comment, stop, type) {
-  this.comment = sanitize(comment).xss();
-  this.stop = sanitize(stop).toInt();
+  this.comment = comment;
+  this.stop = stop;
 
   var types = [];
   var valid_types = ['weather', 'suggestion', 'look_for', 'just_sayin'];
@@ -17,8 +17,9 @@ var Comment = exports = module.exports = function Comment(comment, stop, type) {
       types.push(i);
     }
   }
-
   this.type = types;
+
+  this.score = 0;
   this.time = new Date().getTime();
 };
 
@@ -28,7 +29,12 @@ exports.get = function(id, fn){
   query.on('row', function(row) {
     for (var key in row) {
       if (undefined != row[key]) {
-        ret[key] = row[key];
+        if (key == 'type') {
+          ret[key] = JSON.parse(row[key]);
+        }
+        else {
+          ret[key] = row[key];
+        }
       }
     }
   });
@@ -67,7 +73,7 @@ exports.all = function(fn) {
 
 Comment.prototype.save = function(fn){
   var that = this;
-  var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING cid', [this.comment, this.stop, this.type, new Date()]);
+  var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING cid', [sanitize(this.comment).xss(), sanitize(this.stop).toInt(), this.type, new Date()]);
   query.on('row', function(row) {
     that.cid = row.cid;
   });

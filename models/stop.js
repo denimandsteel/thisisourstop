@@ -11,6 +11,31 @@ var Stop = exports = module.exports = function Stop(id) {
   this.id = id;
 };
 
+exports.all = function(fn) {
+  var ret = {};
+  query = client.query('SELECT distinct stops.stop_code, stop_desc, stop_lat, stop_lon, route_short_name, route_long_name from stops left join stop_routes on stops.stop_code = stop_routes.stop_code');
+  query.on('row', function(row) {
+    var trip = {
+      route_short_name: row.route_short_name,
+      route_long_name: row.route_long_name
+    };
+    if (typeof ret[row.stop_code] === 'undefined') {
+      ret[row.stop_code] = {
+        stop_desc: row.stop_desc,
+        stop_lat: row.stop_lat,
+        stop_lon: row.stop_lon,
+        trips: [trip]
+      };
+    }
+    else {
+      ret[row.stop_code].trips.push(trip); 
+    }
+  });
+  query.on('end', function() {
+    fn(ret);
+  });
+}
+
 exports.get = function(id, fn){
   client.query('SELECT * FROM stops WHERE stop_code = $1', [id], function(err, result) {
     if (result.rows.length > 0) {

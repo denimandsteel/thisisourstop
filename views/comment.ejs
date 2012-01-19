@@ -1,5 +1,6 @@
 <div id="comment-<%= comment.cid %>" class="comment">
 	<div class="time"><%=: comment.time | time %></div>
+  <div class="score"><%=: comment.score %></div>
 	<% if (typeof comment.type !== 'undefined') { %>
 		<ul>
 		<% for(var i = 0; i < comment.type.length; i++) { %>
