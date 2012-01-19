@@ -98,3 +98,5 @@ textarea {
 	.comment .icon { background: #ffe600; border-radius: 32px; margin-right: 5px; }
 	.comment .time { border-bottom: 1px solid #ccc; font-weight: bold; padding-bottom: 5px; margin-bottom: 10px; }
 	.comment .text { clear: both; margin: 10px 0; }
+
+#quiet { text-align: center; margin: 10px 0; }
