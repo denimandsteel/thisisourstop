@@ -47,7 +47,7 @@ exports.get = function(id, fn){
         }
         // Ugly... dirty data...
         if (key == 'stop_desc') {
-          ret[key] = formatTitles(data[key]);
+          ret[key] = formatTitles(data[key]).replace('@', '<span class="minor">at</span>');
         }
       }
       // Slow and requires a lot of data up front.
@@ -56,6 +56,7 @@ exports.get = function(id, fn){
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
           ret.trip[i].route_long_name = formatTitles(trip.rows[i].route_long_name);
+          ret.trip[i].night = trip.rows[i].route_short_name.indexOf("N") === 0 ? ' night' : '';
         }
         fn(null, ret);
       });

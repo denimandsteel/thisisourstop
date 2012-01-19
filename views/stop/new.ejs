@@ -1,9 +1,10 @@
 <header>
-	<form method="post" action="/">
-		<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
-		<input type="submit" value="Go" />
-	</form>
-	<h1>What is your post about?</h1>
+  <a href="/"><img width="134" height"81" id="logo" src="/logo.png" /></a>
+  <div id="stop_id"><%= stop.id %></div>
+  <!--<form method="post" action="/">
+  	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
+  	<input class="btn" type="submit" value="Go" />
+  </form>-->
 </header>
 
 <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
