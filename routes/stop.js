@@ -15,7 +15,7 @@ module.exports = function(app) {
         next();
       }
       else {
-        next(err); 
+        next(err);
        // console.log('and this is right too?');
        // next(new Error('failed to find stop'));
         //next(new Error(err));

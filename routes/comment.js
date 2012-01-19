@@ -16,7 +16,7 @@ module.exports = function(app) {
         next();
       }
       else {
-        next(err); 
+        next(err);
       }
     });
   });
@@ -26,7 +26,7 @@ module.exports = function(app) {
     client.query('SELECT * FROM comments', function(err, result) {
       Comment.all(function(comments) {
         if(req.params.format === 'json') {
-          res.json({ comments: comments }); 
+          res.json({ comments: comments });
         }
         else {
           res.render('admin', { comments: comments });
@@ -45,19 +45,15 @@ module.exports = function(app) {
       }
   });
 
-  app.get('/stop/:stop/comment/:comment/report.:format?', function(req, res) {
-    // Report comment form.
-    res.json({ comment: req.comment });
-  });
-
-  app.post('/stop/:stop/comment/:comment/report.:format?', function(req, res) {
-    // Save report and redirect back to stop.
-    res.json({ comment: req.comment });
-  });
-
-  app.get('/stop/:stop/comment/:comment/moderate.:format?', function(req, res) {
-    // Peek in get parameters for +/- and session token.
-    res.json({ comment: req.comment });
+  // Need more mods.
+  app.get('/stop/:stop/comment/:comment/moderate/:verb.:format?', function(req, res) {
+    if(req.params.format === 'json') {
+        res.json({ comment: req.comment });
+      }
+      else {
+        // Back where we came from.
+        res.redirect('/stop/' + req.params.stop + '/#comment-' + req.comment.cid);
+      }
   });
 
 };

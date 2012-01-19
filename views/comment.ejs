@@ -7,5 +7,5 @@
  		<% } %>
 	<% } %>
 	<div class="text"><%= comment.comment %></div>
-  <div class="actions">+ / - | report</div>
+  <div class="actions"><a href="/stop/<%= stop.id %>/comment/<%= comment.cid %>/moderate/up?token=">+</a> / <a href="/stop/<%= stop.id %>/comment/<%= comment.cid %>/moderate/down?token=">-</a> | <a href="/stop/<%= stop.id %>/comment/<%= comment.cid %>/moderate/report?token=">report</a></div>
 </div>
