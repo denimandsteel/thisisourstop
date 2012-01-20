@@ -75,7 +75,7 @@
    * Takes an ISO time and returns a string representing how
    * long ago the date represents.
    */
-  ejs.filters.time = function(milliseconds) {
+  function prettyDate(time) {
     var date = new Date(time),
         diff = (((new Date()).getTime() - date.getTime()) / 1000),
         day_diff = Math.floor(diff / 86400);
@@ -92,6 +92,10 @@
       day_diff == 1 && "Yesterday" ||
       day_diff < 7 && day_diff + " days ago" ||
       day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+  };
+
+  ejs.filters.time = function(milliseconds) {
+    return prettyDate(milliseconds);
   };
 
   var socket = io.connect();
