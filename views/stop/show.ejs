@@ -24,11 +24,12 @@
 
 <div id="stop-talk">
   <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
-
-    <img width="64" height="64" class="icon" id="weather" src="/weather.png" />
-    <img width="64" height="64" class="icon" id="suggestion" src="/look_for.png" />
-    <img width="64" height="64" class="icon" id="look_for" src="/suggestion.png" />
-    <img width="64" height="64" class="icon last" id="just_sayin" src="/just_sayin.png" />
+    <div class="icons">
+      <img width="64" height="64" class="icon" id="weather" src="/weather.png" />
+      <img width="64" height="64" class="icon" id="suggestion" src="/look_for.png" />
+      <img width="64" height="64" class="icon" id="look_for" src="/suggestion.png" />
+      <img width="64" height="64" class="icon last" id="just_sayin" src="/just_sayin.png" />
+    </div>
 
     <input class="checkboxes" type="checkbox" name="type[weather]" />
     <input class="checkboxes" type="checkbox" name="type[suggestion]" />

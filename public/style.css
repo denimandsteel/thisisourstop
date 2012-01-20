@@ -29,7 +29,7 @@ img#logo {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 320px;
+	width: 100%;
 }
 .notch.bottom { background-position: bottom center; top: 184px; } /* 200 - 16px */
 
@@ -54,6 +54,7 @@ img#logo {
 
 #stop-talk { padding: 10px; }
 
+#new-comment .icons { text-align: center; }
 #new-comment .icon { background: #c3d4e5; border-radius: 64px; margin-right: 10px; }
 #new-comment .icon.active { background: #ffe600; }
 #new-comment .icon.last { margin-right: 0; }
