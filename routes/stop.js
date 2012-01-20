@@ -11,6 +11,10 @@ fs.readFile('views/comment.ejs', function(error, content) {
 
 module.exports = function(app) {
   var io = sio.listen(app);
+  io.configure(function () {
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+  });
 
   app.param('stop', function(req, res, next, id){
     Stop.get(id, function(err, stop){
