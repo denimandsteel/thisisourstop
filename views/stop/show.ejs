@@ -66,23 +66,24 @@
   </script>
 
   <script type="text/javascript">
+  var ejs = require('ejs');
+
   /*
    * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
    * Licensed under the MIT and GPL licenses.
+   *
+   * Takes an ISO time and returns a string representing how
+   * long ago the date represents.
    */
-
-  // Takes an ISO time and returns a string representing how
-  // long ago the date represents.
-  function prettyDate(time){
-    console.log('made it prettyDate?');
-    console.log(time);
+  ejs.filters.time = function(milliseconds) {
     var date = new Date(time),
-      diff = (((new Date()).getTime() - date.getTime()) / 1000),
-      day_diff = Math.floor(diff / 86400);
+        diff = (((new Date()).getTime() - date.getTime()) / 1000),
+        day_diff = Math.floor(diff / 86400);
 
-    if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+    if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 ) {
       return;
-
+    }
+    console.log('good so far I imageine...');
     return day_diff == 0 && (
         diff < 60 && "Just now" ||
         diff < 120 && "1 minute ago" ||
@@ -93,14 +94,6 @@
       day_diff < 7 && day_diff + " days ago" ||
       day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
   }
-
-  var ejs = require('ejs');
-
-  ejs.filters.time = function(milliseconds) {
-    console.log('made it time?');
-    console.log(milliseconds);
-    return prettyDate(milliseconds);
-  };
 
   var socket = io.connect();
 
