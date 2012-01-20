@@ -31,10 +31,10 @@
       <img width="64" height="64" class="icon last" id="just_sayin" src="/just_sayin.png" />
     </div>
 
-    <input class="checkboxes" type="checkbox" name="type[weather]" />
-    <input class="checkboxes" type="checkbox" name="type[suggestion]" />
-    <input class="checkboxes" type="checkbox" name="type[look_for]" />
-    <input class="checkboxes" type="checkbox" name="type[just_sayin]" />
+    <input class="checkboxes" type="checkbox" name="type[weather]" value="weather" />
+    <input class="checkboxes" type="checkbox" name="type[suggestion]" value="suggestion" />
+    <input class="checkboxes" type="checkbox" name="type[look_for]" value="look_for" />
+    <input class="checkboxes" type="checkbox" name="type[just_sayin]" value="just_sayin" />
 
     <div id="post-body">
       <div id="post-header"><span class="minor">Talk About</span> This Stop</div>
@@ -112,6 +112,21 @@
   // http://api.jquery.com/focusin/ for showing when something is typing.
 
   $('#new-comment').submit(function() {
+      var types = {};
+      $.each($("#new-comment input:checked"), function() {
+        var val = $(this).val();
+        types[val] = 'on';
+      });
+      socket.emit('new', {
+        comment : $('#new-comment textarea').val(),
+        stop: <%= stop.id %>,
+        types: types
+      });
+      $('#new-comment textarea').val('');
+      $('#new-comment .icon').removeClass('active');
+      $('#new-comment input[type=checkbox]').attr('checked', false);
+
+      /*
       $.post($(this).attr('action'), $(this).serialize(), function(data) {
         if (data.error === false) {
           $('#new-comment textarea').val('');
@@ -124,6 +139,7 @@
           }
         }
       });
+      */
       return false;
   });
 
@@ -133,6 +149,7 @@
 
   $('.comment .actions a').click(function(evt) {
     var el = $(this);
+    // Should probably be sending with the socket.
     $.get(el.attr('href'), function(data) {
       el.parents('.comment').replaceWith(commentTemplate({ comment: data.comment, new_comment: true }));
     });

@@ -63,6 +63,24 @@ module.exports = function(app) {
     res.render('stop/new', { stop: req.stop });
   });
 
+  io.sockets.on('connection', function (socket) {
+    socket.on('new', function(data) {
+      console.log(data.types);
+      var comment = new Comment(data.comment, data.stop, data.types);
+      comment.save(function(err, savedComment){
+        io.sockets.emit('stop/' + savedComment.stop, savedComment);
+      });
+    });
+  });
+
+  io.sockets.on('new', function(data) {
+    console.log(data);
+    /*var comment = new Comment(data.comment, data.stop, data.type);
+    comment.save(function(err, savedComment){
+      io.sockets.emit('stop/' + savedComment.stop, savedComment);
+    }*/
+  });
+
   app.post('/stop/:stop.:format?', function(req, res) {
     var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
     // todo: Fully validate and remove XSS input, only plain text is allowed.
