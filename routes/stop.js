@@ -91,7 +91,7 @@ module.exports = function(app) {
       else {
         var hash = '';
         if (typeof savedComment.cid !== 'undefined') {
-          hash = '/#comment-' + savedComment.cid;
+          hash = '#comment-' + savedComment.cid;
         }
         res.redirect('/stop/' + req.stop.id + hash);
       }

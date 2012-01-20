@@ -67,6 +67,7 @@
 
   <script type="text/javascript">
   var ejs = require('ejs');
+  var socket = io.connect();
 
   /*
    * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
@@ -98,16 +99,27 @@
     return prettyDate(milliseconds);
   };
 
-  var socket = io.connect();
-
   var commentTemplate = ejs.compile($('#comment-template').html());
+
+  var actionsHandler = function(evt) {
+    var el = $(this);
+    // Should probably be sending with the socket.
+    $.get(el.attr('href'), function(data) {
+      var newComment = $(commentTemplate({ comment: data.comment, new_comment: true }));
+      $('.actions a', newComment).click(actionsHandler);
+      el.parents('.comment').replaceWith(newComment);
+    });
+    return false;
+  }
+  $('.comment .actions a').click(actionsHandler);
 
   var insertComment = function(data) {
     var comment = data.comment;
     // if data.error === true then prepend to comment form with data.message
-    var html = $(commentTemplate({ comment: comment, new_comment: true })).hide();
-    $('#comments').prepend(html);
-    html.slideDown();
+    var newComment = $(commentTemplate({ comment: comment, new_comment: true })).hide();
+    $('.actions a', newComment).click(actionsHandler);
+    $('#comments').prepend(newComment);
+    newComment.slideDown();
   }
   socket.on('stop/<%= stop.id %>', insertComment);
 
@@ -147,15 +159,6 @@
 
   $('textarea#text').keyup(function() {
     $('#count').html(200 - $(this).val().length);
-  });
-
-  $('.comment .actions a').click(function(evt) {
-    var el = $(this);
-    // Should probably be sending with the socket.
-    $.get(el.attr('href'), function(data) {
-      el.parents('.comment').replaceWith(commentTemplate({ comment: data.comment, new_comment: true }));
-    });
-    return false;
   });
 
   // Also look at: http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone
