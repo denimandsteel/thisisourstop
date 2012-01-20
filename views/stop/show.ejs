@@ -58,64 +58,12 @@
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
   <script type="text/javascript">
-  // From: http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone
-  function NoClickDelay(el) {
-    console.log(el);
-    this.element = el;
-    this.element.addEventListener('touchstart', this, false);
-  }
-
-  NoClickDelay.prototype = {
-    handleEvent: function(e) {
-      console.log('oh?');
-      switch(e.type) {
-        case 'touchstart': this.onTouchStart(e); break;
-        case 'touchmove': this.onTouchMove(e); break;
-        case 'touchend': this.onTouchEnd(e); break;
-      }
-    },
-
-    onTouchStart: function(e) {
-      console.log('ok?');
-      e.preventDefault();
-      this.moved = false;
-
-      this.element.addEventListener('touchmove', this, false);
-      this.element.addEventListener('touchend', this, false);
-    },
-
-    onTouchMove: function(e) {
-      this.moved = true;
-    },
-
-    onTouchEnd: function(e) {
-      this.element.removeEventListener('touchmove', this, false);
-      this.element.removeEventListener('touchend', this, false);
-
-      if( !this.moved ) {
-        // Place your code here or use the click simulation below
-        var theTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-        if(theTarget.nodeType == 3) theTarget = theTarget.parentNode;
-
-        var theEvent = document.createEvent('MouseEvents');
-        theEvent.initEvent('click', true, true);
-        theTarget.dispatchEvent(theEvent);
-      }
-    }
-  };
-
   $('textarea#text').keyup(function() {
     $('#count').html($(this).val().length + '/200');
   });
 
-
-  /*$('#new-comment .icon').each(function() {
-    NoClickDelay(this); // Speed up taps, triggers onclick.
-  });*/
-
-  var weather = document.querySelector('#weather');
-  NoClickDelay(weather);
-
+  // Also look at: http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone
+  // And: http://code.google.com/mobile/articles/fast_buttons.html
   $('#new-comment .icon').toggle(function() {
     $(this).addClass('active');
     $('#new-comment input[name="type[' + $(this).attr('id') + ']"]').attr('checked', true);
@@ -123,6 +71,7 @@
     $(this).removeClass('active');
     $('#new-comment input[name="type[' + $(this).attr('id') + ']"]').attr('checked', false);
   });
+
   $('#another-stop').click(function() {
     $('#stop_id').hide();
     $('#stop_form').show();
@@ -130,6 +79,7 @@
     $('#stop').val('').focus();
     return false;
   });
+
   $('#stop_id').click(function() {
     $(this).hide();
     $('#stop_form').show();
