@@ -102,7 +102,10 @@
 
   var commentTemplate = ejs.compile($('#comment-template').html());
 
-  var insertComment = function(comment) {
+  var insertComment = function(data) {
+    console.log(data.comment.time);
+    var comment = data.comment;
+    // if data.error === true then prepend to comment form with data.message
     var html = $(commentTemplate({ comment: comment, new_comment: true })).hide();
     $('#comments').prepend(html);
     html.slideDown();
@@ -135,7 +138,7 @@
 
           // If socket not connected, take care of insertion.
           if (socket.socket.connected !== true) {
-            insertComment(data.comment);
+            insertComment(data);
           }
         }
       });

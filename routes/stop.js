@@ -65,10 +65,9 @@ module.exports = function(app) {
 
   io.sockets.on('connection', function (socket) {
     socket.on('new', function(data) {
-      console.log(data.types);
       var comment = new Comment(data.comment, data.stop, data.types);
       comment.save(function(err, savedComment){
-        io.sockets.emit('stop/' + savedComment.stop, savedComment);
+        io.sockets.emit('stop/' + savedComment.stop, { comment: savedComment });
       });
     });
   });
