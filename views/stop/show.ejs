@@ -38,7 +38,7 @@
 
     <div id="post-body">
       <div id="post-header"><span class="minor">Talk About</span> This Stop</div>
-      <div id="count">0/200</div>
+      <div id="count">200</div>
       <textarea id="text" name="comment"></textarea>
 
       <div class="actions">
@@ -93,33 +93,50 @@
   }
 
   var ejs = require('ejs');
+
   ejs.filters.time = function(milliseconds) {
     return prettyDate(milliseconds);
   };
 
   var socket = io.connect();
+
   var commentTemplate = ejs.compile($('#comment-template').html());
-  socket.on('stop/<%= stop.id %>', function (comment) {
+
+  var insertComment = function(comment) {
     var html = $(commentTemplate({ comment: comment, new_comment: true })).hide();
     $('#comments').prepend(html);
     html.slideDown();
-  });
+  }
+  socket.on('stop/<%= stop.id %>', insertComment);
 
   // http://api.jquery.com/focusin/ for showing when something is typing.
 
   $('#new-comment').submit(function() {
-    $.post('/stop/<%= stop.id %>.json', $(this).serialize(), function(data) {
-      if (data.error === false) {
-        $('#new-comment textarea').val('');
-        $('#new-comment .icon').removeClass('active');
-        $('#new-comment input[type=checkbox]').attr('checked', false);
-      }
-    });
-    return false;
+      $.post($(this).attr('action'), $(this).serialize(), function(data) {
+        if (data.error === false) {
+          $('#new-comment textarea').val('');
+          $('#new-comment .icon').removeClass('active');
+          $('#new-comment input[type=checkbox]').attr('checked', false);
+
+          // If socket not connected, take care of insertion.
+          if (socket.socket.connected !== true) {
+            insertComment(data.comment);
+          }
+        }
+      });
+      return false;
   });
 
   $('textarea#text').keyup(function() {
-    $('#count').html($(this).val().length + '/200');
+    $('#count').html(200 - $(this).val().length);
+  });
+
+  $('.comment .actions a').click(function(evt) {
+    var el = $(this);
+    $.get(el.attr('href'), function(data) {
+      el.parents('.comment').replaceWith(commentTemplate({ comment: data.comment, new_comment: true }));
+    });
+    return false;
   });
 
   // Also look at: http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone

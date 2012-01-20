@@ -24,7 +24,7 @@ module.exports = function(app) {
   // All comments.
   app.get('/all.:format?', function(req, res) {
     Comment.all(function(comments) {
-      if(req.params.format === 'json') {
+      if(req.params.format === 'json' || req.xhr) {
         res.json({ comments: comments });
       }
       else {
@@ -36,7 +36,7 @@ module.exports = function(app) {
   // All comments.
   app.get('/admin/moderate.:format?', function(req, res) {
     Comment.all(function(comments) {
-      if(req.params.format === 'json') {
+      if(req.params.format === 'json' || req.xhr) {
         res.json({ comments: comments });
       }
       else {
@@ -47,7 +47,7 @@ module.exports = function(app) {
 
   // Individual comment info.
   app.get('/stop/:stop/comment/:comment.:format?', function(req, res) {
-      if(req.params.format === 'json') {
+      if(req.params.format === 'json' || req.xhr) {
         res.json({ comment: req.comment });
       }
       else {
@@ -57,7 +57,7 @@ module.exports = function(app) {
 
   // Need more mods.
   app.get('/stop/:stop/comment/:comment/moderate/:verb.:format?', function(req, res) {
-    if(req.params.format === 'json') {
+    if(req.params.format === 'json' || req.xhr) {
         res.json({ comment: req.comment });
       }
       else {

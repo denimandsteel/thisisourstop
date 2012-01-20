@@ -50,7 +50,7 @@ module.exports = function(app) {
 
   app.get('/stop/:stop.:format?', function(req, res) {
     Comment.byStop(req.stop.id, function(comments) {
-      if(req.params.format === 'json') {
+      if(req.params.format === 'json' || req.xhr) {
         res.json({stop: req.stop, comments: comments});
       }
       else {
@@ -68,7 +68,7 @@ module.exports = function(app) {
     // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
       io.sockets.emit('stop/' + savedComment.stop, savedComment);
-      if (req.params.format === 'json') {
+      if (req.params.format === 'json' || req.xhr) {
         res.json({ error: false, comment: savedComment });
       }
       else {
