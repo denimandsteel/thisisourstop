@@ -26,8 +26,8 @@
   <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
     <div class="icons">
       <img width="64" height="64" class="icon" id="weather" src="/weather.png" />
-      <img width="64" height="64" class="icon" id="suggestion" src="/look_for.png" />
-      <img width="64" height="64" class="icon" id="look_for" src="/suggestion.png" />
+      <img width="64" height="64" class="icon" id="look_for" src="/look_for.png" />
+      <img width="64" height="64" class="icon" id="suggestion" src="/suggestion.png" />
       <img width="64" height="64" class="icon last" id="just_sayin" src="/just_sayin.png" />
     </div>
 
@@ -99,10 +99,23 @@
 
   var socket = io.connect();
   var commentTemplate = ejs.compile($('#comment-template').html());
-  socket.on('stop/' + <%= stop.id %>, function (comment) {
+  socket.on('stop/<%= stop.id %>', function (comment) {
     var html = $(commentTemplate({ comment: comment, new_comment: true })).hide();
     $('#comments').prepend(html);
     html.slideDown();
+  });
+
+  // http://api.jquery.com/focusin/ for showing when something is typing.
+
+  $('#new-comment').submit(function() {
+    $.post('/stop/<%= stop.id %>.json', $(this).serialize(), function(data) {
+      if (data.error === false) {
+        $('#new-comment textarea').val('');
+        $('#new-comment .icon').removeClass('active');
+        $('#new-comment input[type=checkbox]').attr('checked', false);
+      }
+    });
+    return false;
   });
 
   $('textarea#text').keyup(function() {
