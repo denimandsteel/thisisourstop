@@ -23,15 +23,25 @@ module.exports = function(app) {
 
   // All comments.
   app.get('/all.:format?', function(req, res) {
-    client.query('SELECT * FROM comments', function(err, result) {
-      Comment.all(function(comments) {
-        if(req.params.format === 'json') {
-          res.json({ comments: comments });
-        }
-        else {
-          res.render('admin', { comments: comments });
-        }
-      });
+    Comment.all(function(comments) {
+      if(req.params.format === 'json') {
+        res.json({ comments: comments });
+      }
+      else {
+        res.render('admin/all', { comments: comments, page_id: 'admin' });
+      }
+    });
+  });
+
+  // All comments.
+  app.get('/admin/moderate.:format?', function(req, res) {
+    Comment.all(function(comments) {
+      if(req.params.format === 'json') {
+        res.json({ comments: comments });
+      }
+      else {
+        res.render('admin/moderate', { comments: comments, page_id: 'admin' });
+      }
     });
   });
 

@@ -71,6 +71,19 @@ exports.all = function(fn) {
   });
 }
 
+exports.moderate = function(fn) {
+  var ret = [];
+  query = client.query('SELECT * FROM comments ORDER BY time DESC');
+  query.on('row', function(row) {
+    var types = JSON.parse(row.type);
+    row.type = types;
+    ret.push(row);
+  });
+  query.on('end', function() {
+    fn(ret);
+  });
+}
+
 Comment.prototype.save = function(fn){
   var that = this;
   var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING cid', [sanitize(this.comment).xss(), sanitize(this.stop).toInt(), this.type, new Date()]);
