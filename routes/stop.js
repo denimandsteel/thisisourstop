@@ -1,6 +1,13 @@
 var Stop = require('../models/stop');
 var Comment = require('../models/comment');
 var sio = require('socket.io');
+var fs = require('fs');
+
+var comment_template = null;
+
+fs.readFile('views/comment.ejs', function(error, content) {
+  comment_template = content;
+});
 
 module.exports = function(app) {
   var io = sio.listen(app);
@@ -40,10 +47,10 @@ module.exports = function(app) {
   app.get('/stop/:stop.:format?', function(req, res) {
     Comment.byStop(req.stop.id, function(comments) {
       if(req.params.format === 'json') {
-        res.json({stop: req.stop, comments: comments}); 
+        res.json({stop: req.stop, comments: comments});
       }
       else {
-        res.render('stop/show', { stop: req.stop, comments: comments });
+        res.render('stop/show', { stop: req.stop, comments: comments, comment_template: comment_template });
       }
     });
   });
@@ -56,10 +63,7 @@ module.exports = function(app) {
     var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
     // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
-      // Render HTML on server side... bit of a hack but don't feel like sharing templates on client side yet.
-      res.partial('comment', [savedComment], function(err, html) {
-        io.sockets.emit('comment', {'html': html});
-      });
+      io.sockets.emit('stop/' + savedComment.stop, savedComment);
       if (req.params.format === 'json') {
         res.json({ error: false, comment: savedComment });
       }
