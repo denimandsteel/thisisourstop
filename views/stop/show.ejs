@@ -60,12 +60,14 @@
   <script type="text/javascript">
   // From: http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone
   function NoClickDelay(el) {
+    console.log(el);
     this.element = el;
-    if( window.Touch ) this.element.addEventListener('touchstart', this, false);
+    this.element.addEventListener('touchstart', this, false);
   }
 
   NoClickDelay.prototype = {
     handleEvent: function(e) {
+      console.log('oh?');
       switch(e.type) {
         case 'touchstart': this.onTouchStart(e); break;
         case 'touchmove': this.onTouchMove(e); break;
@@ -74,6 +76,7 @@
     },
 
     onTouchStart: function(e) {
+      console.log('ok?');
       e.preventDefault();
       this.moved = false;
 
@@ -105,9 +108,13 @@
     $('#count').html($(this).val().length + '/200');
   });
 
-  $('#new-comment .icon').each(function() {
+
+  /*$('#new-comment .icon').each(function() {
     NoClickDelay(this); // Speed up taps, triggers onclick.
-  });
+  });*/
+
+  var weather = document.querySelector('#weather');
+  NoClickDelay(weather);
 
   $('#new-comment .icon').toggle(function() {
     $(this).addClass('active');
