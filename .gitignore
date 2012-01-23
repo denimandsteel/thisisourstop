@@ -1,2 +1,4 @@
 node_modules
-comments.dirty
+resources
+google_transit*
+.monitor
