@@ -1,7 +1,16 @@
-/* Being style */
-body, label, input, select, textarea, .topbar input, .btn .close, .alert-message .close { font-family: "ff-super-grotesk-web",sans-serif; }
-body { margin: 0 auto; max-width: 500px; }
-header { position: relative; text-align: right; height: 60px; background: #500f66; }
+/* Put your best foot forward. */
+body, input, textarea { font-family: "ff-super-grotesk-web", sans-serif; }
+body {
+	margin: 0 auto;
+	max-width: 500px;
+}
+
+header {
+	position: relative;
+	text-align: right;
+	height: 60px;
+	background: #500f66;
+}
 
 header form { padding: 20px 20px 0 0; }
 header #stop { width: 60px; }
@@ -24,7 +33,12 @@ img#logo {
 	top: 0; left: 0;
 }
 
-.map { position: relative; z-index: -1; height: 200px; }
+.map {
+	position: relative;
+	z-index: -1;
+	height: 200px;
+}
+
 .notch {
 	background: url(notches.png) top center no-repeat;
 	height: 16px;
@@ -33,7 +47,11 @@ img#logo {
 	left: 0;
 	width: 100%;
 }
-.notch.bottom { background-position: bottom center; top: 184px; } /* 200 - 16px */
+
+.notch.bottom {
+	background-position: bottom center;
+	top: 184px; /* 200 - 16px */
+}
 
 #stop-info { background: #99b3cc; padding: 10px; }
 .stop_desc {
@@ -105,4 +123,4 @@ textarea {
 	.comment .text { clear: both; margin: 10px 0; }
 	.comment.new { background: #ffffe6; }
 
-#quiet { text-align: center; margin: 10px 0; }
+#no-comments { text-align: center; margin: 10px 0; }
