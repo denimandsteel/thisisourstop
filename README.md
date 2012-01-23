@@ -15,7 +15,7 @@ Install [node and npm](http://nodejs.org/#download).
 
 Visit the site at <http://localhost:3000> in a web browser.
 
-Create a postgres database, import your GTFS data using csv or pg with the migrate scripts (`node migrate.js` csv or `node migrate.js pg`).
+Create a postgres database, import your GTFS data using csv or pg with the migrate scripts (`node import.js csv` or `node import.js pg`).
 
 You can install your own GTFS feed by replacing the google_transit directory with your own.
 
@@ -30,6 +30,13 @@ Create an account at [Heroku](http://www.heroku.com/).
 - $ heroku ps:scale web=1 # node apps require a resize
 - $ heroku open # open a web browser to the site
 - $ heroku logs -t # show instance log (useful to keep an eye on if you have a large GTFS file)
+
+To run the database migration scripts:
+
+- $ heroku run node migrate.js schema
+- $ heroku run node import.js csv
+
+Watch your logs for it to complete.
 
 ## Todo
 

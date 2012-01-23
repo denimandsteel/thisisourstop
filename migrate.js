@@ -11,9 +11,10 @@ var endTest = function() {
   }
 }
 
-if (process.argv[2] == 'migrate') {
+if (process.argv[2] == 'schema') {
   client = new pg.Client(connectionString);
   client.connect();
+  // Create primary key for comments.
   client.query("CREATE SEQUENCE comments_cid_seq;", function(err, result) {
     client.query("ALTER TABLE comments ADD cid INT UNIQUE;", function(err, result){
       client.query("ALTER TABLE comments ALTER COLUMN cid SET DEFAULT NEXTVAL('comments_cid_seq');", function(err, result) {
@@ -38,7 +39,7 @@ else if (process.argv[2] == 'test') {
   query.on('end', endTest);
 
   var sequence = client.query("select * from INFORMATION_SCHEMA.SEQUENCES");
-  sequence.on('row', function(row) { 
+  sequence.on('row', function(row) {
     console.log(row);
   });
   sequence.on('end', endTest);
