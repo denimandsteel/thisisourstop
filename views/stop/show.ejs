@@ -24,11 +24,11 @@
 
 <div id="stop-talk">
   <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
-    <div class="icons">
-      <img width="64" height="64" class="icon" id="weather" src="/weather.png" />
-      <img width="64" height="64" class="icon" id="look_for" src="/look_for.png" />
-      <img width="64" height="64" class="icon" id="suggestion" src="/suggestion.png" />
-      <img width="64" height="64" class="icon last" id="just_sayin" src="/just_sayin.png" />
+    <div class="categories">
+      <div class="category" id="weather"><img width="64" height="64" src="/weather.png" /><label>Weather</label></div>
+      <div class="category" id="look_for"><img width="64" height="64" src="/look_for.png" /><label>Look For</label></div>
+      <div class="category" id="suggestion"><img width="64" height="64" src="/suggestion.png" /><label>Suggestion</label></div>
+      <div class="category last" id="just_sayin"><img width="64" height="64" src="/just_sayin.png" /><label>Just Sayin'</label></div>
     </div>
 
     <input class="checkboxes" type="checkbox" name="type[weather]" value="weather" />
@@ -138,14 +138,14 @@
         types: types
       });
       $('#new-comment textarea').val('');
-      $('#new-comment .icon').removeClass('active');
+      $('#new-comment .category').removeClass('active');
       $('#new-comment input[type=checkbox]').attr('checked', false);
 
       /*
       $.post($(this).attr('action'), $(this).serialize(), function(data) {
         if (data.error === false) {
           $('#new-comment textarea').val('');
-          $('#new-comment .icon').removeClass('active');
+          $('#new-comment .category').removeClass('active');
           $('#new-comment input[type=checkbox]').attr('checked', false);
 
           // If socket not connected, take care of insertion.
@@ -164,7 +164,7 @@
 
   // Also look at: http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone
   // And: http://code.google.com/mobile/articles/fast_buttons.html
-  $('#new-comment .icon').toggle(function() {
+  $('#new-comment .category').toggle(function() {
     $(this).addClass('active');
     $('#new-comment input[name="type[' + $(this).attr('id') + ']"]').attr('checked', true);
   }, function() {
