@@ -67,24 +67,18 @@ module.exports = function(app) {
     socket.on('new', function(data) {
       var comment = new Comment(data.comment, data.stop, data.types);
       comment.save(function(err, savedComment){
+        io.sockets.emit('comment', { comment: savedComment });
         io.sockets.emit('stop/' + savedComment.stop, { comment: savedComment });
       });
     });
-  });
-
-  io.sockets.on('new', function(data) {
-    console.log(data);
-    /*var comment = new Comment(data.comment, data.stop, data.type);
-    comment.save(function(err, savedComment){
-      io.sockets.emit('stop/' + savedComment.stop, savedComment);
-    }*/
   });
 
   app.post('/stop/:stop.:format?', function(req, res) {
     var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
     // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
-      io.sockets.emit('stop/' + savedComment.stop, savedComment);
+      io.sockets.emit('comment', { comment: savedComment });
+      io.sockets.emit('stop/' + savedComment.stop, { comment: savedComment });
       if (req.params.format === 'json' || req.xhr) {
         res.json({ error: false, comment: savedComment });
       }

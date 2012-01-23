@@ -71,16 +71,11 @@ exports.all = function(fn) {
   });
 }
 
-exports.moderate = function(fn) {
-  var ret = [];
-  query = client.query('SELECT * FROM comments ORDER BY time DESC');
-  query.on('row', function(row) {
-    var types = JSON.parse(row.type);
-    row.type = types;
-    ret.push(row);
-  });
-  query.on('end', function() {
-    fn(ret);
+exports.flag = function(comment, flag, ip, fn) {
+  var that = this;
+  // clean flags.
+  client.query('INSERT INTO comment_flags VALUES($1, $2, $3, $4) RETURNING cid', [comment.cid, flag, new Date(), ip], function() {
+    that.get(comment.cid, fn);
   });
 }
 

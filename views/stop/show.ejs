@@ -122,6 +122,7 @@
     newComment.slideDown();
   }
   socket.on('stop/<%= stop.id %>', insertComment);
+  socket.on('comment', function(data) { console.log(data); });
 
   // http://api.jquery.com/focusin/ for showing when something is typing.
 

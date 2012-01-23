@@ -6,6 +6,8 @@ header { position: relative; text-align: right; height: 60px; background: #500f6
 header form { padding: 20px 20px 0 0; }
 header #stop { width: 60px; }
 
+.content { padding: 10px; }
+
 #stop_form.hide { display: none; }
 
 header #stop_id {
@@ -81,7 +83,9 @@ img#logo {
 textarea {
 	font-size: 16px;
 	padding: 5px;
-	width: 96%;
+	width: 100%;
+	-webkit-box-sizing: border-box; /* Make properly full width. */
+	box-sizing: border-box;
 	height: 50px;
 	border: 0;
 	border-radius: 5px;
