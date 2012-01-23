@@ -15,6 +15,8 @@ Install [node and npm](http://nodejs.org/#download).
 
 Visit the site at <http://localhost:3000> in a web browser.
 
+Create a postgres database, import your GTFS data using csv or pg with the migrate scripts (`node migrate.js` csv or `node migrate.js pg`).
+
 You can install your own GTFS feed by replacing the google_transit directory with your own.
 
 ### On a Heroku instance
@@ -32,13 +34,13 @@ Create an account at [Heroku](http://www.heroku.com/).
 ## Todo
 
 - instructions for installation on other platforms (eg. no.de)
-- database backends for comments and stops
+- <del>database backends for comments and stops</del>
 - cookies/sessions for recent stops
 - comment flagging
 - admin
 - cookie user account
 - <del>look at using ejs (on server) and underscore (on client) templating together. They both use <% %></del>
-- want to serve up full layout at /stop/123 and json at /stop/123.json, that can then be passed to the same partial template.
+- <del>want to serve up full layout at /stop/123 and json at /stop/123.json, that can then be passed to the same partial template./del>
 - <del>implement a parser for gtfs</del>
-- make sure I am using the best way to determine format, can also use accept: application/json
+- <del>make sure I am using the best way to determine format, can also use accept: application/json/del>
 - checklist: http://googlegeodevelopers.blogspot.com/2011/11/four-tips-for-improving-your-mobile-web.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+GoogleGeoDevelopersBlog+(Google+Geo+Developers+Blog)
