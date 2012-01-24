@@ -21,7 +21,7 @@ header #stop { width: 60px; }
 #stop-dividers { position: relative; }
 #stop-dividers #fg {
 	position: absolute;
-	top: 2px;
+	top: 0;
 	left: 0;
 	width: 100%;
 	height: 64px;
@@ -35,6 +35,7 @@ header #stop { width: 60px; }
 	-webkit-appearance: none;
 	padding: 5px 3px;
 	width: 132px;
+	height: 41px;
 	border-radius: 5px;
 	background: url(dividers.png) -7px 0px no-repeat;
 }
