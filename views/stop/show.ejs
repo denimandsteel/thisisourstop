@@ -2,7 +2,7 @@
   <a href="/"><img width="134" height"81" id="logo" src="/logo.png" /></a>
   <div id="stop_id"><%= stop.id %></div>
   <form id="stop_form" class="hide" method="post" action="/">
-  	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="<%= stop.id %>" />
+  	<input name="stop" id="stop" type="text" pattern="[0-9]*" value="" />
   	<input class="btn" type="submit" value="Go" />
   </form>
 </header>
@@ -172,17 +172,21 @@
     $('#new-comment input[name="type[' + $(this).attr('id') + ']"]').attr('checked', false);
   });
 
-  $('#another-stop').click(function() {
+  $('header .btn').hide();
+
+  $('#another-stop, #stop_id').click(function() {
     $('#stop_id').hide();
     $('#stop_form').show();
     window.scrollTo(0,0);
-    $('#stop').val('').focus();
+    $('#stop').focus();
     return false;
   });
 
-  $('#stop_id').click(function() {
-    $(this).hide();
-    $('#stop_form').show();
+  $('#stop').keyup(function() {
+    if ($(this).val().length >= 5) {
+      $('#stop_form').submit();
+      $(this).unbind();
+    }
   });
   </script>
 </div>
