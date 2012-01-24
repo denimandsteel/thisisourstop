@@ -37,7 +37,7 @@ module.exports = function(app) {
   });
 
   app.get('/', function(req, res) {
-    res.render('stop');
+    res.render('index');
   });
 
   app.get('/about', function(req, res) {
@@ -54,13 +54,9 @@ module.exports = function(app) {
         res.json({stop: req.stop, comments: comments});
       }
       else {
-        res.render('stop/show', { stop: req.stop, comments: comments, comment_template: comment_template });
+        res.render('stop', { stop: req.stop, comments: comments, comment_template: comment_template });
       }
     });
-  });
-
-  app.get('/stop/:stop/new', function(req, res) {
-    res.render('stop/new', { stop: req.stop });
   });
 
   io.sockets.on('connection', function (socket) {
