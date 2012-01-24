@@ -99,6 +99,26 @@ img#logo {
 
 #stop-talk { padding: 10px; }
 
+#recent a.stop {
+	font-weight: bold;
+	color: #ffffff;
+	background: #500f66;
+	padding: 3px 0 4px 10px;
+	border-bottom: 1px solid white;
+	text-decoration: none;
+	display: block;
+}
+
+#recent a.stop.first {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#recent a.stop.last {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
 #new-comment .categories { text-align: center; }
 #new-comment .category { width: 24%; display: inline-block; }
 #new-comment .category img { background: #c3d4e5; border-radius: 64px; }
