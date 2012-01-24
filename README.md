@@ -40,6 +40,7 @@ Watch your logs for it to complete.
 
 ## Todo
 
+- look at using media queries for retina (that way we can use background images in css)
 - instructions for installation on other platforms (eg. no.de)
 - <del>database backends for comments and stops</del>
 - cookies/sessions for recent stops
