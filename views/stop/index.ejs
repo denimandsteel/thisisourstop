@@ -5,13 +5,30 @@
 <div class="content">
   <p>Your bus stop is a social space! Share, learn and suggest improvments with the people who use your bus stop.</p>
 
-  <form method="post" action="/">
-  	<label for="stop">Stop Number:</label>
-  	<input class="span2" name="stop" id="stop" type="text" pattern="[0-9]*" />
-  	<input type="submit" value="Go" />
+  <form id="stop-form" method="post" action="/">
+  	<label for="stop">Stop Number</label>
+    <div id="stop-dividers">
+      <div id="fg"></div>
+  	  <input name="stop" id="stop" type="text" pattern="[0-9]*" maxlength="5" />
+    </div>
+  	<input id="stop-go" type="submit" value="Go" />
   </form>
 
   <p>Works with TransLink stops in the Greater Vancouver area.</p>
 </div>
 
 <a class="button" href="/about">Learn More</a>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script>
+$('#stop-dividers #fg').click(function() {
+  $('#stop').focus();
+})
+
+$('#stop-go').hide();
+$('#stop').keyup(function() {
+  if ($(this).val().length >= 5) {
+    $('#stop-form').submit();
+    $(this).unbind();
+  }
+});
+</script>
