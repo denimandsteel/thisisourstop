@@ -44,6 +44,10 @@ module.exports = function(app) {
     res.render('about');
   });
 
+  app.get('/how', function(req, res) {
+    res.render('how');
+  });
+
   app.post('/', function(req, res) {
     res.redirect('/stop/' + req.body.stop);
   });
