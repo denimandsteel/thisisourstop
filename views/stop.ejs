@@ -67,7 +67,8 @@
   <script src="/ejs.min.js"></script>
   <script type="text/javascript">
   var tios = tios || {};
-  tios.stop_id = <%= stop.id %>
+  tios.stop_id = '<%= stop.id %>';
+  tios.stop_desc = '<%- stop.stop_desc %>';
   </script>
   <script src="/scripts.js"></script>
 </div>

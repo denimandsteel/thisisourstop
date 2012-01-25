@@ -1,6 +1,19 @@
 var ejs = require('ejs');
 var socket = io.connect();
 var tios = tios || {};
+
+tios.recent = $.cookie('recent') || [];
+//if (tios.recent )
+var tios.inserted = false;
+for (var i = 0; i < tios.recent; i++) {
+  if (tios.recent[i].id === tios.id) {
+
+  }
+}
+//tios.recent.reverse();
+tios.recent.unshift({ id: tios.stop_id, desc: tios.stop_desc }); //.reverse().slice(0, 5)
+//$.cookie('recent', tios.recent, { expires: 90, path: '/' });
+
 /*
  * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
  * Licensed under the MIT and GPL licenses.
