@@ -1,13 +1,6 @@
-<script src="/socket.io/socket.io.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-<script>
-  var socket = io.connect();
-  socket.on('comment', function (data) {
-    $('#comments').prepend(data.html);
-  });
-</script>
 <h1>Moderate</h1>
 <div id="admin">
+  <div id="map"></div>
   <table>
     <thead>
       <tr>
@@ -27,3 +20,21 @@
     </tbody>
   </table>
 </div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/modestmaps.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script>
+  var socket = io.connect();
+  socket.on('comment', function (data) {
+    $('#comments').prepend(data.html);
+
+  });
+  // name of a div element:
+  var parent = 'map';
+
+  var template = 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png';
+  var provider = new MM.TemplatedMapProvider(template);
+  var dimensions = new MM.Point(500, 250);
+  var map = new MM.Map(parent, provider, dimensions);
+  map.setCenterZoom(new MM.Location(49.24717051903947, -123.09061148388665), 11);
+</script>
