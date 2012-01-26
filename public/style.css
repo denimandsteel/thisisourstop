@@ -99,6 +99,7 @@ img#logo {
 
 #stop-talk { padding: 10px; }
 
+#recent { margin-top: 1.5em; }
 #recent a.stop {
 	font-weight: bold;
 	color: #ffffff;

@@ -2,17 +2,21 @@ var ejs = require('ejs');
 var socket = io.connect();
 var tios = tios || {};
 
-tios.recent = $.cookie('recent') || [];
-//if (tios.recent )
-var tios.inserted = false;
-for (var i = 0; i < tios.recent; i++) {
-  if (tios.recent[i].id === tios.id) {
-
+tios.updateRecent = function() {
+  var recent = JSON.parse($.cookie('recent'));
+  var update = [];
+  for (var i = 0; i < recent.length; i++) {
+    if (recent[i].stop_id !== tios.stop_id) {
+      update.push(recent[i]);
+    }
   }
+  update.unshift({ stop_id: tios.stop_id, stop_desc: tios.stop_desc });
+  tios.recent = update.slice(0, 5); // Max 5.
+  $.cookie('recent', JSON.stringify(tios.recent), { expires: 90, path: '/' });
 }
-//tios.recent.reverse();
-tios.recent.unshift({ id: tios.stop_id, desc: tios.stop_desc }); //.reverse().slice(0, 5)
-//$.cookie('recent', tios.recent, { expires: 90, path: '/' });
+tios.updateRecent();
+
+
 
 /*
  * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/

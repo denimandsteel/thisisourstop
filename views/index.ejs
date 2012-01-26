@@ -14,11 +14,7 @@
   	<input id="stop-go" type="submit" value="Go" />
   </form>
 
-  <h3>Your recent stops</h3>
-
   <div id="recent">
-    <a class="stop first" href="/stop/50101">50101 - <span class="minor">Cornwall Ave at Cypress St</span></a>
-    <a class="stop last" href="/stop/50322">50322 - <span class="minor">W Broadway at Vine St</span></a>
   </div>
 
   <p>Works with TransLink stops in Greater Vancouver.</p>
@@ -30,6 +26,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script src="/jquery.cookie.js"></script>
 <script>
+var tios = tios || {};
 $('#stop-dividers #fg').click(function() {
   $('#stop').focus();
 })
@@ -40,5 +37,18 @@ $('#stop').keyup(function() {
     $('#stop-form').submit();
     $(this).unbind();
   }
+});
+
+tios.recent = JSON.parse($.cookie('recent'));
+$.each(tios.recent, function(index, stop) {
+  var classes = '';
+  if (index === 0) {
+    classes += ' first';
+  }
+  if (index === tios.recent.length - 1) {
+    classes += ' last';
+  }
+  var html = '<a class="stop' + classes + '" href="/stop/' + stop.stop_id + '">' + stop.stop_id + ' - <span class="minor">' + stop.stop_desc + '</span></a>';
+  $('#recent').append(html);
 });
 </script>
