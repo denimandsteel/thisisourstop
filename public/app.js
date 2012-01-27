@@ -54,7 +54,7 @@ tios.Index = new tios.Views.Index();
 tios.Views.About = Backbone.View.extend({
   el: $('#about'),
   events: {
-    'click #home-link': 'home',
+    'click .home-link': 'home',
   },
   home: function() {
     tios.Router.navigate('/', true);
