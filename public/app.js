@@ -44,7 +44,7 @@ tios.Views.Index = Backbone.View.extend({
     var that = this;
     that.$('#stop-go').hide();
 
-    var recent = JSON.parse($.cookie('recent'));
+    var recent = JSON.parse($.cookie('recent')) || [];
     $.each(recent, function(index, stop) {
       var classes = '';
       if (index === 0) {
