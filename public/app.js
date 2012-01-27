@@ -1,29 +1,30 @@
 var tios = {
+  app: {},
   Router: {},
-  Routes: {},
   Views: {}
 };
-
-tios.Routes = Backbone.Router.extend({
+tios.Router = Backbone.Router.extend({
   routes: {
     '': 'index',
-    '/': 'index',
-    '/about': 'about',
-    '/how': 'how'
+    'about': 'about',
+    'how': 'how'
   },
   index: function() {
+    console.log('index');
     tios.Index.el.show();
     tios.About.el.hide();
     tios.How.el.hide();
-    window.scrollTo(0,0);
+    window.scrollTo(0,0); // Eugh.
   },
   about: function() {
+    console.log('about');
     tios.Index.el.hide();
     tios.About.el.show();
     tios.How.el.hide();
     window.scrollTo(0,0);
   },
   how: function () {
+    console.log('how');
     tios.Index.el.hide();
     tios.About.el.hide();
     tios.How.el.show();
@@ -38,10 +39,10 @@ tios.Views.Index = Backbone.View.extend({
     'click #how-link': 'how',
     'click #stop-dividers #fg': 'focus',
     'keyup #stop': 'autosubmit'
-
   },
   initialize: function() {
-    this.$('#stop-go').hide();
+    var that = this;
+    that.$('#stop-go').hide();
 
     var recent = JSON.parse($.cookie('recent'));
     $.each(recent, function(index, stop) {
@@ -53,15 +54,15 @@ tios.Views.Index = Backbone.View.extend({
         classes += ' last';
       }
       var html = '<a class="stop' + classes + '" href="/stop/' + stop.stop_id + '">' + stop.stop_id + ' - <span class="minor">' + stop.stop_desc + '</span></a>';
-      $('#recent').append(html);
+      that.$('#recent').append(html);
     });
   },
   about: function() {
-    tios.Router.navigate('/about', true);
+    tios.app.navigate('about', true);
     return false;
   },
   how: function() {
-    tios.Router.navigate('/how', true);
+    tios.app.navigate('how', true);
     return false;
   },
   focus: function() {
@@ -82,7 +83,7 @@ tios.Views.About = Backbone.View.extend({
     'click .home-link': 'home',
   },
   home: function() {
-    tios.Router.navigate('/', true);
+    tios.app.navigate('', true);
     return false;
   }
 });
@@ -94,11 +95,23 @@ tios.Views.How = Backbone.View.extend({
     'click .home-link': 'home',
   },
   home: function() {
-    tios.Router.navigate('/', true);
+    tios.app.navigate('', true);
     return false;
   }
 });
 tios.How = new tios.Views.How();
 
-tios.Router = new tios.Routes();
+tios.Views.Header = Backbone.View.extend({
+  el: $('header'),
+  events: {
+    'click .home-link': 'home',
+  },
+  home: function() {
+    tios.app.navigate('', true);
+    return false;
+  }
+});
+tios.Header = new tios.Views.Header();
+
+tios.app = new tios.Router();
 Backbone.history.start({pushState: true});

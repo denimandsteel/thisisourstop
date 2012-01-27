@@ -5,19 +5,9 @@ var fs = require('fs');
 
 // Keep in memory for speed.
 var comment_template = null;
-var how_template = null;
-var about_template = null;
 
 fs.readFile('views/comment.ejs', function(error, content) {
   comment_template = content;
-});
-
-fs.readFile('views/how.ejs', function(error, content) {
-  how_template = content;
-});
-
-fs.readFile('views/about.ejs', function(error, content) {
-  about_template = content;
 });
 
 module.exports = function(app) {
@@ -50,15 +40,15 @@ module.exports = function(app) {
   });
 
   app.get('/', function(req, res) {
-    res.render('index', { about_template: about_template, how_template: how_template, });
+    res.render('index');
   });
 
   app.get('/about', function(req, res) {
-    res.render('about');
+    res.render('index');
   });
 
   app.get('/how', function(req, res) {
-    res.render('how');
+    res.render('index');
   });
 
   app.post('/', function(req, res) {
