@@ -3,14 +3,27 @@ var Comment = require('../models/comment');
 var sio = require('socket.io');
 var fs = require('fs');
 
+// Keep in memory for speed.
 var comment_template = null;
+var how_template = null;
+var about_template = null;
 
 fs.readFile('views/comment.ejs', function(error, content) {
   comment_template = content;
 });
 
+fs.readFile('views/how.ejs', function(error, content) {
+  how_template = content;
+});
+
+fs.readFile('views/about.ejs', function(error, content) {
+  about_template = content;
+});
+
 module.exports = function(app) {
   var io = sio.listen(app);
+
+  // Just for dev.
   io.configure(function () {
     io.set("transports", ["xhr-polling"]);
     io.set("polling duration", 10);
@@ -37,7 +50,7 @@ module.exports = function(app) {
   });
 
   app.get('/', function(req, res) {
-    res.render('index');
+    res.render('index', { about_template: about_template, how_template: how_template, });
   });
 
   app.get('/about', function(req, res) {

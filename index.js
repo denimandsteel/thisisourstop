@@ -7,11 +7,6 @@ ejs.filters.time = function(milliseconds) {
   return prettyDate(milliseconds);
 };
 
-// Mount hook
-app.mounted(function(other){
-  console.log('ive been mounted!');
-});
-
 app.set('jsonp callback', true);
 app.set('view engine', 'ejs');
 

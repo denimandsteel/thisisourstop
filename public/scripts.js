@@ -16,8 +16,6 @@ tios.updateRecent = function() {
 }
 tios.updateRecent();
 
-
-
 /*
  * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
  * Licensed under the MIT and GPL licenses.

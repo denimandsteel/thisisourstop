@@ -16,7 +16,9 @@
 <div id="stop-info">
   <div class="stop_desc"><%- stop.stop_desc %></div>
   <div class="trips">
-    <%- partial('trip', stop.trip) %>
+    <% for(var i = 0; i < stop.trip.length; i++) { %>
+    <div class="trip<%= stop.trip[i].night %>"><span class="short"><%= stop.trip[i].route_short_name %></span><span class="long"><%= stop.trip[i].route_long_name %></span></div>
+    <% } %>
   </div>
   <!--<a class="button" href="http://maps.google.com/maps?ll=<%= stop.stop_lat %>,<%= stop.stop_lon %>">Open in Maps</a>
   <a class="button" href="http://nb.translink.ca/Map/Stop/<%= stop.id %>">Open in TransLink Mobile</a>-->
@@ -61,6 +63,7 @@
   <script id="comment-template" type="text/template">
 <%- comment_template %>
   </script>
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
   <script src="/jquery.cookie.js"></script>
   <script src="/socket.io/socket.io.js"></script>

@@ -1,32 +1,47 @@
-<header>
-  <a href="/"><img width="134" height"81" id="logo" src="/logo.png" /></a>
-</header>
+<div id="index">
+  <header>
+    <a href="/"><img width="134" height"81" id="logo" src="/logo.png" /></a>
+  </header>
+  <div class="content">
+    <p>Discover the secret neighbourhood of your favourite bus stops! Read and share suggestions with others to make your stop a little more friendly.</p>
 
-<div class="content">
-  <p>Discover the secret neighbourhood of your favourite bus stops! Read and share suggestions with others to make your stop a little more friendly.</p>
+    <form id="stop-form" method="post" action="/">
+    	<label for="stop">Stop Number</label>
+      <div id="stop-dividers">
+        <div id="fg"></div>
+    	  <input name="stop" id="stop" type="text" pattern="[0-9]*" maxlength="5" />
+      </div>
+    	<input id="stop-go" type="submit" value="Go" />
+    </form>
 
-  <form id="stop-form" method="post" action="/">
-  	<label for="stop">Stop Number</label>
-    <div id="stop-dividers">
-      <div id="fg"></div>
-  	  <input name="stop" id="stop" type="text" pattern="[0-9]*" maxlength="5" />
+    <div id="recent">
     </div>
-  	<input id="stop-go" type="submit" value="Go" />
-  </form>
 
-  <div id="recent">
+    <p>Works with TransLink stops in Greater Vancouver.</p>
   </div>
-
-  <p>Works with TransLink stops in Greater Vancouver.</p>
+  <a id="how-link" class="button" href="/how">What Do I Do Here?</a><br />
+  <a id="about-link" class="button" href="/about">About This Is Our Stop</a>
 </div>
 
+<div id="about">
+  <%- about_template %>
+</div>
 
-<a class="button" href="/how">What Do I Do Here?</a><br />
-<a class="button" href="/about">About This Is Our Stop</a>
+<div id="how">
+  <%- how_template %>
+</div>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script src="/jquery.cookie.js"></script>
-<script>
-var tios = tios || {};
+<script src="/socket.io/socket.io.js"></script>
+<script src="/ejs.min.js"></script>
+<script src="/underscore.js"></script>
+<script src="/json2.js"></script>
+<script src="/backbone.js"></script>
+<script src="/app.js"></script>
+
+<script type="text/javascript">
+
 $('#stop-dividers #fg').click(function() {
   $('#stop').focus();
 })
