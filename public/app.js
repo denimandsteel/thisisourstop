@@ -12,21 +12,18 @@ tios.Routes = Backbone.Router.extend({
     '/how': 'how'
   },
   index: function() {
-    console.log('index');
     tios.Index.el.show();
     tios.About.el.hide();
     tios.How.el.hide();
     window.scrollTo(0,0);
   },
   about: function() {
-    console.log('about');
     tios.Index.el.hide();
     tios.About.el.show();
     tios.How.el.hide();
     window.scrollTo(0,0);
   },
   how: function () {
-    console.log('how');
     tios.Index.el.hide();
     tios.About.el.hide();
     tios.How.el.show();
@@ -38,7 +35,26 @@ tios.Views.Index = Backbone.View.extend({
   el: $('#index'),
   events: {
     'click #about-link': 'about',
-    'click #how-link': 'how'
+    'click #how-link': 'how',
+    'click #stop-dividers #fg': 'focus',
+    'keyup #stop': 'autosubmit'
+
+  },
+  initialize: function() {
+    this.$('#stop-go').hide();
+
+    var recent = JSON.parse($.cookie('recent'));
+    $.each(recent, function(index, stop) {
+      var classes = '';
+      if (index === 0) {
+        classes += ' first';
+      }
+      if (index === recent.length - 1) {
+        classes += ' last';
+      }
+      var html = '<a class="stop' + classes + '" href="/stop/' + stop.stop_id + '">' + stop.stop_id + ' - <span class="minor">' + stop.stop_desc + '</span></a>';
+      $('#recent').append(html);
+    });
   },
   about: function() {
     tios.Router.navigate('/about', true);
@@ -47,6 +63,15 @@ tios.Views.Index = Backbone.View.extend({
   how: function() {
     tios.Router.navigate('/how', true);
     return false;
+  },
+  focus: function() {
+    this.$('#stop').focus();
+  },
+  autosubmit: function(event) {
+    if (this.$('#stop').val().length >= 5) {
+      this.$('#stop-form').submit();
+      this.$('#stop').unbind(); // Submit as soons as done.
+    }
   }
 });
 tios.Index = new tios.Views.Index();

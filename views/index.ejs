@@ -39,31 +39,3 @@
 <script src="/json2.js"></script>
 <script src="/backbone.js"></script>
 <script src="/app.js"></script>
-
-<script type="text/javascript">
-
-$('#stop-dividers #fg').click(function() {
-  $('#stop').focus();
-})
-
-$('#stop-go').hide();
-$('#stop').keyup(function() {
-  if ($(this).val().length >= 5) {
-    $('#stop-form').submit();
-    $(this).unbind();
-  }
-});
-
-tios.recent = JSON.parse($.cookie('recent'));
-$.each(tios.recent, function(index, stop) {
-  var classes = '';
-  if (index === 0) {
-    classes += ' first';
-  }
-  if (index === tios.recent.length - 1) {
-    classes += ' last';
-  }
-  var html = '<a class="stop' + classes + '" href="/stop/' + stop.stop_id + '">' + stop.stop_id + ' - <span class="minor">' + stop.stop_desc + '</span></a>';
-  $('#recent').append(html);
-});
-</script>
