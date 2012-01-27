@@ -161,7 +161,7 @@ textarea {
 
 #stop-talk .actions { text-align: center; }
 
-.button { background: #efefef; display: block; padding: 5px; margin: 5px auto; text-align:center; }
+.button { background: #efefef; display: block; padding: 5px; margin: 5px auto 20px auto; text-align:center; }
 
 .map, .disclaimer, .logo { text-align: center; }
 
