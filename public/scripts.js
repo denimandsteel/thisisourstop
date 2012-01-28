@@ -3,7 +3,7 @@ var socket = io.connect();
 var tios = tios || {};
 
 tios.updateRecent = function() {
-  var recent = JSON.parse($.cookie('recent'));
+  var recent = JSON.parse($.cookie('recent')) || [];
   var update = [];
   for (var i = 0; i < recent.length; i++) {
     if (recent[i].stop_id !== tios.stop_id) {
