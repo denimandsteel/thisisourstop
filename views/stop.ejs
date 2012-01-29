@@ -27,10 +27,10 @@
 <div id="stop-talk">
   <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
     <div class="categories">
-      <div class="category" id="weather"><img width="64" height="64" src="/weather.png" /><label>Weather</label></div>
-      <div class="category" id="look_for"><img width="64" height="64" src="/look_for.png" /><label>Look For</label></div>
-      <div class="category" id="suggestion"><img width="64" height="64" src="/suggestion.png" /><label>Suggestion</label></div>
-      <div class="category last" id="just_sayin"><img width="64" height="64" src="/just_sayin.png" /><label>Just Sayin'</label></div>
+      <div class="category" id="weather"><div class="icon"></div><label>Weather</label></div>
+      <div class="category" id="look_for"><div class="icon"></div><label>Look For</label></div>
+      <div class="category" id="suggestion"><div class="icon"></div><label>Suggestion</label></div>
+      <div class="category last" id="just_sayin"><div class="icon"></div><label>Just Sayin'</label></div>
     </div>
 
     <input class="checkboxes" type="checkbox" name="type[weather]" value="weather" />
