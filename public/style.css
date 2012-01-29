@@ -92,15 +92,15 @@ img#logo {
 	font-weight: bold;
 	color: #ffffff;
 	background: #500f66;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
 	padding: 3px 0 4px 10px;
 }
 .minor { font-weight: normal; }
 .trips {
 	background: #ffffff;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 	padding: 3px 0 4px 10px;
 }
 .trip .short { font-weight: bold; margin-right: 5px; }
