@@ -45,7 +45,7 @@ header #stop { width: 60px; }
 	padding: 5px 3px;
 	width: 132px;
 	height: 41px;
-	border-radius: 3px;
+	border-radius: 6px;
 	background: url(dividers.png) -7px 0px no-repeat;
 }
 
@@ -120,13 +120,13 @@ img#logo {
 }
 
 #recent a.stop.first {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
 }
 
 #recent a.stop.last {
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 }
 
 #new-comment .categories { text-align: center; }
@@ -165,7 +165,7 @@ img#logo {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background: #ffe600;
-	border-radius: 10px;
+	border-radius: 6px;
 	padding: 3px 10px 4px 10px;
 }
 #post-header { font-weight: bold; margin-bottom: 5px; }
@@ -184,7 +184,7 @@ textarea, input[type='text'] {
 	-webkit-box-sizing: border-box; /* Make properly full width. */
 	box-sizing: border-box;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 6px;
 	background: #ffffff;
 	-webkit-appearance: none;
 }
