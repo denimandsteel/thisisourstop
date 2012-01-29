@@ -130,7 +130,7 @@ img#logo {
 }
 
 #new-comment .categories { text-align: center; }
-#new-comment .category { width: 24%; display: inline-block; }
+#new-comment .category { width: 24%; display: inline-block; vertical-align: text-top; }
 #new-comment .category .icon {
 	display: inline-block;
 	width: 64px; height: 64px;
