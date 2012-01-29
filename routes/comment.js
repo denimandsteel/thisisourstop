@@ -65,7 +65,7 @@ module.exports = function(app) {
 
   // Need more mods.
   app.get('/stop/:stop/comment/:comment/flag/:flag.:format?', function(req, res) {
-    Comment.flag(req.comment, req.params.flag, req.connection.remoteAddress, function(savedComment) {
+    Comment.flag(req.comment, req.params.flag, req.connection.remoteAddress, function(err, savedComment) {
       if(req.params.format === 'json' || req.xhr) {
         res.json({ comment: savedComment });
       }

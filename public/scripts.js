@@ -16,6 +16,11 @@ tios.updateRecent = function() {
 }
 tios.updateRecent();
 
+//var nickname = JSON.parse($.cookie('identity')) || [];
+
+$('#nickname').html('<label>Nickname</label><input type="text" name="" />');
+
+
 /*
  * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
  * Licensed under the MIT and GPL licenses.
@@ -51,11 +56,13 @@ tios.commentTemplate = ejs.compile($('#comment-template').html());
 tios.actionsHandler = function(evt) {
   var el = $(this);
   // Should probably be sending with the socket.
-  $.get(el.attr('href'), function(data) {
-    var newComment = $(tios.commentTemplate({ comment: data.comment, new_comment: true }));
-    $('.actions a', newComment).click(actionsHandler);
-    el.parents('.comment').replaceWith(newComment);
-  });
+  if (!el.hasClass('report') || confirm('Are you sure you want to report this comment?')) {
+    $.get(el.attr('href'), function(data) {
+      var newComment = $(tios.commentTemplate({ comment: data.comment, new_comment: true }));
+      $('.actions a', newComment).click(tios.actionsHandler);
+      el.parents('.comment').replaceWith(newComment);
+    });
+  }
   return false;
 }
 $('.comment .actions a').click(tios.actionsHandler);
