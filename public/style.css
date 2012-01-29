@@ -72,6 +72,16 @@ header #stop_id {
 	background-size: 120px 81px;
 }
 
+#marker {
+	position: absolute;
+	background: url(images/marker.png) top center no-repeat;
+	height: 25px;
+	top: 75px;
+	left: 0;
+	width: 100%;
+	background-size: 21px 25px;
+}
+
 .map {
 	position: relative;
 	z-index: -1;
