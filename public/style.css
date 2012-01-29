@@ -17,8 +17,9 @@ body {
 header {
 	position: relative;
 	text-align: right;
-	height: 60px;
-	background: #500f66;
+	height: 68px;
+	background: transparent url(images/header.png) top center no-repeat;
+	background-size: 500px 68px;
 }
 
 header form { padding: 20px 20px 0 0; }
@@ -75,6 +76,7 @@ header #stop_id {
 	position: relative;
 	z-index: -1;
 	height: 200px;
+	top: -8px;
 }
 
 .notch {
