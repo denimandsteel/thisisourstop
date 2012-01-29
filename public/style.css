@@ -1,8 +1,8 @@
 /* Put your best foot forward. */
 /*
  * Palette:
- * - Purple: #
- * - Blue: #
+ * - Purple: #502365;
+ * - Blue: #9ab3cc;
  *
  * Icons:
  * - Weather: #
@@ -82,6 +82,14 @@ header #stop_id {
 	background-size: 21px 25px;
 }
 
+#map-overlay {
+	background: #9ab3cc;
+	opacity: 0.6;
+	width: 100%;
+	height: 200px;
+	position: absolute;
+}
+
 .map {
 	position: relative;
 	z-index: -1;
@@ -104,11 +112,11 @@ header #stop_id {
 	top: 192px; /* 200 - 8px */
 }
 
-#stop-info { background: #99b3cc; padding: 10px; }
+#stop-info { background: #9ab3cc; padding: 10px; }
 .stop_desc {
 	font-weight: bold;
 	color: #ffffff;
-	background: #500f66;
+	background: #502365;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	padding: 3px 0 4px 10px;
