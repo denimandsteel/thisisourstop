@@ -16,9 +16,28 @@ tios.updateRecent = function() {
 }
 tios.updateRecent();
 
-//var nickname = JSON.parse($.cookie('identity')) || [];
+tios.identity = JSON.parse($.cookie('identity')) || {count: 0, nickname: null };
 
-$('#nickname').html('<label>Nickname</label><input type="text" name="" />');
+function checkIdentity() {
+  if (tios.identity.count === 3) {
+    $('#identity').html('<label>Nickname</label><input id="nickname" type="text" />');
+  }
+  if (tios.identity.count > 3 && tios.identity.nickname != '') {
+    $('#identity').html('<label>Nickname:</label> ' + tios.identity.nickname);
+  }
+}
+checkIdentity();
+
+function incrementIdentity() {
+  tios.identity.count++;
+  $.cookie('identity', JSON.stringify(tios.identity), { expires: 90, path: '/' });
+  checkIdentity();
+}
+
+function saveIdentity(nickname) {
+  tios.identity.nickname = nickname;
+  $.cookie('identity', JSON.stringify(tios.identity), { expires: 90, path: '/' });
+}
 
 
 /*
@@ -55,7 +74,7 @@ tios.commentTemplate = ejs.compile($('#comment-template').html());
 
 tios.actionsHandler = function(evt) {
   var el = $(this);
-  // Should probably be sending with the socket.
+  // If report button, show confirmation step.
   if (!el.hasClass('report') || confirm('Are you sure you want to report this comment?')) {
     $.get(el.attr('href'), function(data) {
       var newComment = $(tios.commentTemplate({ comment: data.comment, new_comment: true }));
@@ -93,6 +112,11 @@ $('#new-comment').submit(function() {
     $('#new-comment textarea').val('');
     $('#new-comment .category').removeClass('active');
     $('#new-comment input[type=checkbox]').attr('checked', false);
+    incrementIdentity();
+    if ($('#identity #nickname').length > 0) {
+      saveIdentity($('#identity #nickname').val());
+      checkIdentity();
+    }
 
     /*
     $.post($(this).attr('action'), $(this).serialize(), function(data) {
