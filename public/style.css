@@ -75,13 +75,14 @@ header #stop_id {
 .map {
 	position: relative;
 	z-index: -1;
-	height: 200px;
+	height: 192px; /* 200 - 8px for notch */
 	top: -8px;
 }
 
 .notch {
 	background: url(images/notches.png) top center no-repeat;
-	height: 16px;
+	background-size: 16px 16px;
+	height: 8px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -90,7 +91,7 @@ header #stop_id {
 
 .notch.bottom {
 	background-position: bottom center;
-	top: 184px; /* 200 - 16px */
+	top: 192px; /* 200 - 8px */
 }
 
 #stop-info { background: #99b3cc; padding: 10px; }
