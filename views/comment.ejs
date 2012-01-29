@@ -3,7 +3,7 @@
   <!--<div class="score"><%=: comment.score %></div>-->
   <% if (typeof comment.type !== 'undefined') { %>
     <% for(var i = 0; i < comment.type.length; i++) { %>
-      <img width="32" height="32" class="icon" id="<%= comment.type[i] %>" src="/<%= comment.type[i] %>.png" />
+      <img width="32" height="32" class="icon" id="<%= comment.type[i] %>" src="/images/<%= comment.type[i] %>.png" />
     <% } %>
   <% } %>
   <div class="text"><%= comment.comment %></div>

@@ -34,7 +34,7 @@ header #stop { width: 60px; }
 	left: 0;
 	width: 100%;
 	height: 64px;
-	background: url(dividers-vertical.png) -7px 0px repeat-x;
+	background: url(images/dividers-vertical.png) -7px 0px repeat-x;
 }
 
 #stop-form #stop {
@@ -46,7 +46,7 @@ header #stop { width: 60px; }
 	width: 132px;
 	height: 41px;
 	border-radius: 6px;
-	background: url(dividers.png) -7px 0px no-repeat;
+	background: url(images/dividers.png) -7px 0px no-repeat;
 }
 
 .content { padding: 10px; }
@@ -62,9 +62,13 @@ header #stop_id {
 	cursor: pointer;
 }
 
-img#logo {
+#logo {
+	background: url(images/logo.png);
 	position: absolute;
-	top: 0; left: 0;
+	top: -3px; left: 5px;
+	width: 120px;
+	height: 81px;
+	background-size: 120px 81px;
 }
 
 .map {
@@ -74,7 +78,7 @@ img#logo {
 }
 
 .notch {
-	background: url(notches.png) top center no-repeat;
+	background: url(images/notches.png) top center no-repeat;
 	height: 16px;
 	position: absolute;
 	top: 0;
@@ -134,7 +138,7 @@ img#logo {
 #new-comment .category .icon {
 	display: inline-block;
 	width: 64px; height: 64px;
-	background: url(icons.png) no-repeat;
+	background: url(images/icons.png) no-repeat;
 	background-size: 256px 128px;
 }
 
