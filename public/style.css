@@ -106,6 +106,7 @@ header #stop_id {
 	font-size: 25px;
 	text-align: center;
 }
+#third-party .action.active { display: block; }
 #third-party .action a { text-decoration: none; }
 #third-party .action div { text-transform: uppercase; letter-spacing: 1px; font-size: 16px; margin-top: 10px; }
 
@@ -121,7 +122,7 @@ header #stop_id {
 	top: -8px;
 }
 
-#map #map-overlay {
+#map-overlay {
 	display: none;
 	width: 100%;
 	height: 200px;
@@ -129,6 +130,7 @@ header #stop_id {
 	background: #9ab3cc;
 	opacity: 0.6;
 }
+#map-overlay.active { display: block; }
 
 .notch {
 	background: url(images/notches.png) top center no-repeat;
