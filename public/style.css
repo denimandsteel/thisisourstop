@@ -72,7 +72,6 @@ header #stop_id {
 	background-size: 120px 81px;
 }
 
-
 @-webkit-keyframes marker-pulse {
 	0%, 100%   { opacity: 1; }
 	50% { opacity: 0.5; }
@@ -260,7 +259,18 @@ textarea, input[type='text'] {
 #map, .disclaimer, .logo { text-align: center; }
 
 .comment { }
-	.comment .icon { background: #ffe600; border-radius: 32px; margin-right: 5px; }
+	.comment .icon {
+		display: inline-block;
+		margin-right: 5px;
+		width: 32px; height: 32px;
+		background: url(images/icons.png) no-repeat bottom left;
+		background-size: 128px 64px;
+	}
+	.comment .icon.weather { background-position-x: 0px; }
+	.comment .icon.look_for { background-position-x: -32px; }
+	.comment .icon.suggestion { background-position-x: -64px; }
+	.comment .icon.just_sayin { background-position-x: -96px; }
+
 	.comment .time { border-bottom: 1px solid #ccc; font-weight: bold; padding-bottom: 5px; margin-bottom: 10px; }
 	.comment .text { clear: both; margin: 10px 0; }
 	.comment.new { background: #ffffe6; }
