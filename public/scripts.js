@@ -166,6 +166,7 @@ $('#stop').keyup(function() {
   }
 });
 
+var $thirdparty = $('#third-party .action, #map-overlay');
 $('#third-party').click(function() {
-  $('#third-party .action, #map-overlay').toggle();
+  thirdparty.toggle();
 });
