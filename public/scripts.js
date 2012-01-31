@@ -165,3 +165,8 @@ $('#stop').keyup(function() {
     $(this).unbind();
   }
 });
+
+$('#third-party .action, #map-overlay').hide();
+$('#third-party').click(function() {
+  $('#third-party .action, #map-overlay').toggle();
+});
