@@ -8,8 +8,12 @@
 </header>
 
 <div id="third-party">
-  <a id="google" class="action" href="http://maps.google.com/maps?ll=<%= stop.stop_lat %>,<%= stop.stop_lon %>"><div>Open in</div>Google Maps</a>
-  <a id="translink" class="action" href="http://nb.translink.ca/Map/Stop/<%= stop.id %>"><div>Open in</div>TransLink Mobile</a>
+  <div id="google" class="action">
+    <a target="_blank" href="http://maps.google.com/maps?ll=<%= stop.stop_lat %>,<%= stop.stop_lon %>"><div>Open in</div>Google Maps</a>
+  </div>
+  <div id="translink" class="action">
+    <a target="_blank" href="http://nb.translink.ca/Map/Stop/<%= stop.id %>"><div>Open in</div>TransLink Mobile</a>
+  </div>
 </div>
 
 <div id="map">

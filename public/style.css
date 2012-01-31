@@ -88,25 +88,24 @@ header #stop_id {
 	position: absolute;
 }
 
-#third-party a.action {
+#third-party .action {
 	position: absolute;
-	display: block;
 	width: 121px;
 	height: 122px;
 	background: url(images/map-bits.png) top left no-repeat;
 	background-size: 298px 122px;
-	z-index: 1;
 	top: 38px;
-	text-decoration: none;
 	font-weight: bold;
 	font-size: 25px;
 	text-align: center;
 }
+#third-party .action a { text-decoration: none; }
+#third-party .action div { text-transform: uppercase; letter-spacing: 1px; font-size: 16px; margin-top: 10px; }
 
-#third-party a.action div { text-transform: uppercase; letter-spacing: 1px; font-size: 16px; margin-top: 10px; }
-
-#third-party #google.action { left: 11px; color: #dd4b38; padding: 10px 10px 0 0;}
-#third-party #translink.action { right: 11px; color: #055eaa; padding: 10px 0 0 10px; background-position-x: right; }
+#third-party #google.action { left: 11px; padding: 10px 10px 0 0;}
+	#third-party #google.action a { color: #dd4b38; }
+#third-party #translink.action { right: 11px; padding: 10px 0 0 10px; background-position-x: right; }
+	#third-party #translink.action a { color: #055eaa; }
 
 #map {
 	position: relative;
