@@ -72,7 +72,14 @@ header #stop_id {
 	background-size: 120px 81px;
 }
 
+
+@-webkit-keyframes marker-pulse {
+	0%   { opacity: 0.25; }
+	100% { opacity: 1; }
+}
+
 #marker {
+	-webkit-animation: marker-pulse 1s infinite;
 	position: absolute;
 	background: url(images/marker.png) top center no-repeat;
 	height: 25px;
