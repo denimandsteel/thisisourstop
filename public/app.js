@@ -11,23 +11,23 @@ tios.Router = Backbone.Router.extend({
   },
   index: function() {
     console.log('index');
-    tios.Index.el.show();
-    tios.About.el.hide();
-    tios.How.el.hide();
+    tios.Index.$el.show();
+    tios.About.$el.hide();
+    tios.How.$el.hide();
     window.scrollTo(0,0); // Eugh.
   },
   about: function() {
     console.log('about');
-    tios.Index.el.hide();
-    tios.About.el.show();
-    tios.How.el.hide();
+    tios.Index.$el.hide();
+    tios.About.$el.show();
+    tios.How.$el.hide();
     window.scrollTo(0,0);
   },
   how: function () {
     console.log('how');
-    tios.Index.el.hide();
-    tios.About.el.hide();
-    tios.How.el.show();
+    tios.Index.$el.hide();
+    tios.About.$el.hide();
+    tios.How.$el.show();
     window.scrollTo(0,0);
   }
 });
