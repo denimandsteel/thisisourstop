@@ -1,5 +1,6 @@
 var express = require('express');
 var ejs = require('ejs');
+var useragent = require('connect-useragent');
 var app = module.exports = express.createServer();
 
 // Custom template filter for dates.
@@ -18,8 +19,18 @@ app.configure(function(){
   app.use(express.cookieParser());
   app.use(express.favicon());
   app.use(express.session({ secret: 'keyboard cat' }));
-  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use(useragent());
+  app.use(function(req, res, next){
+    // Detect and discourage desktop browsers.
+    if (req.url !== '/desktop' && (req.agent.os.machine === 'mac-os-x' || req.agent.os.machine === 'windows' || req.agent.os.machine === 'linux')) {
+      res.redirect('/desktop');
+    }
+    else {
+      next();
+    }
+  });
+  app.use(app.router);
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 

@@ -43,6 +43,10 @@ module.exports = function(app) {
     res.render('index');
   });
 
+  app.get('/desktop', function(req, res) {
+    res.render('desktop');
+  });
+
   app.get('/about', function(req, res) {
     res.render('index');
   });
