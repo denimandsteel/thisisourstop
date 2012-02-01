@@ -14,7 +14,7 @@
       <tr>
         <td><%=: comments[i].time | time %></td>
         <td><%= comments[i].comment %></td>
-        <td><a href="#">delete</a> | <a href="#">block</a></td>
+        <td><a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>">view</a> | <a href="#">delete</a> | <a href="#">block</a></td>
       </tr>
       <% } %>
     </tbody>
@@ -22,19 +22,63 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/modestmaps.min.js"></script>
+<script src="/ejs.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-<script>
-  var socket = io.connect();
-  socket.on('comment', function (data) {
-    $('#comments').prepend(data.html);
-
-  });
-  // name of a div element:
-  var parent = 'map';
-
-  var template = 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png';
-  var provider = new MM.TemplatedMapProvider(template);
-  var dimensions = new MM.Point(500, 250);
-  var map = new MM.Map(parent, provider, dimensions);
-  map.setCenterZoom(new MM.Location(49.24717051903947, -123.09061148388665), 11);
+<script id="comment-template" type="text/template">
+<tr>
+  <td>{{=: comment.time | time }}</td>
+  <td>{{= comment.comment }}</td>
+  <td><a href="/stop/{{= comment.stop }}#comment-{{= comment.cid }}">view</a> | <a href="#">delete</a> | <a href="#">block</a></td>
+</tr>
 </script>
+<script>
+  // name of a div element:
+
+  var provider = new MM.TemplatedMapProvider('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
+  var map = new MM.Map('map', provider, new MM.Point(500, 250));
+  map.setCenterZoom(new MM.Location(49.24717051903947, -123.09061148388665), 11);
+
+  /*
+   * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
+   * Licensed under the MIT and GPL licenses.
+   *
+   * Takes an ISO time and returns a string representing how
+   * long ago the date represents.
+   */
+  function prettyDate(time) {
+    var date = new Date(time),
+        diff = (((new Date()).getTime() - date.getTime()) / 1000),
+        day_diff = Math.floor(diff / 86400);
+
+    if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+      return;
+
+    return day_diff == 0 && (
+        diff < 60 && "Just now" ||
+        diff < 120 && "1 minute ago" ||
+        diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+        diff < 7200 && "1 hour ago" ||
+        diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+      day_diff == 1 && "Yesterday" ||
+      day_diff < 7 && day_diff + " days ago" ||
+      day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+  };
+
+  var ejs = require('ejs');
+  ejs.open = '{{';
+  ejs.close = '}}';
+  ejs.filters.time = function(milliseconds) {
+    return prettyDate(milliseconds);
+  };
+  var commentTemplate = ejs.compile($('#comment-template').html());
+
+  var socket = io.connect();
+  socket.on('comment', function(data) { console.log(data); });
+  socket.on('comment', function (data) {
+    var comment = data.comment;
+    var newComment = $(commentTemplate({ comment: comment, new_comment: true })).hide();
+    //$('.actions a', newComment).click(actionsHandler);
+    $('#admin table tbody').prepend(newComment);
+    newComment.slideDown();
+  });
+  </script>
