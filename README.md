@@ -38,6 +38,11 @@ To run the database migration scripts:
 
 Watch your logs for it to complete.
 
+Make sure you set up your environment properly:
+
+- $ heroku config:add NODE_ENV=production
+- $ heroku config:add TIOS_ADMIN=admin:password
+
 ## Todo
 
 - look at using media queries for retina (that way we can use background images in css)

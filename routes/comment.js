@@ -7,7 +7,6 @@ var client;
 client = new pg.Client(connectionString);
 client.connect();
 
-
 var fs = require('fs');
 var comment_template = null;
 
@@ -29,8 +28,29 @@ module.exports = function(app) {
     });
   });
 
+  // Basic auth middleware for admin pages: http://node-js.ru/3-writing-express-middleware
+  function basic_auth (req, res, next) {
+    console.log(process.env);
+    if (req.headers.authorization && req.headers.authorization.search('Basic ') === 0) {
+      if (new Buffer(req.headers.authorization.split(' ')[1], 'base64').toString() == (process.env.TIOS_ADMIN || 'admin:password')) {
+        next();
+        return;
+      }
+    }
+    res.header('WWW-Authenticate', 'Basic realm="Admin Area"');
+    if (req.headers.authorization) {
+      // Stop
+      setTimeout(function () {
+        res.send('Authentication required', 401);
+      }, 5000);
+    }
+    else {
+      res.send('Authentication required', 401);
+    }
+  }
+
   // All comments.
-  app.get('/all.:format?', function(req, res) {
+  app.get('/all.:format?', basic_auth, function(req, res) {
     Comment.all(function(comments) {
       if(req.params.format === 'json' || req.xhr) {
         res.json({ comments: comments });
@@ -42,7 +62,7 @@ module.exports = function(app) {
   });
 
   // All comments.
-  app.get('/admin/moderate.:format?', function(req, res) {
+  app.get('/admin/moderate.:format?', basic_auth, function(req, res) {
     Comment.all(function(comments) {
       if(req.params.format === 'json' || req.xhr) {
         res.json({ comments: comments });
