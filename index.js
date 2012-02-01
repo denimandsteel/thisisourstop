@@ -12,12 +12,10 @@ app.set('jsonp callback', true);
 app.set('view engine', 'ejs');
 
 // Middleware
-app.configure(function(){
-  app.use(express.logger('\x1b[33m:method\x1b[0m \x1b[32m:url\x1b[0m :response-time'));
+app.configure('production', function(){
   app.use(express.bodyParser());
-  app.use(express.methodOverride());
+  app.use(express.methodOverride()); // input name="_method" put support, might not need this.
   app.use(express.cookieParser());
-  app.use(express.favicon());
   app.use(express.session({ secret: 'keyboard cat' }));
   app.use(express.static(__dirname + '/public'));
   app.use(useragent());
@@ -30,6 +28,16 @@ app.configure(function(){
       next();
     }
   });
+  app.use(app.router);
+});
+
+app.configure('development', function(){
+  app.use(express.logger('\x1b[33m:method\x1b[0m \x1b[32m:url\x1b[0m :response-time'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(express.static(__dirname + '/public'));
   app.use(app.router);
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
