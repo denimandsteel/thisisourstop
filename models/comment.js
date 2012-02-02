@@ -51,7 +51,7 @@ exports.get = function(id, fn){
 
 exports.byStop = function(stop, fn) {
   var ret = [];
-  var today = new Date();
+  //var today = new Date();
   //var weekAgo = new Date(today.getTime()-1000*60*60*24*7);
   query = client.query('SELECT * FROM comments WHERE stop = $1 ORDER BY time DESC LIMIT 40', [stop]);
   query.on('row', function(row) {
@@ -101,9 +101,10 @@ exports.flag = function(comment, flag, ip, fn) {
 
 Comment.prototype.save = function(fn){
   var that = this;
-  var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING cid', [sanitize(this.comment).xss(), sanitize(this.stop).toInt(), this.type, new Date()]);
+  var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING cid, time', [sanitize(this.comment).xss(), sanitize(this.stop).toInt(), this.type, new Date()]);
   query.on('row', function(row) {
     that.cid = row.cid;
+    that.time = new Date(row.time).toString();
   });
   query.on('end', function() {
     Stop.get(that.stop, function(err, stop){
