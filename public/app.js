@@ -53,7 +53,7 @@ tios.Views.Index = Backbone.View.extend({
       if (index === recent.length - 1) {
         classes += ' last';
       }
-      var html = '<a class="stop' + classes + '" href="/stop/' + stop.stop_id + '">' + stop.stop_id + ' - <span class="minor">' + stop.stop_desc + '</span></a>';
+      var html = '<a class="stop' + classes + '" href="/stop/' + stop.stop_id + '"><span class="stop_id">' + stop.stop_id + '</span><span class="minor">' + stop.stop_desc + '</span></a>';
       that.$('#recent').append(html);
     });
   },

@@ -189,6 +189,8 @@ header #stop_id {
 	border-bottom-right-radius: 6px;
 }
 
+#recent a.stop .stop_id { margin-right: 5px; }
+
 #new-comment .categories { text-align: center; }
 #new-comment .category { width: 24%; display: inline-block; vertical-align: text-top; }
 #new-comment .category .icon {
