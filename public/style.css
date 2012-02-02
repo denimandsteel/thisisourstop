@@ -286,7 +286,8 @@ textarea, input[type='text'] {
 #admin .comment .icon.just_sayin { background-position-x: -48px; }
 
 #admin table { border-collapse: collapse; width: 100%; }
-#admin tbody tr { border-top: 1px solid #666; }
+#admin tbody tr { border-top: 1px solid #ddd; }
+#admin thead tr { border-bottom: 1px solid #aaa; }
 #admin tbody td { padding: 6px 0; }
 #admin tbody .time { width: 105px; font-weight: normal; border-bottom: 0; margin: 0; padding-left: 3px; color: #666; }
 #admin .categories { width: 85px; text-align: right; }
