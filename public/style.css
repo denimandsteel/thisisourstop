@@ -279,6 +279,8 @@ textarea, input[type='text'] {
 
 #no-comments { text-align: center; margin: 10px 0; }
 
+#admin-map { margin: 10px 0; }
+
 #admin .comment .icon { background-size: 64px 32px; width: 16px; height: 16px; margin-right: 2px; }
 #admin .comment .icon.weather { background-position-x: 0px; }
 #admin .comment .icon.look_for { background-position-x: -16px; }
@@ -293,3 +295,4 @@ textarea, input[type='text'] {
 #admin .categories { width: 85px; text-align: right; }
 #admin .actions { width: 60px; text-align: right; padding-right: 3px; }
 #admin .actions a { display: block; }
+#admin .marker { width: 8px; height: 8px; border-radius: 10px; background: #f00; opacity: 0.3; }

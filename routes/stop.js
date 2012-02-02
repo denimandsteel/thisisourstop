@@ -75,7 +75,7 @@ module.exports = function(app) {
       var comment = new Comment(data.comment, data.stop, data.types);
       comment.save(function(err, savedComment){
         io.sockets.emit('comment', { comment: savedComment });
-        io.sockets.emit('stop/' + savedComment.stop, { comment: savedComment });
+        io.sockets.emit('stop/' + savedComment.stop.stop_code, { comment: savedComment });
       });
     });
   });
@@ -85,7 +85,7 @@ module.exports = function(app) {
     // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
       io.sockets.emit('comment', { comment: savedComment });
-      io.sockets.emit('stop/' + savedComment.stop, { comment: savedComment });
+      io.sockets.emit('stop/' + savedComment.stop.stop_code, { comment: savedComment });
       if (req.params.format === 'json' || req.xhr) {
         res.json({ error: false, comment: savedComment });
       }

@@ -94,6 +94,7 @@ tios.insertComment = function(data) {
   $('#comments').prepend(newComment);
   newComment.slideDown();
 }
+
 socket.on('stop/' + tios.stop_id, tios.insertComment);
 
 // http://api.jquery.com/focusin/ for showing when something is typing.

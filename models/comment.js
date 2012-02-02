@@ -3,6 +3,8 @@ var connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhos
 var client;
 var sanitize = require('validator').sanitize;
 
+var Stop = require('./stop');
+
 client = new pg.Client(connectionString);
 client.connect();
 
@@ -26,6 +28,7 @@ var Comment = exports = module.exports = function Comment(comment, stop, type) {
 exports.get = function(id, fn){
   var query = client.query('SELECT * FROM comments WHERE cid = $1', [id]);
   var ret = new Comment();
+
   query.on('row', function(row) {
     for (var key in row) {
       if (undefined != row[key]) {
@@ -39,7 +42,10 @@ exports.get = function(id, fn){
     }
   });
   query.on('end', function() {
-    fn(null, ret);
+    Stop.get(ret.stop, function(err, stop){
+      ret.stop = stop;
+      fn(null, ret);
+    });
   });
 };
 
@@ -86,7 +92,10 @@ Comment.prototype.save = function(fn){
     that.cid = row.cid;
   });
   query.on('end', function() {
+    Stop.get(that.stop, function(err, stop){
+      that.stop = stop;
+      fn(null, that);
+    });
     //if (typeof result === 'undefined') // Check for errors.
-    fn(null, that);
   });
 }

@@ -1,6 +1,6 @@
 <h1>Moderate</h1>
 <div id="admin">
-  <div id="map"></div>
+  <div id="admin-map"></div>
   <table>
     <thead>
       <tr>
@@ -30,6 +30,7 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/modestmaps.min.js"></script>
+<script src="/modestmaps.markers.js"></script>
 <script src="/ejs.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script id="comment-template" type="text/template">
@@ -47,11 +48,12 @@
 </tr>
 </script>
 <script>
-  // name of a div element:
+  var provider = new MM.TemplatedMapProvider('http://c.tiles.mapbox.com/v3/mapbox.mapbox-light/{Z}/{X}/{Y}.png');
+  var map = new MM.Map('admin-map', provider, new MM.Point(500, 250));
+  map.setCenterZoom(new MM.Location(49.2435,-122.9529), 10);
 
-  var provider = new MM.TemplatedMapProvider('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
-  var map = new MM.Map('map', provider, new MM.Point(500, 250));
-  map.setCenterZoom(new MM.Location(49.24717051903947, -123.09061148388665), 11);
+  markers = new MM.MarkerLayer();
+  map.addLayer(markers);
 
   /*
    * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
@@ -88,12 +90,14 @@
   var commentTemplate = ejs.compile($('#comment-template').html());
 
   var socket = io.connect();
-  socket.on('comment', function(data) { console.log(data); });
   socket.on('comment', function (data) {
     var comment = data.comment;
     var newComment = $(commentTemplate({ comment: comment, new_comment: true })).hide();
     //$('.actions a', newComment).click(actionsHandler);
     $('#admin table tbody').prepend(newComment);
     newComment.slideDown();
+
+    var marker = $('<div>').addClass('marker'); // and bind to newComment as well.
+    markers.addMarker(marker[0], new MM.Location(comment.stop.stop_lat, comment.stop.stop_lon));
   });
   </script>
