@@ -28,7 +28,7 @@ exports.all = function(fn) {
       };
     }
     else {
-      ret[row.stop_code].trips.push(trip); 
+      ret[row.stop_code].trips.push(trip);
     }
   });
   query.on('end', function() {
@@ -56,6 +56,7 @@ exports.get = function(id, fn){
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
           ret.trip[i].route_long_name = formatTitles(trip.rows[i].route_long_name);
+          ret.trip[i].route_short_name = trip.rows[i].route_short_name.replace(/^[0]+/g,'');
           ret.trip[i].night = trip.rows[i].route_short_name.indexOf("N") === 0 ? ' night' : '';
         }
         fn(null, ret);
@@ -91,17 +92,17 @@ exports.get = function(id, fn){
     var correct_keys = [];
     for (var key in correct) {
       if(Object.prototype.hasOwnProperty.call(correct, key)) {
-        correct_keys.push(key); 
+        correct_keys.push(key);
       }
     }
 
     var punct = "([!\"#$%&'()*+,./:;<=>?@[\\\\\\]^_`{|}~-]*)";
-    
+
     this.titleCaps = function(title){
       var parts = [],
           split = /[:.;?!] |(?: |^)["Ò]/g,
           index = 0;
-      
+
       while (true) {
         var m = split.exec(title);
 
@@ -119,9 +120,9 @@ exports.get = function(id, fn){
           })
           .replace(RegExp("\\b" + small + punct + "$", "ig"), upper)
         );
-        
+
         index = split.lastIndex;
-        
+
         if (m) {
           parts.push(m[0]);
         }
@@ -129,7 +130,7 @@ exports.get = function(id, fn){
           break;
         }
       }
-      
+
       return parts.join("").replace(/ V(s?)\. /ig, " v$1. ")
         .replace(/(['Õ])S\b/ig, "$1s")
         .replace(RegExp("\\b(" + correct_keys.join("|") + ")\\b", "ig"), function(all) {
@@ -139,7 +140,7 @@ exports.get = function(id, fn){
           return all.toUpperCase();
         });
     };
-      
+
     function upper(word){
       return word.substr(0,1).toUpperCase() + word.substr(1);
     }
