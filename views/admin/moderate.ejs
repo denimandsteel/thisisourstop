@@ -13,7 +13,7 @@
     <tbody>
       <% for(var i = 0; i < comments.length; i++) { %>
       <tr class="comment">
-        <td class="time"><%=: comments[i].time | time %></td>
+        <td class="time" data-time="<%= comments[i].time %>"><%=: comments[i].time | time %></td>
         <td class="comment"><%= comments[i].comment %></td>
         <td class="categories">
         <% if (typeof comments[i].type !== 'undefined') { %>
@@ -35,7 +35,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script id="comment-template" type="text/template">
 <tr class="comment new">
-  <td class="time">{{=: comment.time | time }}</td>
+  <td class="time" data-time="{{= comments[i].time }}">{{=: comment.time | time }}</td>
   <td class="comment">{{= comment.comment }}</td>
   <td class="categories">
   {{ if (typeof comment.type !== 'undefined') { }}
@@ -61,6 +61,12 @@
     var el = $('<div>').addClass('marker');
     markers.addMarker(el[0], new MM.Location(marker.stop_lat, marker.stop_lon));
   });
+
+  window.setInterval(function() {
+    $('table .time').each(function(index) {
+      $(this).html(prettyDate($(this).attr('data-time')));
+    });
+  }, 15000);
 
   /*
    * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/

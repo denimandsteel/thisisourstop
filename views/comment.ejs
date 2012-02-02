@@ -1,5 +1,5 @@
 <div id="comment-<%= comment.cid %>" class="comment<% if (typeof new_comment !== 'undefined' && new_comment === true) { %> new<% } %>">
-  <div class="time"><%=: comment.time | time %></div>
+  <div class="time" data-time="<%= comment.time %>"><%=: comment.time | time %></div>
   <!--<div class="score"><%=: comment.score %></div>-->
   <% if (typeof comment.type !== 'undefined') { %>
     <% for(var i = 0; i < comment.type.length; i++) { %>

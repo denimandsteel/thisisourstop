@@ -39,6 +39,11 @@ function saveIdentity(nickname) {
   $.cookie('identity', JSON.stringify(tios.identity), { expires: 90, path: '/' });
 }
 
+window.setInterval(function() {
+  $('.comment .time').each(function(index) {
+    $(this).html(tios.prettyDate($(this).attr('data-time')));
+  });
+}, 15000);
 
 /*
  * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
