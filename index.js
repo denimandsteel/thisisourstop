@@ -21,7 +21,7 @@ app.configure('production', function(){
   app.use(useragent());
   app.use(function(req, res, next){
     // Detect and discourage desktop browsers.
-    if ((req.url !== '/desktop' || req.url !== '/admin/moderate') && (req.agent.os.machine === 'mac-os-x' || req.agent.os.machine === 'windows' || req.agent.os.machine === 'linux')) {
+    if ((req.url !== '/desktop' && req.url !== '/admin/moderate') && (req.agent.os.machine === 'mac-os-x' || req.agent.os.machine === 'windows' || req.agent.os.machine === 'linux')) {
       res.redirect('/desktop');
     }
     else {
