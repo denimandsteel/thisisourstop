@@ -56,7 +56,7 @@ exports.get = function(id, fn){
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
           ret.trip[i].route_long_name = formatTitles(trip.rows[i].route_long_name);
-          ret.trip[i].route_short_name = trip.rows[i].route_short_name.replace(/^[0]+/g,'');
+          ret.trip[i].route_short_name = trip.rows[i].route_short_name.replace(/^[0]+/g,''); // Remove leading zeros.
           ret.trip[i].night = trip.rows[i].route_short_name.indexOf("N") === 0 ? ' night' : '';
         }
         fn(null, ret);
