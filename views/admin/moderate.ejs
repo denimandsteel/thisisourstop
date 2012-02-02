@@ -4,17 +4,25 @@
   <table>
     <thead>
       <tr>
-        <td>Time</td>
-        <td>Comment</td>
-        <td>Actions</td>
+        <td class="time">Time</td>
+        <td class="comment">Comment</td>
+        <td class="categories">Categories</td>
+        <td class="actions">Actions</td>
       </tr>
     </thead>
     <tbody>
       <% for(var i = 0; i < comments.length; i++) { %>
-      <tr>
-        <td><%=: comments[i].time | time %></td>
-        <td><%= comments[i].comment %></td>
-        <td><a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>">view</a> | <a href="#">delete</a> | <a href="#">block</a></td>
+      <tr class="comment">
+        <td class="time"><%=: comments[i].time | time %></td>
+        <td class="comment"><%= comments[i].comment %></td>
+        <td class="categories">
+        <% if (typeof comments[i].type !== 'undefined') { %>
+          <% for(var j = 0; j < comments[i].type.length; j++) { %>
+            <div class="icon <%= comments[i].type[j] %>"></div>
+          <% } %>
+        <% } %>
+        </td>
+        <td class="actions"><a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>">view</a><a href="#">delete</a><a href="#">block</a></td>
       </tr>
       <% } %>
     </tbody>
@@ -25,10 +33,17 @@
 <script src="/ejs.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script id="comment-template" type="text/template">
-<tr>
-  <td>{{=: comment.time | time }}</td>
-  <td>{{= comment.comment }}</td>
-  <td><a href="/stop/{{= comment.stop }}#comment-{{= comment.cid }}">view</a> | <a href="#">delete</a> | <a href="#">block</a></td>
+<tr class="comment new">
+  <td class="time">{{=: comment.time | time }}</td>
+  <td class="comment">{{= comment.comment }}</td>
+  <td class="categories">
+  {{ if (typeof comment.type !== 'undefined') { }}
+    {{ for(var j = 0; j < comment.type.length; j++) { }}
+      <div class="icon {{= comment.type[j] }}"></div>
+    {{ } }}
+  {{ } }}
+  </td>
+  <td class="actions"><a href="/stop/{{= comment.stop }}#comment-{{= comment.cid }}">view</a><a href="#">delete</a><a href="#">block</a></td>
 </tr>
 </script>
 <script>

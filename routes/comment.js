@@ -30,7 +30,6 @@ module.exports = function(app) {
 
   // Basic auth middleware for admin pages: http://node-js.ru/3-writing-express-middleware
   function basic_auth (req, res, next) {
-    console.log(process.env);
     if (req.headers.authorization && req.headers.authorization.search('Basic ') === 0) {
       if (new Buffer(req.headers.authorization.split(' ')[1], 'base64').toString() == (process.env.TIOS_ADMIN || 'admin:password')) {
         next();
