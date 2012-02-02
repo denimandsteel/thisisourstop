@@ -64,6 +64,20 @@ exports.byStop = function(stop, fn) {
   });
 }
 
+exports.recentComments = function(fn) {
+  var ret = [];
+  query = client.query("SELECT * FROM comments WHERE time >= NOW() - '1 week'::INTERVAL");
+  query.on('row', function(row) {
+    var types = JSON.parse(row.type);
+    row.type = types;
+    ret.push(row);
+  });
+  query.on('end', function() {
+    // todo: Should be doing a join instead.
+    fn(ret);
+  });
+}
+
 exports.all = function(fn) {
   var ret = [];
   query = client.query('SELECT * FROM comments ORDER BY time DESC');

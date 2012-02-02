@@ -29,16 +29,23 @@
 <script src="/modestmaps.markers.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script>
-  var existingMarkers = {};
+  var recentMarkers = <%- recentMarkers %>;
   var provider = new MM.TemplatedMapProvider('http://c.tiles.mapbox.com/v3/mapbox.mapbox-light/{Z}/{X}/{Y}.png');
   var map = new MM.Map('admin-map', provider, new MM.Point(480, 250));
-  map.setCenterZoom(new MM.Location(49.2435,-122.9529), 10);
+  map.setCenterZoom(new MM.Location(49.2435,-122.9529), 9);
+  map.setZoomRange(8, 10);
 
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
 
+  $.each(recentMarkers, function(i, marker) {
+    var el = $('<div>').addClass('marker');
+    markers.addMarker(el[0], new MM.Location(marker.stop_lat, marker.stop_lon));
+  });
+
   var socket = io.connect();
   socket.on('comment', function (data) {
+    var comment = data.comment;
     var marker = $('<div>').addClass('marker'); // and bind to newComment as well.
     markers.addMarker(marker[0], new MM.Location(comment.stop.stop_lat, comment.stop.stop_lon));
   });

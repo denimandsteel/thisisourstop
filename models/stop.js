@@ -5,7 +5,7 @@ var client;
 client = new pg.Client(connectionString);
 client.connect();
 
- // Schema: stops(stop_code -> stop_id) -> stop_times(stop_id -> trip_id*) -> trips (trip_id -> route_id) -> routes
+// GTFS schema relation: stop_code -> stops(stop_code -> stop_id) -> stop_times(stop_id -> trip_id*) -> trips (trip_id -> route_id) -> routes(route_id)
 
 var Stop = exports = module.exports = function Stop(id) {
   this.id = id;

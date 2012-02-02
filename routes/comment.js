@@ -1,4 +1,5 @@
 var Comment = require('../models/comment');
+var Stop = require('../models/stop');
 
 var pg = require('pg').native;
 var connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/thisisourstop'
@@ -67,7 +68,24 @@ module.exports = function(app) {
         res.json({ comments: comments });
       }
       else {
-        res.render('admin/moderate', { comments: comments, page_id: 'admin', comment_template: comment_template });
+        Comment.recentComments(function(comments) {
+          var markers = [];
+          var length = comments.length;
+          // DIIIIRRRRRTYYYY.
+          for (var i = 0; i < length; i++) {
+            if (i === length - 1) {
+              Stop.get(comments[i].stop, function(err, stop) {
+                markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
+                res.render('admin/moderate', { comments: comments, recentMarkers: JSON.stringify(markers), page_id: 'admin', comment_template: comment_template });
+              });
+            }
+            else {
+              Stop.get(comments[i].stop, function(err, stop) {
+                markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
+              });
+            }
+          }
+        });
       }
     });
   });

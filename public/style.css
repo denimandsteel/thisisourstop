@@ -297,4 +297,4 @@ textarea, input[type='text'] {
 #admin .categories { width: 85px; text-align: right; }
 #admin .actions { width: 60px; text-align: right; padding-right: 3px; }
 #admin .actions a { display: block; }
-#admin .marker { width: 8px; height: 8px; border-radius: 10px; background: #f00; opacity: 0.3; }
+#admin-map .marker { width: 8px; height: 8px; border-radius: 10px; background: #f00; opacity: 0.3; }

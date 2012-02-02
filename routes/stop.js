@@ -44,7 +44,26 @@ module.exports = function(app) {
   });
 
   app.get('/desktop', function(req, res) {
-    res.render('desktop');
+    Comment.recentComments(function(comments) {
+      var markers = [];
+      var length = comments.length;
+      // DIIIIRRRRRTYYYY.
+      for (var i = 0; i < length; i++) {
+        if (i === length - 1) {
+          Stop.get(comments[i].stop, function(err, stop) {
+            //console.log({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
+            markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
+            res.render('desktop', { recentMarkers: JSON.stringify(markers)});
+          });
+        }
+        else {
+          Stop.get(comments[i].stop, function(err, stop) {
+            //console.log({ stop_lat: stop.stop_lat, stop_long: stop.stop_lon });
+            markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
+          });
+        }
+      }
+    });
   });
 
   app.get('/about', function(req, res) {
