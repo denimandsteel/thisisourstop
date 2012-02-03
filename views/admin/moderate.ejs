@@ -10,7 +10,7 @@
       <tr>
         <td class="time">Time</td>
         <td class="comment">Comment</td>
-        <td class="categories">Categories</td>
+        <td class="stop">Stop</td>
         <td class="actions">Actions</td>
       </tr>
     </thead>
@@ -18,15 +18,18 @@
       <% for(var i = 0; i < comments.length; i++) { %>
       <tr class="comment">
         <td class="time" data-time="<%= comments[i].time %>"><%=: comments[i].time | time %></td>
-        <td class="comment"><%= comments[i].comment %></td>
-        <td class="categories">
-        <% if (typeof comments[i].type !== 'undefined') { %>
-          <% for(var j = 0; j < comments[i].type.length; j++) { %>
-            <div class="icon <%= comments[i].type[j] %>"></div>
-          <% } %>
-        <% } %>
+        <td class="comment">
+            <%= comments[i].comment %>
+            <% if (typeof comments[i].type !== 'undefined') { %>
+              <% for(var j = 0; j < comments[i].type.length; j++) { %>
+                <div class="icon <%= comments[i].type[j] %>"></div>
+              <% } %>
+            <% } %>
         </td>
-        <td class="actions"><a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>">view</a><a href="#">delete</a><a href="#">block</a></td>
+        <td class="stop">
+          <a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>"><%= comments[i].stop %></a>
+        </td>
+        <td class="actions"><a href="#">delete</a><a href="#">block</a></td>
       </tr>
       <% } %>
     </tbody>
@@ -62,7 +65,7 @@
   map.addLayer(markers);
 
   $.each(recentMarkers, function(i, marker) {
-    var el = $('<div>').addClass('marker');
+    var el = $('<div class="marker"><div class="point"></div><div class="pulse"></div></div>');
     markers.addMarker(el[0], new MM.Location(marker.stop_lat, marker.stop_lon));
   });
 
@@ -114,7 +117,7 @@
     $('#admin table tbody').prepend(newComment);
     newComment.slideDown();
 
-    var marker = $('<div>').addClass('marker'); // and bind to newComment as well.
+    var marker = $('<div class="marker"><div class="point"></div><div class="pulse"></div></div>'); // and bind to newComment as well.
     markers.addMarker(marker[0], new MM.Location(comment.stop.stop_lat, comment.stop.stop_lon));
   });
   </script>

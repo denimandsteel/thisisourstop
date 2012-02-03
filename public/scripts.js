@@ -39,6 +39,7 @@ function saveIdentity(nickname) {
   $.cookie('identity', JSON.stringify(tios.identity), { expires: 90, path: '/' });
 }
 
+// Update timestamps every 15 seconds.
 window.setInterval(function() {
   $('.comment .time').each(function(index) {
     $(this).html(tios.prettyDate($(this).attr('data-time')));

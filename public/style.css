@@ -283,7 +283,13 @@ textarea, input[type='text'] {
 
 #admin-map { margin: 10px 0; }
 
-#admin .comment .icon { background-size: 64px 32px; width: 16px; height: 16px; margin-right: 2px; }
+#admin .comment .icon {
+	background-size: 64px 32px;
+	width: 16px; height: 16px;
+	margin-right: 2px;
+	position: relative;
+	top: 2px;
+}
 #admin .comment .icon.weather { background-position-x: 0px; }
 #admin .comment .icon.look_for { background-position-x: -16px; }
 #admin .comment .icon.suggestion { background-position-x: -32px; }
@@ -294,7 +300,101 @@ textarea, input[type='text'] {
 #admin thead tr { border-bottom: 1px solid #aaa; }
 #admin tbody td { padding: 6px 0; }
 #admin tbody .time { width: 105px; font-weight: normal; border-bottom: 0; margin: 0; padding-left: 3px; color: #666; }
-#admin .categories { width: 85px; text-align: right; }
+#admin .stop { width: 50px; text-align: right; }
 #admin .actions { width: 60px; text-align: right; padding-right: 3px; }
 #admin .actions a { display: block; }
-#admin-map .marker { width: 6px; height: 6px; border-radius: 10px; background: #f00; opacity: 0.2; }
+
+#admin-map .marker { position: relative; }
+
+#admin-map .marker .point {
+	width: 6px; height: 6px;
+	border-radius: 10px;
+	background: #f00; opacity: 0.2;
+}
+
+#admin-map .marker .pulse {
+	width: 20px;
+	height: 20px;
+	display: block;
+	position: absolute;
+	top: -10px;
+	left: -10px;
+	border: 3px solid #000;
+	border-radius: 50px;
+	box-shadow: 0 0 5px #ccc;
+
+	/* Set up animation */
+	-webkit-animation-name: pulse;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation-name: pulse;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-out;
+  animation-name: pulse;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+
+  /* Final state */
+  -webkit-transform: scale(2.5);
+  -moz-transform: scale(2.5);
+	transform: scale(2.5);
+	opacity: 0;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(0.3);
+        transform: scale(0.3);
+        opacity: 0.8;
+    }
+    80% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: scale(2.5);
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes pulse {
+    0% {
+        -moz-transform: scale(0.3);
+        transform: scale(0.3);
+        opacity: 0.8;
+    }
+
+    80% {
+        -moz-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 0;
+    }
+
+    100% {
+        -moz-transform: scale(2.5);
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.3);
+        opacity: 0.8;
+    }
+
+    80% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}

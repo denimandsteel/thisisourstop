@@ -39,14 +39,14 @@
   map.addLayer(markers);
 
   $.each(recentMarkers, function(i, marker) {
-    var el = $('<div>').addClass('marker');
+    var el = $('<div class="marker"><div class="point"></div><div class="pulse"></div></div>'); // and bind to newComment as well.
     markers.addMarker(el[0], new MM.Location(marker.stop_lat, marker.stop_lon));
   });
 
   var socket = io.connect();
   socket.on('comment', function (data) {
     var comment = data.comment;
-    var marker = $('<div>').addClass('marker'); // and bind to newComment as well.
+    var marker = $('<div class="marker"><div class="point"></div><div class="pulse"></div></div>'); // and bind to newComment as well.
     markers.addMarker(marker[0], new MM.Location(comment.stop.stop_lat, comment.stop.stop_lon));
   });
   </script>
