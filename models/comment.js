@@ -8,9 +8,11 @@ var Stop = require('./stop');
 client = new pg.Client(connectionString);
 client.connect();
 
-var Comment = exports = module.exports = function Comment(comment, stop, type) {
+var Comment = exports = module.exports = function Comment(comment, stop, type, ip, nickname) {
   this.comment = comment;
   this.stop = stop;
+  this.ip = ip;
+  this.nickname = nickname;
 
   var types = [];
   var valid_types = ['weather', 'suggestion', 'look_for', 'just_sayin'];
@@ -101,12 +103,14 @@ exports.flag = function(comment, flag, ip, fn) {
 
 Comment.prototype.save = function(fn){
   var that = this;
-  var query = client.query('INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING cid, time', [sanitize(this.comment).xss(), sanitize(this.stop).toInt(), this.type, new Date()]);
+  var cleanedUp = [sanitize(this.comment).xss(), sanitize(this.stop).toInt(), this.type, new Date(), this.ip, sanitize(this.nickname).xss()];
+  var query = client.query('INSERT INTO comments (comment, stop, type, time, ip, nickname) VALUES($1, $2, $3, $4, $5, $6) RETURNING cid, time', cleanedUp);
   query.on('row', function(row) {
     that.cid = row.cid;
     that.time = new Date(row.time).toString();
   });
   query.on('end', function() {
+
     Stop.get(that.stop, function(err, stop){
       that.stop = stop;
       fn(null, that);

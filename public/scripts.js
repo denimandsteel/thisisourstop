@@ -23,7 +23,7 @@ function checkIdentity() {
     $('#identity').html('<label>Nickname</label><input id="nickname" type="text" />');
   }
   if (tios.identity.count > 3 && tios.identity.nickname != '') {
-    $('#identity').html('<label>Nickname:</label> ' + tios.identity.nickname);
+    $('#identity').html('<label>Nickname:</label> ' + tios.identity.nickname + '<input id="nickname" type="hidden" value="' + tios.identity.nickname + '" />');
   }
 }
 checkIdentity();
@@ -114,7 +114,8 @@ $('#new-comment').submit(function() {
     socket.emit('new', {
       comment : $('#new-comment textarea').val(),
       stop: tios.stop_id,
-      types: types
+      types: types,
+      nickname: $('#identity #nickname').val() || null
     });
     $('#new-comment textarea').val('');
     $('#new-comment .category').removeClass('active');
