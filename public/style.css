@@ -344,6 +344,13 @@ textarea, input[type='text'] {
 	opacity: 0;
 }
 
+#admin-map .marker.hover .pulse {
+	-webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+	transform: scale(0.5);
+	opacity: 0.8;
+}
+
 @-webkit-keyframes pulse {
     0% {
         -webkit-transform: scale(0.3);
