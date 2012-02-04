@@ -43,15 +43,18 @@
 <script id="comment-template" type="text/template">
 <tr id="comment-{{= comment.cid }}" class="comment new">
   <td class="time" data-time="{{= comment.time }}">{{=: comment.time | time }}</td>
-  <td class="comment">{{= comment.comment }}</td>
-  <td class="categories">
-  {{ if (typeof comment.type !== 'undefined') { }}
-    {{ for(var j = 0; j < comment.type.length; j++) { }}
-      <div class="icon {{= comment.type[j] }}"></div>
-    {{ } }}
-  {{ } }}
+  <td class="comment">
+      {{= comment.comment }}
+      {{ if (typeof comment.type !== 'undefined') { }}
+        {{ for(var j = 0; j < comment.type.length; j++) { }}
+          <div class="icon {{= comment.type[j] }}"></div>
+        {{ } }}
+      {{ } }}
   </td>
-  <td class="actions"><a href="/stop/{{= comment.stop.stop_code }}#comment-{{= comment.cid }}">view</a><a href="#">delete</a><a href="#">block</a></td>
+  <td class="stop">
+    <a href="/stop/{{= comment.stop.stop_code }}#comment-{{= comment.cid }}">{{= comment.stop.stop_code }}</a>
+  </td>
+  <td class="actions"><a href="#">delete</a><a href="#">block</a></td>
 </tr>
 </script>
 <script>
