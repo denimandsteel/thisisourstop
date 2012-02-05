@@ -103,12 +103,21 @@ header #stop_id {
 	background-size: 298px 122px;
 	top: 38px;
 	font-weight: bold;
-	font-size: 25px;
+	font-size: 24px;
 	text-align: center;
+  letter-spacing: 0.5px;
 }
 #third-party.active .action { display: block; }
 #third-party .action a { text-decoration: none; }
-#third-party .action div { text-transform: uppercase; letter-spacing: 1px; font-size: 16px; margin-top: 10px; }
+#third-party .action .one {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  margin-top: 18px;
+  margin-bottom: -3px;
+}
+#third-party .action .two { margin-bottom: -7px; }
+#third-party .action .three {}
 
 #third-party #google.action { left: 11px; padding: 10px 10px 0 0;}
 	#third-party #google.action a { color: #dd4b38; }

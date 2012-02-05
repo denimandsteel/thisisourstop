@@ -110,7 +110,6 @@ Comment.prototype.save = function(fn){
     that.time = new Date(row.time).toString();
   });
   query.on('end', function() {
-
     Stop.get(that.stop, function(err, stop){
       that.stop = stop;
       fn(null, that);
