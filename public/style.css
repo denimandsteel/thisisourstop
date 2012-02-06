@@ -205,7 +205,7 @@ header #stop_id {
   padding: 4px 14px;
 }
 
-#comments {
+#stop-talk {
   padding: 0px 8px 8px;
   background: #f0f4f7;
 }
@@ -223,6 +223,9 @@ header #stop_id {
 	border-radius: 6px;
   border: 1px solid #9ab3cc;
 }
+
+#comment-info.active,
+#comment-info.active #identity #nickname { border-color: #502365; }
 
 textarea, input[type='text'] {
 	font-size: 16px;

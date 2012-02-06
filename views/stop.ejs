@@ -33,7 +33,7 @@
 </div>
 
 <div id="comment-header"><span class="minor">Talk About</span> This Stop</div>
-<div id="comments">
+<div id="stop-talk">
   <div class="notch"></div>
   <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
     <div id="comment-info">
@@ -56,7 +56,9 @@
     <input class="btn" type="submit" value="Post" />
   </form>
 
+<div id="comments">
 <%- partial('comment', comments) %>
+</div>
 
   <% if (comments.length > 0) { %>
   <div id="footer">

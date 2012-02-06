@@ -117,7 +117,8 @@ $('#new-comment').submit(function() {
       types: types,
       nickname: $('#identity #nickname').val() || null
     });
-    $('#new-comment textarea').val('');
+    $('#comment-info').removeClass('active');
+    $('#new-comment textarea').val('Write something...');
     $('#new-comment .category').removeClass('active');
     $('#new-comment input[type=checkbox]').attr('checked', false);
     incrementIdentity();
@@ -144,6 +145,7 @@ $('#new-comment').submit(function() {
 });
 
 $('textarea#text').focus(function() {
+  $('#comment-info').addClass('active');
   $(this).html('');
 }).keyup(function() {
   $('#count').html(200 - $(this).val().length);
