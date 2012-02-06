@@ -292,6 +292,7 @@ textarea, input[type='text'] {
   border: 0;
   border-radius: 6px;
   text-decoration: none;
+  -webkit-appearance: none;
 }
 .btn.blue { background: #9ab3cc; }
 
