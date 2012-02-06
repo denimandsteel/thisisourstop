@@ -1,5 +1,4 @@
 <div id="comment-<%= comment.cid %>" class="comment<% if (typeof new_comment !== 'undefined' && new_comment === true) { %> new<% } %>">
-  <div class="time" data-time="<%= comment.time %>"><%=: comment.time | time %></div>
   <!--<div class="score"><%=: comment.score %></div>-->
   <% if (typeof comment.type !== 'undefined') { %>
     <% for(var i = 0; i < comment.type.length; i++) { %>
@@ -7,5 +6,9 @@
     <% } %>
   <% } %>
   <div class="text"><%= comment.comment %></div>
+  <div class="meta">
+    <!--<div class="nickname"></div>-->
+    <div class="time" data-time="<%= comment.time %>"><%=: comment.time | time %></div>
+  </div>
   <div class="actions"><a href="/stop/<%= comment.stop %>/comment/<%= comment.cid %>/flag/up?token=">+</a> / <a href="/stop/<%= comment.stop %>/comment/<%= comment.cid %>/flag/down?token=">-</a> | <a class="report" href="/stop/<%= comment.stop %>/comment/<%= comment.cid %>/flag/report?token=">report</a></div>
 </div>

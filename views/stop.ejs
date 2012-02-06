@@ -20,7 +20,7 @@
   <div id="map-overlay"></div>
   <div id="marker" class="active"></div>
   <img width="320" height="200" src="http://maps.googleapis.com/maps/api/staticmap?center=<%= stop.stop_lat %>,<%= stop.stop_lon %>&amp;zoom=15&amp;size=320x200&amp;maptype=&amp;sensor=false&amp;scale=2" />
-  <div class="notch bottom"></div>
+  <div class="notch"></div>
 </div>
 
 <div id="stop-info">
@@ -32,43 +32,43 @@
   </div>
 </div>
 
-<div id="stop-talk">
+<div id="comment-header"><span class="minor">Talk About</span> This Stop</div>
+<div id="comments">
+  <div class="notch"></div>
   <form id="new-comment" method="post" action="/stop/<%= stop.id %>">
-    <div class="categories">
+    <div id="comment-info">
+      <div id="comment-text">
+        <textarea id="text" name="comment">Write something...</textarea>
+        <div id="count">200</div>
+      </div>
+      <div id="identity"></div>
+    </div>
+    <div id="categories">
       <div class="category" id="weather"><div class="icon"></div><label>Weather</label></div>
       <div class="category" id="look_for"><div class="icon"></div><label>Point of Interest</label></div>
       <div class="category" id="suggestion"><div class="icon"></div><label>Suggest</label></div>
       <div class="category last" id="just_sayin"><div class="icon"></div><label>Just Saying</label></div>
+      <input class="checkboxes" type="checkbox" name="type[weather]" value="weather" />
+      <input class="checkboxes" type="checkbox" name="type[suggestion]" value="suggestion" />
+      <input class="checkboxes" type="checkbox" name="type[look_for]" value="look_for" />
+      <input class="checkboxes" type="checkbox" name="type[just_sayin]" value="just_sayin" />
     </div>
-
-    <input class="checkboxes" type="checkbox" name="type[weather]" value="weather" />
-    <input class="checkboxes" type="checkbox" name="type[suggestion]" value="suggestion" />
-    <input class="checkboxes" type="checkbox" name="type[look_for]" value="look_for" />
-    <input class="checkboxes" type="checkbox" name="type[just_sayin]" value="just_sayin" />
-
-    <div id="post-body">
-      <div id="post-header"><span class="minor">Talk About</span> This Stop</div>
-      <div id="count">200</div>
-      <textarea id="text" name="comment"></textarea>
-      <div id="identity">
-      </div>
-
-      <div class="actions">
-        <input class="btn primary" type="submit" value="Post It" />
-      </div>
-    </div>
+    <input class="btn" type="submit" value="Post" />
   </form>
-  <div id="comments">
+
 <%- partial('comment', comments) %>
-  </div>
 
   <% if (comments.length > 0) { %>
-  <a class="button" href="#new-comment">Talk About This Stop</a>
+  <div id="footer">
+    <a class="btn" href="#new-comment">Talk About This Stop</a>
+    <a id="another-stop" class="btn blue" href="#stop">Find Another Stop</a>
+  </div>
   <% } else { %>
   <div id="no-comments">Pretty quiet in here... say something!</div>
+  <div id="footer">
+    <a id="another-stop" class="btn blue" href="#stop">Find Another Stop</a>
+  </div>
   <% } %>
-
-  <a id="another-stop" class="button" href="#stop">Find Another Stop</a>
 
   <script id="comment-template" type="text/template">
 <%- comment_template %>

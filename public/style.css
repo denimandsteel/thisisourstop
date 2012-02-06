@@ -3,6 +3,8 @@
  * Palette:
  * - Purple: #502365;
  * - Blue: #9ab3cc;
+ * - Light blue: #f0f4f7;
+ * - Yellow: #ffe600;
  *
  * Icons:
  * - Weather: #
@@ -145,37 +147,34 @@ header #stop_id {
 	background: url(images/notches.png) top center no-repeat;
 	background-size: 16px 16px;
 	height: 8px;
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
 }
 
-.notch.bottom {
+#map .notch {
+  position: absolute;
+  left: 0;
+  top: 192px; /* 200 - 8px */
 	background-position: bottom center;
-	top: 192px; /* 200 - 8px */
 }
 
-#stop-info { background: #9ab3cc; padding: 10px; }
+#stop-info { background: #9ab3cc; padding: 8px; }
 .stop_desc {
 	font-weight: bold;
 	color: #ffffff;
 	background: #502365;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
-	padding: 3px 0 4px 10px;
+	padding: 3px 0 3px 6px;
 }
 .minor { font-weight: normal; }
 .trips {
 	background: #ffffff;
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
-	padding: 3px 0 4px 10px;
+	padding: 3px 0 3px 6px;
 }
 .trip .short { font-weight: bold; margin-right: 5px; }
 .trip.night { color: #99b3cc; }
-
-#stop-talk { padding: 10px; }
 
 #recent { margin-top: 1.5em; }
 #recent a.stop {
@@ -200,52 +199,29 @@ header #stop_id {
 
 #recent a.stop .stop_id { margin-right: 5px; }
 
-#new-comment .categories { text-align: center; }
-#new-comment .category { width: 24%; display: inline-block; vertical-align: text-top; }
-#new-comment .category .icon {
-	display: inline-block;
-	width: 64px; height: 64px;
-	background: url(images/icons.png) no-repeat;
-	background-size: 256px 128px;
+#comment-header {
+  background: #ffe600;
+  font-weight: bold;
+  padding: 4px 14px;
 }
 
-#new-comment .category label {
-	display: block;
-	font-size: 10px;
-	text-transform: uppercase;
-	font-weight: bold;
-	letter-spacing: 1px;
+#comments {
+  padding: 0px 8px 8px;
+  background: #f0f4f7;
 }
 
-#new-comment #weather label { color: #0093d0; }
-#new-comment #look_for label { color: #ee3a43; }
-#new-comment #suggestion label { color: #ffc423; }
-#new-comment #just_sayin label { color: #00703c; }
+#new-comment {
+  color: #9ab3cc;
+  border: 1px solid #ffe600;
+  border-radius: 10px;
+  background: white;
+  margin-top: 5px;
+  padding: 8px;
+}
 
-#new-comment #weather .icon { background-position-x: 0px; }
-#new-comment #look_for .icon { background-position-x: -64px; }
-#new-comment #suggestion .icon { background-position-x: -128px; }
-#new-comment #just_sayin .icon { background-position-x: -192px; }
-
-#new-comment .category.active .icon { background-position-y: bottom; }
-
-.checkboxes { display: none; }
-
-#post-body {
-	position: relative;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background: #ffe600;
+#comment-info {
 	border-radius: 6px;
-	padding: 3px 10px 4px 10px;
-}
-#post-header { font-weight: bold; margin-bottom: 5px; }
-
-#count {
-	position: absolute;
-	top: 6px;
-	right: 12px;
-	font-size: 13px;
+  border: 1px solid #9ab3cc;
 }
 
 textarea, input[type='text'] {
@@ -258,19 +234,79 @@ textarea, input[type='text'] {
 	border-radius: 6px;
 	background: #ffffff;
 	-webkit-appearance: none;
+  color: #9ab3cc;
 }
-#post-body textarea {
-	height: 50px;
+#comment-info textarea {
+	height: 90px;
 }
 
-#nickname label { display: block; }
-#nickname input { width: 100%; }
+#comment-text { position: relative; }
 
-#stop-talk .actions { text-align: center; }
+#count {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
 
-.button { background: #efefef; display: block; padding: 5px; margin: 5px auto 20px auto; text-align:center; }
+#identity #nickname { border-top: 1px solid #9ab3cc; padding: 3px 5px; }
+
+#identity label { }
+#identity input { width: 100%; }
+
+#categories { text-align: center; margin: 15px 0; }
+#categories .category { width: 24%; display: inline-block; vertical-align: text-top; }
+#categories .category .icon {
+  display: inline-block;
+  width: 64px; height: 64px;
+  background: url(images/icons.png) no-repeat;
+  background-size: 256px 128px;
+}
+#categories .category label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+#categories #weather label { color: #0093d0; }
+#categories #look_for label { color: #ee3a43; }
+#categories #suggestion label { color: #ffc423; }
+#categories #just_sayin label { color: #00703c; }
+#categories #weather .icon { background-position-x: 0px; }
+#categories #look_for .icon { background-position-x: -64px; }
+#categories #suggestion .icon { background-position-x: -128px; }
+#categories #just_sayin .icon { background-position-x: -192px; }
+
+#categories .category.active .icon { background-position-y: bottom; }
+#categories .checkboxes { display: none; }
+
+.btn {
+  background: #502365;
+  color: white;
+  display: block;
+  width: 100%;
+  padding: 6px 0 7px 0;
+  text-align:center;
+  font-size: 26px;
+  letter-spacing: 1px;
+  border: 0;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.btn.blue { background: #9ab3cc; }
 
 #map, .disclaimer, .logo { text-align: center; }
+
+.comment {
+  color: black;
+  border: 1px solid #9ab3cc;
+  border-radius: 10px;
+  background: white;
+  margin-top: 10px;
+  padding: 8px 8px 40px;
+  position: relative;
+}
+.comment.new { background: #ffffe6; }
 
 .comment .icon {
 	display: inline-block;
@@ -284,11 +320,34 @@ textarea, input[type='text'] {
 .comment .icon.suggestion { background-position-x: -64px; }
 .comment .icon.just_sayin { background-position-x: -96px; }
 
-.comment .time { border-bottom: 1px solid #ccc; font-weight: bold; padding-bottom: 5px; margin-bottom: 10px; }
-.comment .text { clear: both; margin: 10px 0; }
-.comment.new { background: #ffffe6; }
+.comment .text { }
+
+.comment .meta {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  color: #9ab3cc;
+}
+  .comment .time {
+    color: #9ab3cc;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+.comment .actions {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  color: #9ab3cc;
+}
 
 #no-comments { text-align: center; margin: 10px 0; }
+
+#footer .btn {
+  margin-top: 10px;
+}
 
 #admin-map { margin: 10px 0; }
 

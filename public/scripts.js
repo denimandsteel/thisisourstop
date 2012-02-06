@@ -20,10 +20,10 @@ tios.identity = JSON.parse($.cookie('identity')) || {count: 0, nickname: null };
 
 function checkIdentity() {
   if (tios.identity.count === 3) {
-    $('#identity').html('<label>Nickname</label><input id="nickname" type="text" />');
+    $('#identity').html('<div id="nickname"><label>Nickname</label><input id="nickname" type="text" /></div>');
   }
   if (tios.identity.count > 3 && tios.identity.nickname != '') {
-    $('#identity').html('<label>Nickname:</label> ' + tios.identity.nickname + '<input id="nickname" type="hidden" value="' + tios.identity.nickname + '" />');
+    $('#identity').html('<div id="nickname"><label>Nickname:</label> ' + tios.identity.nickname + '<input id="nickname" type="hidden" value="' + tios.identity.nickname + '" /></div>');
   }
 }
 checkIdentity();
@@ -143,7 +143,9 @@ $('#new-comment').submit(function() {
     return false;
 });
 
-$('textarea#text').keyup(function() {
+$('textarea#text').focus(function() {
+  $(this).html('');
+}).keyup(function() {
   $('#count').html(200 - $(this).val().length);
 });
 
