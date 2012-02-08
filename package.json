@@ -15,8 +15,7 @@
     "express": "2.5.1",
     "ejs": "0.5.0",
     "socket.io": "0.8.7",
-    "validator": "0.3.9",
-    "connect-useragent": "0.0.1"
+    "validator": "0.3.9"
   },
   "devDependencies": {},
   "scripts": { "start" : "node index.js" }
