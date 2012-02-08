@@ -31,7 +31,7 @@ header #stop { width: 60px; }
 	font-size: 60px;
   letter-spacing: 11px;
   border: 1px solid #502365;
-  -webkit-appearance: none;
+  -webkit-appearance: textfield;
   padding: 0px 8px;
   width: 236px;
   height: 86px;
@@ -41,6 +41,7 @@ header #stop { width: 60px; }
 }
 
 header #stop_form #stop {
+  -webkit-appearance: textfield;
   color: #502365;
   font-size: 38px;
   height: 45px;
