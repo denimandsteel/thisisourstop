@@ -5,17 +5,23 @@
   <div class="content">
     <p>Give voice to the secret lives of your favourite bus stops in Greater Vancouver.</p>
 
-
     <form id="stop-form" method="post" action="/">
     	<label for="stop">Enter a Bus Stop Number</label>
-  	  <input name="stop" id="stop" type="text" pattern="[0-9]*" maxlength="5" />
+      <div id="numbers">
+        <div class="number one">&nbsp;</div>
+        <div class="number two">&nbsp;</div>
+        <div class="number three">&nbsp;</div>
+        <div class="number four">&nbsp;</div>
+        <div class="number five">&nbsp;</div>
+        <input name="stop" id="stop" type="text" pattern="[0-9]*" maxlength="5" />
+      </div>
     	<input id="stop-go" type="submit" value="Go" />
     </form>
 
     <div id="recent">
     </div>
 
-   </div>
+  </div>
 
    <footer>
     <div id="how-link" class="btn blue" href="/how">How Do I Use This?</div>

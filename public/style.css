@@ -28,15 +28,32 @@ header #stop { width: 60px; }
 #stop-form label { display: block; }
 
 #stop-form #stop {
-	font-size: 32px;
-	letter-spacing: 10px;
-	border: 1px solid black;
-	-webkit-appearance: none;
-	padding: 5px 3px;
-	width: 132px;
-	height: 41px;
-	border-radius: 6px;
-	background: url(images/dividers.png) -7px 0px no-repeat;
+  position: absolute;
+  left: -9999px;
+  /*top: 0; left: 0;*/
+	font-size: 60px;
+  letter-spacing: 11px;
+  border: 1px solid #502365;
+  -webkit-appearance: none;
+  padding: 0px 8px;
+  width: 236px;
+  height: 86px;
+  border-radius: 6px;
+  line-height: 0px;
+  /*background: url(images/dividers.png) -7px 0px no-repeat;*/
+}
+
+#numbers { position: relative; margin-top: 5px; }
+
+#numbers .number {
+  background: white;
+  font-size: 60px;
+  border: 1px solid #502365;
+  margin-right: 2px;
+  border-radius: 5px;
+  width: 40px;
+  height: 76px;
+  display: inline-block;
 }
 
 .content { padding: 10px; }
