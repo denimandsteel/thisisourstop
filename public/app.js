@@ -37,7 +37,6 @@ tios.Views.Index = Backbone.View.extend({
   events: {
     'click #about-link': 'about',
     'click #how-link': 'how',
-    'click #numbers': 'focus',
     'keyup #stop': 'autosubmit'
   },
   initialize: function() {
@@ -65,16 +64,8 @@ tios.Views.Index = Backbone.View.extend({
     tios.app.navigate('how', true);
     return false;
   },
-  focus: function() {
-    this.$('#stop').focus();
-  },
   autosubmit: function(event) {
     var value = this.$('#stop').val();
-    $('#numbers .one').html(value[0] ? value[0] : '&nbsp;');
-    $('#numbers .two').html(value[1] ? value[1] : '&nbsp;');
-    $('#numbers .three').html(value[2] ? value[2] : '&nbsp;');
-    $('#numbers .four').html(value[3] ? value[3] : '&nbsp;');
-    $('#numbers .five').html(value[4] ? value[4] : '&nbsp;');
     if (value.length >= 5) {
       this.$('#stop-form').submit();
       this.$('#stop').unbind(); // No more events after submit.

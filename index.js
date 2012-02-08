@@ -61,7 +61,6 @@ if (!module.parent) {
  * Based on John Resig's Pretty Date: http://ejohn.org/blog/javascript-pretty-date/
  * Licensed under the MIT and GPL licenses.
  */
-
 // Takes an ISO time and returns a string representing how
 // long ago the date represents.
 function prettyDate(time){

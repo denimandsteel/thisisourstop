@@ -71,7 +71,7 @@ module.exports = function(app) {
         Comment.recentComments(function(recentComments) {
           var markers = [];
           var length = recentComments.length;
-          // DIIIIRRRRRTYYYY.
+          // DIIIIRRRRRTYYYY. Oh well, this is only for admins.
           for (var i = 0; i < length; i++) {
             if (i === length - 1) {
               Stop.get(recentComments[i].stop, function(err, stop) {

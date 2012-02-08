@@ -21,16 +21,13 @@ header {
   z-index: 1;
 }
 
-header form { padding: 20px 20px 0 0; }
+header form { padding: 7px 16px 0 0; }
 header #stop { width: 60px; }
 
 #stop-form { text-align: center; }
 #stop-form label { display: block; }
 
-#stop-form #stop, #stop_form #stop {
-  position: absolute;
-  left: -9999px;
-  /*top: 0; left: 0;*/
+#stop-form #stop {
 	font-size: 60px;
   letter-spacing: 11px;
   border: 1px solid #502365;
@@ -40,30 +37,17 @@ header #stop { width: 60px; }
   height: 86px;
   border-radius: 6px;
   line-height: 0px;
-  /*background: url(images/dividers.png) -7px 0px no-repeat;*/
-}
-
-#numbers { position: relative; margin-top: 5px; }
-header #numbers { top: -15px; margin-top: 0; right: -4px; }
-#numbers .number {
   background: white;
-  font-size: 60px;
-  border: 1px solid #502365;
-  margin-right: 2px;
-  border-radius: 5px;
-  width: 40px;
-  height: 76px;
-  display: inline-block;
 }
 
-header #numbers .number {
+header #stop_form #stop {
   color: #502365;
-  font-weight: bold;
-  font-size: 36px;
-  width: 22px;
+  font-size: 38px;
   height: 45px;
-  padding-right: 2px;
-  margin-right: 1px;
+  width: 152px;
+  letter-spacing: 8px;
+  padding: 0;
+  padding-left: 5px;
 }
 
 .content { padding: 10px; }

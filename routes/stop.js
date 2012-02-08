@@ -15,21 +15,12 @@ module.exports = function(app) {
 
   app.param('stop', function(req, res, next, id){
     Stop.get(id, function(err, stop){
-      //if (err) return next(err);
-      //if (!stop) return next(new Error('failed to find stop'));
-      // Send 404...
       if (err === null) {
         req.stop = stop;
         next();
       }
       else {
         res.redirect('/404');
-        //next(err);
-       // console.log('and this is right too?');
-       // next(new Error('failed to find stop'));
-        //next(new Error(err));
-        //res.send(404);
-        //res.render('stop');
       }
     });
   });

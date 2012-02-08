@@ -169,17 +169,8 @@ $('#another-stop, #stop_id').click(function() {
   return false;
 });
 
-$('#numbers').click(function() {
-  $('#stop').focus();
-});
-
 $('#stop').keyup(function() {
   var value = $('#stop').val();
-  $('#numbers .one').html(value[0] ? value[0] : '&nbsp;');
-  $('#numbers .two').html(value[1] ? value[1] : '&nbsp;');
-  $('#numbers .three').html(value[2] ? value[2] : '&nbsp;');
-  $('#numbers .four').html(value[3] ? value[3] : '&nbsp;');
-  $('#numbers .five').html(value[4] ? value[4] : '&nbsp;');
   if (value.length >= 5) {
     $('#stop_form').submit();
     $('#stop').unbind(); // No more events after submit.
