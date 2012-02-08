@@ -56,21 +56,22 @@
     <input class="btn" type="submit" value="Post" />
   </form>
 
-<div id="comments">
+  <div id="comments">
 <%- partial('comment', comments) %>
+  </div>
 </div>
 
-  <% if (comments.length > 0) { %>
-  <div id="footer">
-    <a class="btn" href="#new-comment">Talk About This Stop</a>
-    <a id="another-stop" class="btn blue" href="#stop">Find Another Stop</a>
-  </div>
-  <% } else { %>
-  <div id="no-comments">Pretty quiet in here... say something!</div>
-  <div id="footer">
-    <a id="another-stop" class="btn blue" href="#stop">Find Another Stop</a>
-  </div>
-  <% } %>
+<% if (comments.length > 0) { %>
+<footer>
+  <a class="btn" href="#new-comment">Talk About This Stop</a>
+  <a id="another-stop" class="btn blue" href="#stop">Find Another Stop</a>
+</footer>
+<% } else { %>
+<div id="no-comments">Pretty quiet in here... say something!</div>
+<footer>
+  <a id="another-stop" class="btn blue" href="#stop">Find Another Stop</a>
+</footer>
+<% } %>
 
   <script id="comment-template" type="text/template">
 <%- comment_template %>
@@ -86,4 +87,3 @@
   tios.stop_desc = '<%- stop.stop_desc %>';
   </script>
   <script src="/scripts.js"></script>
-</div>
