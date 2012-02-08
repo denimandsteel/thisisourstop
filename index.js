@@ -13,7 +13,8 @@ app.set('view engine', 'ejs');
 
 // Middleware
 app.configure('production', function(){
-  app.use(express.static(__dirname + '/public', { maxAge: 31557600000 })); /* One year */
+  var oneYear = 31557600000;
+  app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
   app.use(express.bodyParser());
   app.use(express.methodOverride()); // input name="_method" put support, might not need this.
   app.use(express.cookieParser());
