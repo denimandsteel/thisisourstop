@@ -9,7 +9,7 @@
 body, input, textarea { font-family: "ff-super-grotesk-web", sans-serif; }
 body {
 	margin: 0 auto;
-	max-width: 320px;
+	max-width: 500px;
 }
 
 header {
@@ -294,7 +294,7 @@ textarea, input[type='text'] {
 
 #map, .disclaimer, .logo { text-align: center; }
 
-.comment {
+#comments .comment {
   color: black;
   border: 1px solid #9ab3cc;
   border-radius: 10px;
@@ -303,29 +303,29 @@ textarea, input[type='text'] {
   padding: 8px 8px 40px;
   position: relative;
 }
-.comment.new { background: #ffffe6; }
+#comments  .comment.new { background: #ffffe6; }
 
-.comment .icon {
+#comments  .comment .icon {
 	display: inline-block;
 	margin-right: 5px;
 	width: 32px; height: 32px;
 	background: url(images/icons.png) no-repeat bottom left;
 	background-size: 128px 64px;
 }
-.comment .icon.weather { background-position-x: 0px; }
-.comment .icon.look_for { background-position-x: -32px; }
-.comment .icon.suggestion { background-position-x: -64px; }
-.comment .icon.just_sayin { background-position-x: -96px; }
+#comments .comment .icon.weather { background-position-x: 0px; }
+#comments .comment .icon.look_for { background-position-x: -32px; }
+#comments .comment .icon.suggestion { background-position-x: -64px; }
+#comments .comment .icon.just_sayin { background-position-x: -96px; }
 
-.comment .text { }
+#comments .comment .text { }
 
-.comment .meta {
+#comments .comment .meta {
   position: absolute;
   left: 8px;
   bottom: 8px;
   color: #9ab3cc;
 }
-  .comment .time {
+  #comments .comment .time {
     color: #9ab3cc;
     font-size: 10px;
     text-transform: uppercase;
@@ -333,7 +333,7 @@ textarea, input[type='text'] {
     letter-spacing: 1px;
   }
 
-.comment .actions {
+#comments .comment .actions {
   position: absolute;
   right: 8px;
   bottom: 8px;
@@ -350,6 +350,7 @@ footer .btn {
 #admin-map { margin: 10px 0; }
 
 #admin .comment .icon {
+  background: url(images/icons.png) no-repeat bottom left;
 	background-size: 64px 32px;
 	width: 16px; height: 16px;
 	margin-right: 2px;
