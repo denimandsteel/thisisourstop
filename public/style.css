@@ -27,7 +27,7 @@ header #stop { width: 60px; }
 #stop-form { text-align: center; }
 #stop-form label { display: block; }
 
-#stop-form #stop {
+#stop-form #stop, #stop_form #stop {
   position: absolute;
   left: -9999px;
   /*top: 0; left: 0;*/
@@ -44,7 +44,7 @@ header #stop { width: 60px; }
 }
 
 #numbers { position: relative; margin-top: 5px; }
-
+header #numbers { top: -15px; margin-top: 0; right: -4px; }
 #numbers .number {
   background: white;
   font-size: 60px;
@@ -54,6 +54,16 @@ header #stop { width: 60px; }
   width: 40px;
   height: 76px;
   display: inline-block;
+}
+
+header #numbers .number {
+  color: #502365;
+  font-weight: bold;
+  font-size: 36px;
+  width: 22px;
+  height: 45px;
+  padding-right: 2px;
+  margin-right: 1px;
 }
 
 .content { padding: 10px; }
