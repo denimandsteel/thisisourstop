@@ -41,13 +41,11 @@ header #stop { width: 60px; }
 
 .content { padding: 10px; }
 
-.try-again .content {
-  background: url(images/404.jpg) top left;
-  min-height: 299px;
-  position: relative;
-  top: -8px;
+#try-again {
+  background: url(images/404.jpg) center 55px no-repeat #000;
 }
-.try-again label { color: white; margin-top: 40px; }
+
+#try-again label { color: white; margin-top: 40px; }
 
 #stop_form.hide { display: none; }
 

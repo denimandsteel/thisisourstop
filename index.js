@@ -48,7 +48,7 @@ require('./routes/comment')(app);
 
 // 404 always comes last.
 app.get('/*', function(req, res){
-  res.render('404', {status: 404 });
+  res.render('404', {status: 404, page_id: 'try-again' });
 });
 
 if (!module.parent) {
