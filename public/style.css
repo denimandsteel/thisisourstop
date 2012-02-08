@@ -350,6 +350,7 @@ footer .btn {
 #admin-map { margin: 10px 0; }
 
 #admin .comment .icon {
+  display: inline-block;
   background: url(images/icons.png) no-repeat bottom left;
 	background-size: 64px 32px;
 	width: 16px; height: 16px;
