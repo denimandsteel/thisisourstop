@@ -18,6 +18,7 @@ header {
 	height: 68px;
 	background: transparent url(images/header.png) top center no-repeat;
 	background-size: 500px 68px;
+  z-index: 1;
 }
 
 header form { padding: 20px 20px 0 0; }
@@ -25,16 +26,6 @@ header #stop { width: 60px; }
 
 #stop-form { text-align: center; }
 #stop-form label { display: block; }
-
-#stop-dividers { position: relative; }
-#stop-dividers #fg {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 64px;
-	background: url(images/dividers-vertical.png) -7px 0px repeat-x;
-}
 
 #stop-form #stop {
 	font-size: 32px;
@@ -49,6 +40,14 @@ header #stop { width: 60px; }
 }
 
 .content { padding: 10px; }
+
+.try-again .content {
+  background: url(images/404.jpg) top left;
+  min-height: 299px;
+  position: relative;
+  top: -8px;
+}
+.try-again label { color: white; margin-top: 40px; }
 
 #stop_form.hide { display: none; }
 

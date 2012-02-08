@@ -29,7 +29,8 @@ module.exports = function(app) {
         next();
       }
       else {
-        next(err);
+        res.redirect('/404');
+        //next(err);
        // console.log('and this is right too?');
        // next(new Error('failed to find stop'));
         //next(new Error(err));

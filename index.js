@@ -46,6 +46,11 @@ app.configure('development', function(){
 require('./routes/stop')(app);
 require('./routes/comment')(app);
 
+// 404 always comes last.
+app.get('/*', function(req, res){
+  res.render('404', {status: 404 });
+});
+
 if (!module.parent) {
   app.listen(process.env.PORT || 3000);
   console.log('Express started!');

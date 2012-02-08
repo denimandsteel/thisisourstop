@@ -37,7 +37,6 @@ tios.Views.Index = Backbone.View.extend({
   events: {
     'click #about-link': 'about',
     'click #how-link': 'how',
-    'click #stop-dividers #fg': 'focus',
     'keyup #stop': 'autosubmit'
   },
   initialize: function() {
@@ -64,9 +63,6 @@ tios.Views.Index = Backbone.View.extend({
   how: function() {
     tios.app.navigate('how', true);
     return false;
-  },
-  focus: function() {
-    this.$('#stop').focus();
   },
   autosubmit: function(event) {
     if (this.$('#stop').val().length >= 5) {

@@ -1,0 +1,21 @@
+<header>
+  <a id="logo" class="home-link" href="/"></a>
+</header>
+<div id="index" class="try-again">
+  <div class="content">
+    <form id="stop-form" method="post" action="/">
+    	<label for="stop">Not a stop, try again:</label>
+  	  <input name="stop" id="stop" type="text" pattern="[0-9]*" maxlength="5" />
+    	<input id="stop-go" type="submit" value="Go" />
+    </form>
+  </div>
+</div>
+
+<script src="/jquery.js"></script>
+<script src="/jquery.cookie.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/ejs.min.js"></script>
+<script src="/underscore.js"></script>
+<script src="/json2.js"></script>
+<script src="/backbone.js"></script>
+<script src="/app.js"></script>
