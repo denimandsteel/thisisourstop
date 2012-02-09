@@ -45,7 +45,6 @@ app.configure('development', function(){
 
 // Routes
 require('./routes/stop')(app);
-require('./routes/comment')(app);
 
 // 404 always comes last.
 app.get('/*', function(req, res){

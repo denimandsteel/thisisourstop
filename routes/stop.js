@@ -3,7 +3,7 @@ var Comment = require('../models/comment');
 var sio = require('socket.io');
 var fs = require('fs');
 
-// Keep in memory for speed.
+// Keep in memory.
 var comment_template = null;
 
 fs.readFile('views/comment.ejs', function(error, content) {
@@ -21,6 +21,18 @@ module.exports = function(app) {
       }
       else {
         res.redirect('/404');
+      }
+    });
+  });
+
+  app.param('comment', function(req, res, next, cid){
+    Comment.get(cid, function(err, comment){
+      if (err === null) {
+        req.comment = comment;
+        next();
+      }
+      else {
+        next(err);
       }
     });
   });
@@ -101,6 +113,78 @@ module.exports = function(app) {
           hash = '#comment-' + savedComment.cid;
         }
         res.redirect('/stop/' + req.stop.id + hash);
+      }
+    });
+  });
+
+  // Individual comment info.
+  app.get('/stop/:stop/comment/:comment.:format?', function(req, res) {
+      if(req.params.format === 'json' || req.xhr) {
+        res.json({ comment: req.comment });
+      }
+      else {
+        res.render('admin', { comments: req.comment });
+      }
+  });
+
+  // Need more mods.
+  app.get('/stop/:stop/comment/:comment/flag/:flag.:format?', function(req, res) {
+    Comment.flag(req.comment, req.params.flag, req.connection.remoteAddress, function(err, savedComment) {
+      if(req.params.format === 'json' || req.xhr) {
+        res.json({ comment: savedComment });
+      }
+      else {
+        // Back where we came from.
+        res.redirect('/stop/' + req.params.stop + '/#comment-' + req.comment.cid);
+      }
+    });
+  });
+
+  // Basic auth middleware for admin pages: http://node-js.ru/3-writing-express-middleware
+  function basic_auth (req, res, next) {
+    if (req.headers.authorization && req.headers.authorization.search('Basic ') === 0) {
+      if (new Buffer(req.headers.authorization.split(' ')[1], 'base64').toString() == (process.env.TIOS_ADMIN || 'admin:password')) {
+        next();
+        return;
+      }
+    }
+    res.header('WWW-Authenticate', 'Basic realm="Admin Area"');
+    if (req.headers.authorization) {
+      // Stop
+      setTimeout(function () {
+        res.send('Authentication required', 401);
+      }, 5000);
+    }
+    else {
+      res.send('Authentication required', 401);
+    }
+  }
+
+  // All comments.
+  app.get('/admin/moderate.:format?', basic_auth, function(req, res) {
+    Comment.all(function(comments) {
+      if(req.params.format === 'json' || req.xhr) {
+        res.json({ comments: comments });
+      }
+      else {
+        Comment.recentComments(function(recentComments) {
+          var markers = [];
+          var length = recentComments.length;
+          // DIIIIRRRRRTYYYY. Oh well, this is only for admins.
+          for (var i = 0; i < length; i++) {
+            if (i === length - 1) {
+              Stop.get(recentComments[i].stop, function(err, stop) {
+                markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
+                res.render('admin/moderate', { comments: comments, recentMarkers: JSON.stringify(markers), page_id: 'admin', comment_template: comment_template });
+              });
+            }
+            else {
+              Stop.get(comments[i].stop, function(err, stop) {
+                markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
+              });
+            }
+          }
+        });
       }
     });
   });
