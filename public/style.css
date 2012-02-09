@@ -300,6 +300,7 @@ textarea, input[type='text'] {
   -webkit-appearance: none;
 }
 .btn.blue { background: #9ab3cc; }
+.btn.inline { display: inline; width: auto; }
 
 #map, .disclaimer, .logo { text-align: center; }
 
