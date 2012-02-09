@@ -35,7 +35,7 @@ app.configure('production', function(){
 
 app.configure('development', function(){
   app.use(express.logger('\x1b[33m:method\x1b[0m \x1b[32m:url\x1b[0m :response-time'));
-  app.use(express.favicon(__dirname + '/public/favicon.ico', { maxAge: oneYear }));
+  app.use(express.favicon(__dirname + '/public/favicon.ico'));
   app.use(express.static(__dirname + '/public', { maxAge: 31557600000 })); /* One year */
   app.use(express.bodyParser());
   app.use(express.methodOverride());
