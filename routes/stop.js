@@ -91,7 +91,6 @@ module.exports = function(app) {
     socket.on('new', function(data) {
       var comment = new Comment(data.comment, data.stop, data.types, socket.handshake.address.address, data.nickname);
       comment.save(function(err, savedComment){
-        console.log(savedComment);
         io.sockets.emit('comment', { comment: savedComment });
         io.sockets.emit('stop/' + savedComment.stop.stop_code, { comment: savedComment });
       });
