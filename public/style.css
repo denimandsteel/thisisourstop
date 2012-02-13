@@ -315,7 +315,7 @@ textarea, input[type='text'] {
   border-radius: 10px;
   background: white;
   margin-top: 10px;
-  padding: 8px 8px 40px;
+  padding: 8px 8px;
   position: relative;
 }
 #comments  .comment.new { background: #ffffe6; }
@@ -335,9 +335,6 @@ textarea, input[type='text'] {
 #comments .comment .text { }
 
 #comments .comment .meta {
-  position: absolute;
-  left: 8px;
-  bottom: 8px;
   color: #9ab3cc;
 }
   #comments .comment .time {
@@ -346,6 +343,7 @@ textarea, input[type='text'] {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1px;
+    margin-top: 5px;
   }
 
 #comments .comment .actions {
