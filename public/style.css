@@ -337,6 +337,7 @@ textarea, input[type='text'] {
 #comments .comment .meta {
   color: #9ab3cc;
 }
+  #comments .comment .nickname { margin-top: 3px; }
   #comments .comment .time {
     color: #9ab3cc;
     font-size: 10px;
