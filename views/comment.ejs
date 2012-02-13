@@ -7,7 +7,9 @@
   <% } %>
   <div class="text"><%= comment.comment %></div>
   <div class="meta">
-    <!--<div class="nickname"></div>-->
+    <% if (comment.nickname != null) { %>
+    <div class="nickname"><%= comment.nickname %></div>
+    <% } %>
     <div class="time" data-time="<%= comment.time %>"><%=: comment.time | time %></div>
   </div>
   <div class="actions"><a href="/stop/<%= comment.stop %>/comment/<%= comment.cid %>/flag/up?token=">+</a> / <a href="/stop/<%= comment.stop %>/comment/<%= comment.cid %>/flag/down?token=">-</a> | <a class="report" href="/stop/<%= comment.stop %>/comment/<%= comment.cid %>/flag/report?token=">report</a></div>

@@ -253,10 +253,15 @@ textarea, input[type='text'] {
   right: 5px;
 }
 
-#identity #nickname { border-top: 1px solid #9ab3cc; padding: 3px 5px; }
-
+#identity div { border-top: 1px solid #9ab3cc; padding: 3px 5px; }
 #identity label { }
-#identity input { width: 100%; }
+#identity input {
+  font-weight: bold;
+  display: inline;
+  width: 75%;
+  position: relative;
+  top: 1px;
+}
 
 #categories { text-align: center; margin: 15px 0; }
 #categories .category { width: 24%; display: inline-block; vertical-align: text-top; }

@@ -19,11 +19,8 @@ tios.updateRecent();
 tios.identity = JSON.parse($.cookie('identity')) || {count: 0, nickname: null };
 
 function checkIdentity() {
-  if (tios.identity.count === 3) {
-    $('#identity').html('<div id="nickname"><label>Nickname</label><input id="nickname" type="text" /></div>');
-  }
-  if (tios.identity.count > 3 && tios.identity.nickname != '') {
-    $('#identity').html('<div id="nickname"><label>Nickname:</label> ' + tios.identity.nickname + '<input id="nickname" type="hidden" value="' + tios.identity.nickname + '" /></div>');
+  if (tios.identity.count >= 3) {
+    $('#identity').html('<div><label for="nickname">Nickname:</label><input id="nickname" type="text" value="' + (tios.identity.nickname || '') + '" /></div>');
   }
 }
 checkIdentity();
@@ -32,11 +29,6 @@ function incrementIdentity() {
   tios.identity.count++;
   $.cookie('identity', JSON.stringify(tios.identity), { expires: 90, path: '/' });
   checkIdentity();
-}
-
-function saveIdentity(nickname) {
-  tios.identity.nickname = nickname;
-  $.cookie('identity', JSON.stringify(tios.identity), { expires: 90, path: '/' });
 }
 
 // Update timestamps every 15 seconds.
@@ -107,6 +99,7 @@ socket.on('stop/' + tios.stop_id, tios.insertComment);
 
 $('#new-comment').submit(function() {
     var types = {};
+    var nickname = $('#identity #nickname').val();
     $.each($("#new-comment input:checked"), function() {
       var val = $(this).val();
       types[val] = 'on';
@@ -115,14 +108,15 @@ $('#new-comment').submit(function() {
       comment : $('#new-comment textarea').val(),
       stop: tios.stop_id,
       types: types,
-      nickname: $('#identity #nickname').val() || null
+      nickname: nickname || null
     });
     $('#new-comment textarea').val('');
     $('#new-comment .category').removeClass('active');
     $('#new-comment input[type=checkbox]').attr('checked', false);
     incrementIdentity();
-    if ($('#identity #nickname').length > 0) {
-      saveIdentity($('#identity #nickname').val());
+    if (nickname != '' && nickname != tios.identity.nickname) {
+      tios.identity.nickname = nickname;
+      $.cookie('identity', JSON.stringify(tios.identity), { expires: 90, path: '/' });
       checkIdentity();
     }
 
