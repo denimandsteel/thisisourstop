@@ -28,7 +28,7 @@ var Comment = exports = module.exports = function Comment(comment, stop, type, i
 };
 
 exports.get = function(id, fn){
-  var query = client.query('SELECT * FROM comments WHERE cid = $1', [id]);
+  var query = client.query("SELECT comments.*, up.count AS up, down.count AS down FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'up' GROUP BY cid) up on up.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'down' GROUP BY cid) down on down.cid = comments.cid WHERE comments.cid = $1", [id]);
   var ret = new Comment();
 
   query.on('row', function(row) {
@@ -42,6 +42,7 @@ exports.get = function(id, fn){
         }
       }
     }
+    ret.score = row.up - row.down;
   });
   query.on('end', function() {
     Stop.get(ret.stop, function(err, stop){
@@ -55,8 +56,10 @@ exports.byStop = function(stop, fn) {
   var ret = [];
   //var today = new Date();
   //var weekAgo = new Date(today.getTime()-1000*60*60*24*7);
-  query = client.query("SELECT comments.* FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid WHERE stop = $1 AND hidden IS null ORDER BY comments.time DESC LIMIT 40", [stop]);
+  query = client.query("SELECT comments.*, up.count AS up, down.count AS down FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'up' GROUP BY cid) up on up.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'down' GROUP BY cid) down on down.cid = comments.cid WHERE stop = $1 AND hidden IS null ORDER BY comments.time DESC LIMIT 40", [stop]);
   query.on('row', function(row) {
+    row.score = row.up - row.down;
+    row.stop = { stop_code: row.stop };
     var types = JSON.parse(row.type);
     row.type = types;
     ret.push(row);
