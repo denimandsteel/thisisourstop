@@ -130,7 +130,12 @@ module.exports = function(app) {
   app.get('/stop/:stop/comment/:comment/flag/:flag.:format?', function(req, res) {
     Comment.flag(req.comment, req.params.flag, req.connection.remoteAddress, function(err, savedComment) {
       if(req.params.format === 'json' || req.xhr) {
-        res.json({ comment: savedComment });
+        if (err === null) {
+          res.json({ comment: savedComment });
+        }
+        else {
+          res.json({ error: true, message: err });
+        }
       }
       else {
         // Back where we came from.

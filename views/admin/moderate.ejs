@@ -25,6 +25,9 @@
                 <div class="icon <%= comments[i].type[j] %>"></div>
               <% } %>
             <% } %>
+            <% if (comments[i].nickname !== null) { %>
+            &ndash;<%= comments[i].nickname %>
+            <% } %>
         </td>
         <td class="stop">
           <a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>"><%= comments[i].stop %></a>

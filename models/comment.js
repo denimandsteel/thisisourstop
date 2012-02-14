@@ -95,10 +95,15 @@ exports.all = function(fn) {
 
 exports.flag = function(comment, flag, ip, fn) {
   var that = this;
-  // clean flags.
-  client.query('INSERT INTO comment_flags VALUES($1, $2, $3, $4) RETURNING cid', [comment.cid, flag, new Date(), ip], function() {
-    that.get(comment.cid, fn);
-  });
+  var valid_flags = ['up', 'down', 'report'];
+  if (valid_flags.indexOf(flag) !== -1) {
+    client.query('INSERT INTO comment_flags VALUES($1, $2, $3, $4) RETURNING cid', [comment.cid, flag, new Date(), ip], function() {
+      that.get(comment.cid, fn);
+    });
+  }
+  else {
+    fn('Not a valid flag.');
+  }
 }
 
 Comment.prototype.save = function(fn){
