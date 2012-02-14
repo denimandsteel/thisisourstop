@@ -30,15 +30,15 @@
             <% } %>
         </td>
         <td class="stop">
-          <a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>"><%= comments[i].stop %></a>
+          <a href="/stop/<%= comments[i].stop.stop_code %>#comment-<%= comments[i].cid %>"><%= comments[i].stop.stop_code %></a>
         </td>
         <td class="actions">
           <% if (comments[i].hidden === null) { %>
-            <a href="/admin/moderate/<%= comments[i].stop %>/comment/<%= comments[i].cid %>/flag/hide">hide</a>
+            <a href="/admin/moderate/<%= comments[i].stop.stop_code %>/comment/<%= comments[i].cid %>/flag/hide">hide</a>
           <% } else { %>
-          <a href="/admin/moderate/<%= comments[i].stop %>/comment/<%= comments[i].cid %>/flag/unhide">unhide</a>
+          <a href="/admin/moderate/<%= comments[i].stop.stop_code %>/comment/<%= comments[i].cid %>/flag/unhide">unhide</a>
           <% } %>
-          <a href="/admin/moderate/<%= comments[i].stop %>/comment/<%= comments[i].cid %>/flag/block">block</a>
+          <!--<a href="/admin/moderate/<%= comments[i].stop.stop_code %>/comment/<%= comments[i].cid %>/flag/block" class="block">block</a>-->
         </td>
       </tr>
       <% } %>
@@ -64,7 +64,14 @@
   <td class="stop">
     <a href="/stop/{{= comment.stop.stop_code }}#comment-{{= comment.cid }}">{{= comment.stop.stop_code }}</a>
   </td>
-  <td class="actions"><a href="#">delete</a><a href="#">block</a></td>
+  <td class="actions">
+    {{ if (comment.hidden === null) { }}
+      <a href="/admin/moderate/{{= comment.stop.stop_code }}/comment/{{= comment.cid }}/flag/hide">hide</a>
+    {{ } else { }}
+    <a href="/admin/moderate/{{= comment.stop.stop_code }}/comment/{{= comment.cid }}/flag/unhide">unhide</a>
+    {{ } }}
+    <!--<a href="/admin/moderate/{{= comment.stop.stop_code }}/comment/{{= comment.cid }}/flag/block" class="block">block</a>-->
+  </td>
 </tr>
 </script>
 <script>
@@ -137,4 +144,18 @@
     $('#admin table tbody').prepend(newComment);
     newComment.slideDown();
   });
+
+  var actionsHandler = function(evt) {
+    var el = $(this);
+    // If report button, show confirmation step.
+    if (!el.hasClass('block') || confirm('This will hide all posts from this IP address, ok?')) {
+      $.get(el.attr('href'), function(data) {
+        var newComment = $(commentTemplate({ comment: data.comment, new_comment: true }))
+        $('.actions a', newComment).click(actionsHandler);
+        el.parents('.comment').replaceWith(newComment);
+      });
+    }
+    return false;
+  }
+  $('.comment .actions a').click(actionsHandler);
   </script>

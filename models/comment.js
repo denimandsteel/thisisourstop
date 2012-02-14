@@ -28,7 +28,7 @@ var Comment = exports = module.exports = function Comment(comment, stop, type, i
 };
 
 exports.get = function(id, fn){
-  var query = client.query("SELECT comments.*, up.count AS up, down.count AS down FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'up' GROUP BY cid) up on up.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'down' GROUP BY cid) down on down.cid = comments.cid WHERE comments.cid = $1", [id]);
+  var query = client.query("SELECT comments.*, up.count AS up, down.count AS down, hidden.flag AS hidden FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'up' GROUP BY cid) up on up.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'down' GROUP BY cid) down on down.cid = comments.cid WHERE comments.cid = $1", [id]);
   var ret = new Comment();
 
   query.on('row', function(row) {
@@ -42,6 +42,7 @@ exports.get = function(id, fn){
         }
       }
     }
+    ret.hidden = row.hidden;
     ret.score = row.up - row.down;
   });
   query.on('end', function() {
@@ -76,6 +77,7 @@ exports.recentComments = function(fn) {
     var types = JSON.parse(row.type);
     row.type = types;
     ret.push(row);
+    row.stop = { stop_code: row.stop };
   });
   query.on('end', function() {
     // todo: Should be doing a join instead.
@@ -85,8 +87,10 @@ exports.recentComments = function(fn) {
 
 exports.all = function(fn) {
   var ret = [];
-  query = client.query("SELECT comments.*, hidden.flag AS hidden FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid ORDER BY comments.time DESC");
+  query = client.query("SELECT comments.*, hidden.flag AS hidden, up.count AS up, down.count AS down FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'up' GROUP BY cid) up on up.cid = comments.cid LEFT JOIN (SELECT cid, count(flag) FROM comment_flags WHERE flag = 'down' GROUP BY cid) down on down.cid = comments.cid ORDER BY comments.time DESC");
   query.on('row', function(row) {
+    row.score = row.up - row.down;
+    row.stop = { stop_code: row.stop };
     var types = JSON.parse(row.type);
     row.type = types;
     ret.push(row);
@@ -113,9 +117,16 @@ exports.flagAdmin = function(comment, flag, ip, fn) {
   var that = this;
   var valid_flags = ['hide', 'unhide', 'block'];
   if (valid_flags.indexOf(flag) !== -1) {
-    client.query('INSERT INTO comment_flags VALUES($1, $2, $3, $4) RETURNING cid', [comment.cid, flag, new Date(), ip], function() {
-      that.get(comment.cid, fn);
-    });
+    if (flag === 'unhide') {
+      client.query("DELETE FROM comment_flags WHERE cid = $1 AND flag = 'hide'", [comment.cid], function() {
+        that.get(comment.cid, fn);
+      });
+    }
+    else {
+      client.query('INSERT INTO comment_flags VALUES($1, $2, $3, $4) RETURNING cid', [comment.cid, flag, new Date(), ip], function() {
+        that.get(comment.cid, fn);
+      });
+    }
   }
   else {
     fn('Not a valid flag.');

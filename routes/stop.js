@@ -48,14 +48,14 @@ module.exports = function(app) {
       // DIIIIRRRRRTYYYY.
       for (var i = 0; i < length; i++) {
         if (i === length - 1) {
-          Stop.get(comments[i].stop, function(err, stop) {
+          Stop.get(comments[i].stop.stop_code, function(err, stop) {
             //console.log({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
             markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
             res.render('desktop', { recentMarkers: JSON.stringify(markers)});
           });
         }
         else {
-          Stop.get(comments[i].stop, function(err, stop) {
+          Stop.get(comments[i].stop.stop_code, function(err, stop) {
             //console.log({ stop_lat: stop.stop_lat, stop_long: stop.stop_lon });
             markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
           });
@@ -177,13 +177,13 @@ module.exports = function(app) {
           // DIIIIRRRRRTYYYY. Oh well, this is only for admins.
           for (var i = 0; i < length; i++) {
             if (i === length - 1) {
-              Stop.get(recentComments[i].stop, function(err, stop) {
+              Stop.get(recentComments[i].stop.stop_code, function(err, stop) {
                 markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
                 res.render('admin/moderate', { comments: comments, recentMarkers: JSON.stringify(markers), page_id: 'admin', comment_template: comment_template });
               });
             }
             else {
-              Stop.get(comments[i].stop, function(err, stop) {
+              Stop.get(comments[i].stop.stop_code, function(err, stop) {
                 markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
               });
             }
