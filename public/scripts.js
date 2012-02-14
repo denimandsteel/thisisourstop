@@ -72,12 +72,28 @@ tios.commentTemplate = ejs.compile($('#comment-template').html());
 
 tios.actionsHandler = function(evt) {
   var el = $(this);
+  var down = false;
+  var report = false;
+  if (el.hasClass('down')) {
+    down = true;
+  }
+  if (el.hasClass('report')) {
+    report = true;
+  }
   // If report button, show confirmation step.
-  if (!el.hasClass('report') || confirm('Are you sure you want to report this comment?')) {
+  if (!report || confirm('Are you sure you want to report this comment?')) {
     $.get(el.attr('href'), function(data) {
       var newComment = $(tios.commentTemplate({ comment: data.comment, new_comment: true }));
+      if (down === true) {
+        newComment.addClass('down');
+      }
       $('.actions a', newComment).click(tios.actionsHandler);
-      el.parents('.comment').replaceWith(newComment);
+      if (report) {
+        el.parents('.comment').hide();
+      }
+      else {
+        el.parents('.comment').replaceWith(newComment);
+      }
     });
   }
   return false;

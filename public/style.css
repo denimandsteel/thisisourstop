@@ -354,6 +354,18 @@ textarea, input[type='text'] {
   color: #9ab3cc;
 }
 
+#comments .comment .actions .up, #comments .comment .actions .down {
+  background: url(images/moderate.gif) top left no-repeat;
+  background-size: 50px 20px;
+  text-indent: -9999px;
+  width: 25px;
+  height: 20px;
+  display: inline-block;
+}
+#comments .comment .actions .down { background-position-x: right; }
+#comments .comment .actions .report { display: none; }
+#comments .comment.down .actions .report { display: inline; }
+
 #no-comments { text-align: center; margin: 10px 0; }
 
 footer { padding: 0px 8px 8px; }
