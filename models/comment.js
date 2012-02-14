@@ -55,7 +55,7 @@ exports.byStop = function(stop, fn) {
   var ret = [];
   //var today = new Date();
   //var weekAgo = new Date(today.getTime()-1000*60*60*24*7);
-  query = client.query('SELECT * FROM comments WHERE stop = $1 ORDER BY time DESC LIMIT 40', [stop]);
+  query = client.query("SELECT comments.* FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid WHERE stop = $1 AND hidden IS null ORDER BY comments.time DESC LIMIT 40", [stop]);
   query.on('row', function(row) {
     var types = JSON.parse(row.type);
     row.type = types;
@@ -82,7 +82,7 @@ exports.recentComments = function(fn) {
 
 exports.all = function(fn) {
   var ret = [];
-  query = client.query('SELECT * FROM comments ORDER BY time DESC');
+  query = client.query("SELECT comments.*, hidden.flag AS hidden FROM comments LEFT JOIN (SELECT * FROM comment_flags WHERE flag = 'hide') hidden on hidden.cid = comments.cid ORDER BY comments.time DESC");
   query.on('row', function(row) {
     var types = JSON.parse(row.type);
     row.type = types;
@@ -96,6 +96,19 @@ exports.all = function(fn) {
 exports.flag = function(comment, flag, ip, fn) {
   var that = this;
   var valid_flags = ['up', 'down', 'report'];
+  if (valid_flags.indexOf(flag) !== -1) {
+    client.query('INSERT INTO comment_flags VALUES($1, $2, $3, $4) RETURNING cid', [comment.cid, flag, new Date(), ip], function() {
+      that.get(comment.cid, fn);
+    });
+  }
+  else {
+    fn('Not a valid flag.');
+  }
+}
+
+exports.flagAdmin = function(comment, flag, ip, fn) {
+  var that = this;
+  var valid_flags = ['hide', 'unhide', 'block'];
   if (valid_flags.indexOf(flag) !== -1) {
     client.query('INSERT INTO comment_flags VALUES($1, $2, $3, $4) RETURNING cid', [comment.cid, flag, new Date(), ip], function() {
       that.get(comment.cid, fn);

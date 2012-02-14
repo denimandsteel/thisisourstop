@@ -26,13 +26,20 @@
               <% } %>
             <% } %>
             <% if (comments[i].nickname !== null) { %>
-            &ndash;<%= comments[i].nickname %>
+            <br />&ndash;<%= comments[i].nickname %>
             <% } %>
         </td>
         <td class="stop">
           <a href="/stop/<%= comments[i].stop %>#comment-<%= comments[i].cid %>"><%= comments[i].stop %></a>
         </td>
-        <td class="actions"><a href="#">delete</a><a href="#">block</a></td>
+        <td class="actions">
+          <% if (comments[i].hidden === null) { %>
+            <a href="/admin/moderate/<%= comments[i].stop %>/comment/<%= comments[i].cid %>/flag/hide">hide</a>
+          <% } else { %>
+          <a href="/admin/moderate/<%= comments[i].stop %>/comment/<%= comments[i].cid %>/flag/unhide">unhide</a>
+          <% } %>
+          <a href="/admin/moderate/<%= comments[i].stop %>/comment/<%= comments[i].cid %>/flag/block">block</a>
+        </td>
       </tr>
       <% } %>
     </tbody>

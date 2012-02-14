@@ -193,4 +193,22 @@ module.exports = function(app) {
     });
   });
 
+  // Need more mods.
+  app.get('/admin/moderate/:stop/comment/:comment/flag/:flag.:format?', basic_auth, function(req, res) {
+    Comment.flagAdmin(req.comment, req.params.flag, req.connection.remoteAddress, function(err, savedComment) {
+      if(req.params.format === 'json' || req.xhr) {
+        if (err === null) {
+          res.json({ comment: savedComment });
+        }
+        else {
+          res.json({ error: true, message: err });
+        }
+      }
+      else {
+        // Back where we came from.
+        res.redirect('/admin/moderate#comment-' + req.comment.cid);
+      }
+    });
+  });
+
 };
