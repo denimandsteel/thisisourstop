@@ -60,8 +60,8 @@
           <div class="icon {{= comment.type[j] }}"></div>
         {{ } }}
       {{ } }}
-      {{ if (comments[i].nickname !== null) { }}
-        <br />&ndash;{{= comments[i].nickname }}
+      {{ if (typeof comment.nickname !== 'undefined') { }}
+        <br />&ndash;{{= comment.nickname }}
       {{ } }}
   </td>
   <td class="stop">

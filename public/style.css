@@ -318,7 +318,7 @@ textarea, input[type='text'] {
   padding: 8px 8px;
   position: relative;
 }
-#comments  .comment.new { background: #ffffe6; }
+.comment.new { background: #ffffe6; }
 
 #comments  .comment .icon {
 	display: inline-block;
