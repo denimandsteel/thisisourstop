@@ -79,10 +79,13 @@
 </script>
 <script>
   var recentMarkers = <%- recentMarkers %>;
-  var provider = new MM.TemplatedMapProvider('http://c.tiles.mapbox.com/v3/mapbox.mapbox-light/{Z}/{X}/{Y}.png');
+  //var provider = new MM.TemplatedMapProvider('http://c.tiles.mapbox.com/v3/mapbox.mapbox-light/{Z}/{X}/{Y}.png');
+  var provider = new MM.TemplatedMapProvider('http://b.tiles.mapbox.com/v3/mapbox.mapbox-streets/{Z}/{X}/{Y}.png');
+  //var provider = new MM.TemplatedMapProvider('http://a.tile.stamen.com/toner/{Z}/{X}/{Y}.png');
+  //var provider = new MM.TemplatedMapProvider('http://a.tile.stamen.com/terrain/{Z}/{X}/{Y}.png');
   var map = new MM.Map('admin-map', provider, new MM.Point(500, 250));
   map.setCenterZoom(new MM.Location(49.18608,-122.91170), 9);
-  map.setZoomRange(8, 10);
+  map.setZoomRange(8, 17);
 
   markers = new MM.MarkerLayer();
   map.addLayer(markers);
