@@ -11,31 +11,6 @@ var Stop = exports = module.exports = function Stop(id) {
   this.id = id;
 };
 
-exports.all = function(fn) {
-  var ret = {};
-  query = client.query('SELECT distinct stops.stop_code, stop_desc, stop_lat, stop_lon, route_short_name, route_long_name from stops left join stop_routes on stops.stop_code = stop_routes.stop_code');
-  query.on('row', function(row) {
-    var trip = {
-      route_short_name: row.route_short_name,
-      route_long_name: row.route_long_name
-    };
-    if (typeof ret[row.stop_code] === 'undefined') {
-      ret[row.stop_code] = {
-        stop_desc: row.stop_desc,
-        stop_lat: row.stop_lat,
-        stop_lon: row.stop_lon,
-        trips: [trip]
-      };
-    }
-    else {
-      ret[row.stop_code].trips.push(trip);
-    }
-  });
-  query.on('end', function() {
-    fn(ret);
-  });
-}
-
 exports.get = function(id, fn){
   client.query('SELECT * FROM stops WHERE stop_code = $1', [id], function(err, result) {
     if (result.rows.length > 0) {
@@ -51,13 +26,20 @@ exports.get = function(id, fn){
         }
       }
       // Slow and requires a lot of data up front.
-      client.query('SELECT distinct route_short_name, route_long_name from stop_routes WHERE stop_code = $1 ORDER BY route_short_name', [ret.stop_code], function(err, trip) {
-        ret.trip = trip.rows;
+      client.query("SELECT trips.trip_headsign, MIN(stop_times.arrival_time::INTERVAL - LOCALTIME) + now() as arrival_time FROM stops LEFT JOIN stop_times ON stops.stop_id = stop_times.stop_id LEFT JOIN trips ON stop_times.trip_id = trips.trip_id LEFT JOIN calendar ON trips.service_id = calendar.service_id WHERE CASE DATE_PART('dow', CURRENT_DATE) WHEN 0 THEN sunday = 't' WHEN 1 THEN monday = 't' WHEN 2 THEN tuesday = 't' WHEN 3 THEN wednesday = 't' WHEN 4 THEN thursday = 't' WHEN 5 THEN friday = 't' WHEN 6 THEN saturday = 't' END AND stop_times.arrival_time::INTERVAL > LOCALTIME AND stop_times.arrival_time::INTERVAL < (LOCALTIME + INTERVAL '2 hours') AND stop_code = $1 GROUP BY trips.trip_headsign ORDER BY arrival_time", [ret.stop_code], function(err, trip) {
+        ret.trip = [];
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
-          ret.trip[i].route_long_name = formatTitles(trip.rows[i].route_long_name);
-          ret.trip[i].route_short_name = trip.rows[i].route_short_name.replace(/^[0]+/g,''); // Remove leading zeros.
-          ret.trip[i].night = trip.rows[i].route_short_name.indexOf("N") === 0 ? ' night' : '';
+          var headsign = trip.rows[i].trip_headsign.match(/^([n1-9]{1,3}) (.+)$/i);
+          var arrival = new Date(trip.rows[i].arrival_time);
+          ret.trip[i] = {
+            route_number: headsign[1],
+            route_name: formatTitles(headsign[2]),
+            arrival_time: arrival.getHours() % 12 + ':' + (arrival.getMinutes() < 10 ? '0' : '') + arrival.getMinutes(),
+            arrive_soon: ((arrival.getMinutes() - (new Date()).getMinutes()) < 5 ? ' soon' : ''),
+            night: headsign[1].indexOf("N") === 0 ? ' night' : ''
+          }
+          //ret.trip[i].route_short_name = trip.rows[i].route_short_name.replace(/^[0]+/g,''); // Remove leading zeros.
         }
         fn(null, ret);
       });

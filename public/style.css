@@ -33,7 +33,8 @@ header #stop { width: 60px; }
   border: 1px solid #502365;
   -webkit-appearance: textfield;
   padding: 0px 8px;
-  width: 236px;
+  width: 240px;
+  text-align: center;
   height: 86px;
   border-radius: 6px;
   line-height: 0px;
@@ -53,6 +54,9 @@ header #stop_form #stop {
 
 .content { padding: 10px; }
 
+h2 { margin-bottom: 0; }
+p.first { margin-top: 5px; }
+
 #try-again {
   background: url(images/404.jpg) center 55px no-repeat #000;
 }
@@ -70,6 +74,7 @@ header #stop_id {
 	cursor: pointer;
 }
 
+h1 { margin: 0; text-indent: -9999px; text-align: left; }
 #logo {
 	background: url(images/logo.png);
 	position: absolute;
@@ -178,7 +183,28 @@ header #stop_id {
 	border-bottom-right-radius: 6px;
 	padding: 3px 0 3px 6px;
 }
-.trip .short { font-weight: bold; margin-right: 5px; }
+.trip { clear: both; }
+.trip .info {
+  margin-left: 50px;
+  margin-right: 10px;
+}
+.trip .name { }
+.trip .number { font-weight: bold; margin-right: 5px; }
+.trip .arrival {
+  float: left;
+  background: #99b3cc;
+  border-radius: 5px;
+  width: 31px;
+  margin-right: 5px;
+  color: white;
+  padding: 0px 6px;
+  font-size: 12px;
+  text-align: right;
+  margin-bottom: 2px;
+  top: 2px;
+  position: relative;
+}
+.trip.soon .arrival { background: #502365;}
 .trip.night { color: #99b3cc; }
 
 #recent { margin-top: 1.5em; }

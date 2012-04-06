@@ -17,6 +17,8 @@ Visit the site at <http://localhost:3000> in a web browser.
 
 Create a postgres database, import your GTFS data using csv or pg with the migrate scripts (`node import.js csv` or `node import.js pg`).
 
+Import the GTFS data using: `gtfsdb-load --database_url postgresql://postgres@localhost/thisisourstop --file http://mapexport.translink.bc.ca/CURRENT/google_transit.zip --schema public`
+
 You can install your own GTFS feed by replacing the google_transit directory with your own.
 
 ### On a Heroku instance

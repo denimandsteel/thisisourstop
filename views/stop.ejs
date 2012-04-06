@@ -1,5 +1,5 @@
 <header>
-  <a id="logo" href="/"></a>
+  <h1><a id="logo" class="home-link" href="/">This Is Our Stop</a></h1>
   <div id="stop_id"><%= stop.id %></div>
   <form id="stop_form" class="hide" method="post" action="/">
   	<input name="stop" id="stop" type="text" pattern="[0-9]*" maxlength="5" />
@@ -27,7 +27,12 @@
   <div class="stop_desc"><%- stop.stop_desc %></div>
   <div class="trips">
     <% for(var i = 0; i < stop.trip.length; i++) { %>
-    <div class="trip<%= stop.trip[i].night %>"><span class="short"><%= stop.trip[i].route_short_name %></span><span class="long"><%= stop.trip[i].route_long_name %></span></div>
+    <div class="trip<%= stop.trip[i].night %><%= stop.trip[i].arrive_soon %>">
+      <div class="arrival"><%= stop.trip[i].arrival_time %></div>
+      <div class="info">
+        <span class="number"><%= stop.trip[i].route_number %></span><span class="name"><%= stop.trip[i].route_name %></span>
+      </div>
+    </div>
     <% } %>
   </div>
 </div>
