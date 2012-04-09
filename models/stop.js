@@ -149,3 +149,5 @@ var formatTitles = function(str) {
   function upper(word){
     return word.substr(0,1).toUpperCase() + word.substr(1);
   }
+  return this.titleCaps(str);
+}
