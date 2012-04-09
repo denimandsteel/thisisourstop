@@ -70,7 +70,7 @@ function prettyDate(time){
     day_diff = Math.floor(diff / 86400);
 
   if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
-    return;
+    return 'A long time ago';
 
   return day_diff == 0 && (
       diff < 60 && "Just now" ||
