@@ -52,14 +52,14 @@ exports.get = function(id, fn){
         ret.trip = [];
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
-          var headsign = trip.rows[i].trip_headsign.match(/^([n1-9]{1,3}) (.+)$/i);
+          var headsign = trip.rows[i].trip_headsign.match(/^([n0-9]{1,3}) (.+)$/i);
           var arrival = new Date(trip.rows[i].arrival_time);
           ret.trip[i] = {
-            route_number: headsign[1],
-            route_name: formatTitles(headsign[2]),
+            route_number: headsign !== null ? headsign[1] : '',
+            route_name: headsign !== null ? formatTitles(headsign[2]) : '',
             arrival_time: (arrival.getHours() % 12  === 0 ? 12 : arrival.getHours() % 12) + ':' + (arrival.getMinutes() < 10 ? '0' : '') + arrival.getMinutes(),
             arrive_soon: (arrival.getTime() - (new Date()).getTime()) / (1000 * 60) < 5 ? ' soon' : '',
-            night: headsign[1].indexOf("N") === 0 ? ' night' : ''
+            night: headsign !== null&& headsign[1].indexOf("N") === 0 ? ' night' : ''
           }
           //ret.trip[i].route_short_name = trip.rows[i].route_short_name.replace(/^[0]+/g,''); // Remove leading zeros.
         }
