@@ -87,6 +87,9 @@ module.exports = function(app) {
     });
   });
 
+  if (process.env.NODE_ENV == 'production') {
+    io.set('log level', 1);
+  }
   io.sockets.on('connection', function (socket) {
     socket.on('new', function(data) {
       var comment = new Comment(data.comment, data.stop, data.types, socket.handshake.address.address, data.nickname);

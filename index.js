@@ -19,7 +19,7 @@ app.configure('production', function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride()); // input name="_method" put support, might not need this.
   app.use(express.cookieParser());
-  app.use(express.session({ secret: 'keyboard cat' }));
+  //app.use(express.session({ secret: 'keyboard cat' }));
 //  app.use(useragent());
 /*  app.use(function(req, res, next){
     // Detect and discourage desktop browsers.
