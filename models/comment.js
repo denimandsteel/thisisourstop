@@ -1,5 +1,5 @@
 var pg = require('pg').native;
-var connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/tios_stage'
+var connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/thisisourstop'
 var client;
 var sanitize = require('validator').sanitize;
 
