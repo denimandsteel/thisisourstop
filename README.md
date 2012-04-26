@@ -8,7 +8,7 @@ For more information about any aspect of the project, contact hello@denimandstee
 
 ## Acknowledgements
 
-We gratefully acknowledge the contributions of [Sam Dal Monte](http://negativeboy.com) in his visual design work and assistance in refining the interaction design and sticker ordering. We also acknowledge [Karen Quinn Fung](http://countablyinfinite.ca) for the original idea from which This is Our Stop was made.
+We gratefully acknowledge the contributions of [Sam Dal Monte](http://negativeboy.com) in his visual design work and assistance in refining the interaction design and sticker ordering. We also acknowledge [Karen Quinn Fung](http://countablyinfinite.ca) for the original idea from which This is Our Stop was made. We also acknowledge the contribution of TransLink by making bus stop and schedule data available in an open format, without which this project would not be possible. 
 
 ## Installation
 

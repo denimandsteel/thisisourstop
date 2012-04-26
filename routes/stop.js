@@ -49,14 +49,12 @@ module.exports = function(app) {
       for (var i = 0; i < length; i++) {
         if (i === length - 1) {
           Stop.getShort(comments[i].stop.stop_code, function(err, stop) {
-            //console.log({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
             markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
             res.render('desktop', { recentMarkers: JSON.stringify(markers)});
           });
         }
         else {
           Stop.getShort(comments[i].stop.stop_code, function(err, stop) {
-            //console.log({ stop_lat: stop.stop_lat, stop_long: stop.stop_lon });
             markers.push({ stop_lat: stop.stop_lat, stop_lon: stop.stop_lon });
           });
         }
@@ -102,7 +100,6 @@ module.exports = function(app) {
 
   app.post('/stop/:stop.:format?', function(req, res) {
     var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
-    // todo: Fully validate and remove XSS input, only plain text is allowed.
     comment.save(function(err, savedComment){
       io.sockets.emit('comment', { comment: savedComment });
       io.sockets.emit('stop/' + savedComment.stop.stop_code, { comment: savedComment });
@@ -157,7 +154,7 @@ module.exports = function(app) {
     }
     res.header('WWW-Authenticate', 'Basic realm="Admin Area"');
     if (req.headers.authorization) {
-      // Stop
+      // Slow down brute force.
       setTimeout(function () {
         res.send('Authentication required', 401);
       }, 5000);
