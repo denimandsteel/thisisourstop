@@ -133,7 +133,7 @@ h1 { margin: 0; text-indent: -9999px; text-align: left; }
 
 #third-party #google.action { left: 11px; padding: 10px 10px 0 0;}
 	#third-party #google.action a { color: #dd4b38; }
-#third-party #translink.action { right: 11px; padding: 10px 0 0 10px; background-position-x: right; }
+#third-party #translink.action { right: 11px; padding: 10px 0 0 10px; background-position: top right; }
 	#third-party #translink.action a { color: #055eaa; }
 
 #map {
@@ -308,12 +308,15 @@ textarea, input[type='text'] {
 #categories #look_for label { color: #ee3a43; }
 #categories #suggestion label { color: #ffc423; }
 #categories #just_sayin label { color: #00703c; }
-#categories #weather .icon { background-position-x: 0px; }
-#categories #look_for .icon { background-position-x: -64px; }
-#categories #suggestion .icon { background-position-x: -128px; }
-#categories #just_sayin .icon { background-position-x: -192px; }
+#categories #weather .icon { background-position: 0px 0px; }
+#categories #look_for .icon { background-position: -64px 0px; }
+#categories #suggestion .icon { background-position: -128px 0px; }
+#categories #just_sayin .icon { background-position: -192px 0px; }
 
-#categories .category.active .icon { background-position-y: bottom; }
+#categories .active#weather .icon { background-position: 0px bottom; }
+#categories .active#look_for .icon { background-position: -64px bottom; }
+#categories .active#suggestion .icon { background-position: -128px bottom; }
+#categories .active#just_sayin .icon { background-position: -192px bottom; }
 #categories .checkboxes { display: none; }
 
 .btn {
@@ -353,10 +356,10 @@ textarea, input[type='text'] {
 	background: url(images/icons.png) no-repeat bottom left;
 	background-size: 128px 64px;
 }
-#comments .comment .icon.weather { background-position-x: 0px; }
-#comments .comment .icon.look_for { background-position-x: -32px; }
-#comments .comment .icon.suggestion { background-position-x: -64px; }
-#comments .comment .icon.just_sayin { background-position-x: -96px; }
+#comments .comment .icon.weather { background-position: 0px bottom; }
+#comments .comment .icon.look_for { background-position: -32px bottom; }
+#comments .comment .icon.suggestion { background-position: -64px bottom; }
+#comments .comment .icon.just_sayin { background-position: -96px bottom; }
 
 #comments .comment .text { }
 
@@ -388,7 +391,7 @@ textarea, input[type='text'] {
   height: 20px;
   display: inline-block;
 }
-#comments .comment .actions .down { background-position-x: right; }
+#comments .comment .actions .down { background-position: top right; }
 #comments .comment .actions .report { display: none; }
 #comments .comment.down .actions .report { display: inline; }
 
@@ -410,10 +413,10 @@ footer .btn {
 	position: relative;
 	top: 2px;
 }
-#admin .comment .icon.weather { background-position-x: 0px; }
-#admin .comment .icon.look_for { background-position-x: -16px; }
-#admin .comment .icon.suggestion { background-position-x: -32px; }
-#admin .comment .icon.just_sayin { background-position-x: -48px; }
+#admin .comment .icon.weather { background-position: 0px bottom; }
+#admin .comment .icon.look_for { background-position: -16px bottom; }
+#admin .comment .icon.suggestion { background-position: -32px bottom; }
+#admin .comment .icon.just_sayin { background-position: -48px bottom; }
 
 #admin table { border-collapse: collapse; width: 100%; }
 #admin tbody tr { border-top: 1px solid #ddd; }
