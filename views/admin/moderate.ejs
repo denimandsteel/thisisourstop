@@ -91,7 +91,7 @@
   map.addLayer(markers);
 
   $.each(recentMarkers, function(i, marker) {
-    var el = $('<div class="marker"><div class="point"></div><div class="pulse"></div></div>');
+    var el = $('<div class="marker"><div class="point"></div></div>');
     markers.addMarker(el[0], new MM.Location(marker.stop_lat, marker.stop_lon));
   });
 

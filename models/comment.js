@@ -73,7 +73,7 @@ exports.byStop = function(stop, fn) {
 exports.recentComments = function(fn) {
   var ret = [];
   // query = client.query("SELECT * FROM comments WHERE time >= NOW() - '1 week'::INTERVAL");
-  query = client.query("SELECT * FROM comments LIMIT 200");
+  query = client.query("SELECT * FROM comments");
   query.on('row', function(row) {
     var types = JSON.parse(row.type);
     row.type = types;
