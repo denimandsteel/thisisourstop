@@ -48,7 +48,7 @@ exports.get = function(id, fn){
         }
       }
       // Slow and requires a lot of data up front.
-      client.query("SELECT trips.trip_headsign, MIN(stop_times.arrival_time::INTERVAL - LOCALTIME) + now() as arrival_time FROM stops LEFT JOIN stop_times ON stops.stop_id = stop_times.stop_id LEFT JOIN trips ON stop_times.trip_id = trips.trip_id LEFT JOIN calendar ON trips.service_id = calendar.service_id WHERE CASE DATE_PART('dow', CURRENT_DATE) WHEN 0 THEN sunday = 't' WHEN 1 THEN monday = 't' WHEN 2 THEN tuesday = 't' WHEN 3 THEN wednesday = 't' WHEN 4 THEN thursday = 't' WHEN 5 THEN friday = 't' WHEN 6 THEN saturday = 't' END AND stop_times.arrival_time::INTERVAL > LOCALTIME AND stop_times.arrival_time::INTERVAL < (LOCALTIME + INTERVAL '2 hours') AND stop_code = $1 GROUP BY trips.trip_headsign ORDER BY arrival_time", [ret.stop_code], function(err, trip) {
+      client.query("SELECT trips.trip_headsign, MIN(stop_times.arrival_time::INTERVAL - LOCALTIME) + now() as arrival_time FROM stops LEFT JOIN stop_times ON stops.stop_id = stop_times.stop_id LEFT JOIN trips ON stop_times.trip_id = trips.trip_id LEFT JOIN calendar ON trips.service_id = calendar.service_id WHERE CASE DATE_PART('dow', CURRENT_DATE) WHEN 0 THEN sunday = 't' WHEN 1 THEN monday = 't' WHEN 2 THEN tuesday = 't' WHEN 3 THEN wednesday = 't' WHEN 4 THEN thursday = 't' WHEN 5 THEN friday = 't' WHEN 6 THEN saturday = 't' END AND stop_times.arrival_time::INTERVAL > LOCALTIME AND stop_code = $1 GROUP BY trips.trip_headsign ORDER BY arrival_time", [ret.stop_code], function(err, trip) {
         ret.trip = [];
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
