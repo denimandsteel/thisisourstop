@@ -33,7 +33,7 @@
           <a href="/stop/<%= comments[i].stop.stop_code %>#comment-<%= comments[i].cid %>"><%= comments[i].stop.stop_code %></a>
         </td>
         <td class="actions">
-          <% if (comments[i].hidden === null) { %>
+          <% if (comments[i].hidden !== 'hide') { %>
             <a href="/admin/moderate/<%= comments[i].stop.stop_code %>/comment/<%= comments[i].cid %>/flag/hide">hide</a>
           <% } else { %>
           <a href="/admin/moderate/<%= comments[i].stop.stop_code %>/comment/<%= comments[i].cid %>/flag/unhide">unhide</a>
@@ -60,7 +60,7 @@
           <div class="icon {{= comment.type[j] }}"></div>
         {{ } }}
       {{ } }}
-      {{ if (typeof comment.nickname !== 'undefined') { }}
+      {{ if (comment.nickname !== null) { }}
         <br />&ndash;{{= comment.nickname }}
       {{ } }}
   </td>
@@ -68,10 +68,10 @@
     <a href="/stop/{{= comment.stop.stop_code }}#comment-{{= comment.cid }}">{{= comment.stop.stop_code }}</a>
   </td>
   <td class="actions">
-    {{ if (comment.hidden === null) { }}
+    {{ if (comment.hidden !== 'hide') { }}
       <a href="/admin/moderate/{{= comment.stop.stop_code }}/comment/{{= comment.cid }}/flag/hide">hide</a>
     {{ } else { }}
-    <a href="/admin/moderate/{{= comment.stop.stop_code }}/comment/{{= comment.cid }}/flag/unhide">unhide</a>
+      <a href="/admin/moderate/{{= comment.stop.stop_code }}/comment/{{= comment.cid }}/flag/unhide">unhide</a>
     {{ } }}
     <!--<a href="/admin/moderate/{{= comment.stop.stop_code }}/comment/{{= comment.cid }}/flag/block" class="block">block</a>-->
   </td>
@@ -144,8 +144,7 @@
     }, function() {
       marker.removeClass('hover');
     });
-
-    //$('.actions a', newComment).click(actionsHandler);
+    newComment.find('.actions a').click(actionsHandler);
     markers.addMarker(marker[0], new MM.Location(comment.stop.stop_lat, comment.stop.stop_lon));
     $('#admin table tbody').prepend(newComment);
     newComment.slideDown();
