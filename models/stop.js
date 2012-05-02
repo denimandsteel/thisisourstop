@@ -55,7 +55,7 @@ exports.get = function(id, fn){
           var headsign = trip.rows[i].trip_headsign.match(/^([cn0-9]{1,3}) (.+)$/i);
           var arrival = new Date(trip.rows[i].arrival_time);
           ret.trip[i] = {
-            route_number: headsign !== null ? headsign[1] : '',
+            route_number: headsign !== null ? headsign[1] : trip.rows[i].trip_headsign,
             route_name: headsign !== null ? formatTitles(headsign[2]) : '',
             arrival_time: (arrival.getHours() % 12  === 0 ? 12 : arrival.getHours() % 12) + ':' + (arrival.getMinutes() < 10 ? '0' : '') + arrival.getMinutes(),
             arrive_soon: (arrival.getTime() - (new Date()).getTime()) / (1000 * 60) < 5 ? ' soon' : '',
