@@ -39,7 +39,7 @@
   map.addLayer(markers);
 
   $.each(recentMarkers, function(i, marker) {
-    var el = $('<div class="marker"><div class="point"></div><div class="pulse"></div></div>'); // and bind to newComment as well.
+    var el = $('<div class="marker"><div class="point"></div></div>'); // and bind to newComment as well.
     markers.addMarker(el[0], new MM.Location(marker.stop_lat, marker.stop_lon));
   });
 
