@@ -52,7 +52,7 @@ exports.get = function(id, fn){
         ret.trip = [];
         // Ugly... dirty data...
         for (var i = 0; i < trip.rows.length; i++) {
-          var headsign = trip.rows[i].trip_headsign.match(/^([cn0-9]{1,3}) (.+)$/i);
+          var headsign = trip.rows[i].trip_headsign.match(/^([acn0-9]{1,4}) (.+)$/i);
           var arrival = new Date(trip.rows[i].arrival_time);
           ret.trip[i] = {
             route_number: headsign !== null ? headsign[1] : trip.rows[i].trip_headsign,
