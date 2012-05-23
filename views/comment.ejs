@@ -12,5 +12,4 @@
     <% } %>
     <div class="time" data-time="<%= comment.time %>"><%=: comment.time | time %></div>
   </div>
-  <div class="actions"><a href="/stop/<%= comment.stop.stop_code %>/comment/<%= comment.cid %>/flag/up?token=" class="up">+</a> <span class="score"><%= comment.score %></span> <a href="/stop/<%= comment.stop.stop_code %>/comment/<%= comment.cid %>/flag/down?token=" class="down">-</a> <a class="report" href="/stop/<%= comment.stop.stop_code %>/comment/<%= comment.cid %>/flag/report?token=">report</a></div>
 </div>
