@@ -99,7 +99,7 @@ module.exports = function(app) {
   });
 
   app.post('/stop/:stop.:format?', function(req, res) {
-    var comment = new Comment(req.body.comment, req.stop.id, req.body.type);
+    var comment = new Comment(req.body.comment, req.stop.id, req.body.type, req.connection.remoteAddress, req.body.nickname);
     comment.save(function(err, savedComment){
       io.sockets.emit('comment', { comment: savedComment });
       io.sockets.emit('stop/' + savedComment.stop.stop_code, { comment: savedComment });

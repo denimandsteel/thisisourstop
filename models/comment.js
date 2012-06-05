@@ -11,8 +11,8 @@ client.connect();
 var Comment = exports = module.exports = function Comment(comment, stop, type, ip, nickname) {
   this.comment = comment;
   this.stop = stop;
-  this.ip = ip;
-  this.nickname = nickname;
+  this.ip = ip ? ip : '';
+  this.nickname = nickname ? nickname : '';
 
   var types = [];
   var valid_types = ['weather', 'suggestion', 'look_for', 'just_sayin'];
