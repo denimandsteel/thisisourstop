@@ -80,7 +80,7 @@ module.exports = function(app) {
         res.json({stop: req.stop, comments: comments});
       }
       else {
-        res.render('stop', { stop: req.stop, comments: comments, comment_template: comment_template, page_id: 'stop' });
+        res.render('stop', { stop: req.stop, comments: comments, comment_template: comment_template, page_id: 'stop-page' });
       }
     });
   });
